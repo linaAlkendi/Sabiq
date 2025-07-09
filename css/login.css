@@ -1,0 +1,180 @@
+:root {
+  /* الوضع النهاري - افتراضي */
+  --form-bg: rgba(255, 255, 255, 0.35);
+  --text-color: #222;
+  --input-bg: #ffffff;
+  --input-text: #222;
+  --button-bg: #007BFF;
+  --button-gradient-end: #0056b3;
+  --button-hover: #004a99;
+  --footer-color: #515151;
+  --label-color: #333;
+}
+
+body.dark {
+  --form-bg: rgba(255, 255, 255, 0.08);
+  --text-color: #ffffff;
+  --input-bg: #ffffffdd;
+  --input-text: #333;
+  --button-bg: #007BFF;
+  --button-gradient-end: #00BCD4;
+  --button-hover: #0056b3;
+  --footer-color: #ccc;
+  --label-color: #eee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Tajawal', sans-serif;
+  background: url('../assets/airport-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.overlay {
+  background-color: rgba(156, 156, 156, 0.231);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+body.dark .overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.login-container {
+  background-color: var(--form-bg);
+  padding: 40px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin: -30px auto 10px;
+  display: block;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--label-color);
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: var(--input-bg);
+  font-size: 16px;
+  color: var(--input-text);
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: #888;
+}
+
+input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, var(--button-bg), var(--button-gradient-end));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+  background-color: var(--button-hover);
+}
+
+.footer-text {
+  margin-top: 25px;
+  font-size: 13px;
+  color: var(--footer-color);
+  transition: color 0.3s ease;
+}
+
+/* ========== Responsive Enhancements ========== */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle-switch {
+    top: 12px;
+    left: 12px;
+    transform: scale(0.85); /* يصغر حجمه شوي */
+    z-index: 9999;
+  }
+
+  .login-container {
+    margin-top: 50px; /* تبعد الفورم شوي للأسفل */
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  input,
+  button {
+    font-size: 13px;
+  }
+}

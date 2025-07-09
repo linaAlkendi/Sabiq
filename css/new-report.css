@@ -1,0 +1,129 @@
+.report-container {
+  padding: 40px 20px;
+  max-width: 700px;
+  margin: auto;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.report-form {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.report-form label {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--section-title);
+}
+
+.report-form input[type="text"],
+.report-form select,
+.report-form textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e0e0e0;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.report-form input[type="text"]:focus,
+.report-form select:focus,
+.report-form textarea:focus {
+  border-color: #00BCD4;
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+}
+
+.report-form textarea {
+  resize: none;
+  min-height: 100px;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-family: 'Tajawal', sans-serif;
+}
+
+#facility,
+#issue {
+  color: var(--text-color);
+  opacity: 0.7;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.btn {
+  width: 30%;
+  align-self: center;
+  padding: 10px 24px;
+  background: var(--primary-btn);
+  color: white;
+  font-weight: bold;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background: var(--primary-btn-hover);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+/* الوضع الليلي للقائمة المنسدلة */
+body.dark .report-form select {
+  background-color: var(--card-bg);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 30px 16px;
+  }
+
+  .report-form {
+    padding: 20px;
+  }
+
+  .report-form label {
+    font-size: 14px;
+  }
+
+  .report-form input[type="text"],
+  .report-form select,
+  .report-form textarea {
+    font-size: 13px;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-form {
+    gap: 12px;
+  }
+
+  .report-form label {
+    font-size: 13px;
+  }
+
+  .report-form textarea {
+    min-height: 80px;
+  }
+
+  .btn {
+    font-size: 12px;
+  }
+}

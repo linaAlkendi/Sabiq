@@ -1,0 +1,123 @@
+/* زر الوضع الليلي */
+.theme-toggle-switch {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 30px;
+  z-index: 1000;
+}
+/* داخل theme.css */
+header.top-bar {
+  position: relative;
+}
+
+/* اجعلي زر الثيم داخل الهيدر */
+header .theme-toggle-switch {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+@media (max-width: 600px) {
+  .theme-toggle-switch {
+    width: 50px;
+    height: 26px;
+    top: 15px;
+    left: 15px;
+  }
+}
+
+.theme-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  background: #99b6c2;
+  border-radius: 34px;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  transition: background 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+}
+
+.slider .icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s, opacity 0.3s;
+  
+  
+}
+
+@media (max-width: 600px) {
+  .slider .icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.sun-icon {
+  color: #FFD700;
+  opacity: 1;
+  transform: scale(1);
+  
+}
+
+.moon-icon {
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.4s ease;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .slider::before {
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+  }
+}
+
+input:checked + .slider {
+  background: #4e5b70;
+}
+
+input:checked + .slider::before {
+  transform: translateX(30px);
+}
+
+@media (max-width: 600px) {
+  input:checked + .slider::before {
+    transform: translateX(22px);
+  }
+}
+
+input:checked + .slider .sun-icon {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+input:checked + .slider .moon-icon {
+  opacity: 1;
+  transform: scale(1);
+}

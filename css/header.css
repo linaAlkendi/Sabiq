@@ -1,0 +1,200 @@
+:root {
+  --header-height: 80px;
+  --header-bg: #0c1f4a;
+  --header-color: white;
+}
+
+body.dark {
+  --header-bg: rgba(255, 255, 255, 0.04);
+  --header-color: rgb(255, 245, 245);
+}
+
+/* الشريط العلوي */
+.top-bar {
+   position: relative;
+  background-color: var(--header-bg);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+  width: 80px;
+  cursor: pointer;
+  height: auto;
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: width 0.3s ease, right 0.3s ease;
+}
+
+.top-bar h1 {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  margin: 0;
+  font-size: 24px;
+  color: var(--header-color);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* زر المنيو */
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+header .menu-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--header-color);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 240px;
+  height: 100vh;
+  background-color: var(--header-bg);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.menu-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 50px;
+  margin-bottom: 26px;
+}
+
+/* تظهر عند الضغط على زر المنيو */
+.side-menu.active {
+  transform: translateX(0%);
+}
+
+/* الفوتر ثابت أسفل القائمة */
+.menu-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+  flex-shrink: 0; /* لا ينضغط */
+  margin-bottom: 0;
+}
+
+.side-menu nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu nav ul li {
+  margin: 14px 0;
+}
+
+.side-menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.side-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-footer {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-link {
+  color: #ffb3b3;
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.logout-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .side-menu {
+  background-color: #1e1e2f;
+  color: #eee;
+}
+
+body:not(.dark) .side-menu {
+  background-color: #10275f;
+  color: white;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 1024px) {
+  .logo {
+    width: 70px;
+    right: 60px;
+  }
+  .top-bar h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar h1 {
+    font-size: 18px;
+  }
+  .logo {
+    width: 60px;
+    right: 60px; 
+  }
+  header .menu-toggle  {
+    font-size: 22px;
+    top: 15px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar h1 {
+    font-size: 16px;
+  }
+  .logo {
+    width: 50px;
+    right: 60px; 
+  }
+    header .menu-toggle  {
+    font-size: 18px; 
+    top: 12px;
+    right: 12px;
+  }
+}
+

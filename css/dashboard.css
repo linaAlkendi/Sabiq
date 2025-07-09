@@ -1,0 +1,145 @@
+:root {
+  --dashboard-padding: 50px 30px;
+}
+
+.dashboard {
+  padding: var(--dashboard-padding);
+  max-width: 1200px;
+  margin: auto;
+}
+
+.dashboard h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: var(--section-title);
+}
+
+/* الشبكة */
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* البطاقات */
+.facility-card {
+  background-color: var(--card-bg);
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 240px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facility-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 6px 25px rgba(0, 191, 255, 0.15);
+}
+
+.facility-card h3 {
+  font-size: 20px;
+  color: var(--section-title);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.usage {
+  font-size: 16px;
+  margin: 6px 0 12px;
+  color: var(--usage-color);
+}
+
+.status {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 0;
+}
+
+.status.good {
+  background-color: var(--status-good-bg);
+  color: var(--status-good-text);
+}
+
+.status.warning {
+  background-color: var(--status-warning-bg);
+  color: var(--status-warning-text);
+}
+
+.status.danger {
+  background-color: var(--status-danger-bg);
+  color: var(--status-danger-text);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--primary-btn);
+  color: white;
+  font-weight: bold;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background: var(--primary-btn-hover);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 40px 20px;
+  }
+
+  .facility-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .facility-card {
+    padding: 20px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .dashboard h2 {
+    font-size: 20px;
+  }
+    .usage, .status {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .facility-card h3 {
+    font-size: 18px;
+  }
+  .usage, .status {
+    font-size: 13px;
+  }
+  .dashboard h2 {
+    font-size: 18px;
+  }
+}
+
+
