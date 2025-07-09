@@ -1,0 +1,58 @@
+.incident-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: 'Tajawal', sans-serif;
+  line-height: 1.7;
+  direction: rtl;
+  text-align: right;
+  transition: transform 0.2s ease;
+  border-right: 6px solid #3498db; /* Optional severity color */
+}
+
+.incident-card:hover {
+  transform: translateY(-2px);
+}
+
+.incident-card .label {
+  font-weight: bold;
+  color: #333;
+}
+
+.incident-card .value {
+  display: inline-block;
+  margin-right: 8px;
+  color: #555;
+}
+
+.content {
+  padding: 40px 60px;
+}
+
+.incident-container {
+  margin-top: 20px;
+}
+
+.incident-card.pending {
+  background-color: #fdecea;
+  border-right: 6px solid #e74c3c;
+}
+
+.incident-card.resolved {
+  background-color: #eafaf1;
+  border-right: 6px solid #2ecc71;
+}
+
+.status-pending {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.status-resolved {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+
