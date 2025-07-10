@@ -1,0 +1,52 @@
+.chart-section,
+.latest-maintenance,
+.threshold-alert,
+.manual-report {
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+#usageChart {
+  max-width: 100%;
+}
+
+#alertMessage.status {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.status.good {
+  background-color: var(--status-good-bg);
+  color: var(--status-good-text);
+}
+
+.status.warning {
+  background-color: var(--status-warning-bg);
+  color: var(--status-warning-text);
+}
+
+.status.danger {
+  background-color: var(--status-danger-bg);
+  color: var(--status-danger-text);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--primary-btn);
+  color: white;
+  font-weight: bold;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background: var(--primary-btn-hover);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
