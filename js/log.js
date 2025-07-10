@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ctx = document.getElementById("faultChart").getContext("2d");
 
-  // البيانات التجريبية - استبدليها ببياناتك الحقيقية أو جلبها من API
   const rawData = [
     {
       id: 1,
