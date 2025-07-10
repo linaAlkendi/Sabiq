@@ -1,4 +1,4 @@
-const incidents = [
+let incidents = JSON.parse(localStorage.getItem("incidents")) || [
   {
     id: 1,
     facility: "سلم متحرك 2",
@@ -19,13 +19,15 @@ const incidents = [
   }
 ];
 
+localStorage.setItem("incidents", JSON.stringify(incidents));
+
 function renderIncidents(list) {
   const container = document.getElementById('incident-list');
   container.innerHTML = '';
 
   list.forEach(incident => {
     const card = document.createElement('div');
-    
+
     // Arabic label based on status
     const statusLabel = incident.status === "resolved" ? "تم الحل" : "قيد المعالجة";
 

@@ -77,6 +77,21 @@
   box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
 }
 
+.success-box {
+  background-color: #eafaf1;
+  color: #2ecc71;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 16px;
+  font-weight: bold;
+  display: none;
+}
+
+.success-box.visible {
+  display: block;
+}
+
+
 /* الوضع الليلي للقائمة المنسدلة */
 body.dark .report-form select {
   background-color: var(--card-bg);
