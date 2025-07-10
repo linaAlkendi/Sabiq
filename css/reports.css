@@ -9,7 +9,8 @@
   direction: rtl;
   text-align: right;
   transition: transform 0.2s ease;
-  border-right: 6px solid #3498db; /* Optional severity color */
+  border-right: 6px solid #3498db;
+  /* Optional severity color */
 }
 
 .incident-card:hover {
@@ -33,6 +34,8 @@
 
 .incident-container {
   margin-top: 20px;
+  max-width: 700px;
+  margin: auto;
 }
 
 .incident-card.pending {
@@ -54,5 +57,3 @@
   color: #2ecc71;
   font-weight: bold;
 }
-
-
