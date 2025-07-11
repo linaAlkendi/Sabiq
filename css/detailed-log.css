@@ -2,22 +2,31 @@
     padding: var(--dashboard-padding);
     max-width: 1200px;
     margin: auto;
+    text-align: center; /* لجعل العنوان والفلاتر في المنتصف أفقياً */
   }
   
   .logs-section h2, .logs-section h3 {
     color: var(--section-title);
     margin-top: 30px;
+    text-align: center; /* توسيط العناوين */
   }
 
-  /* فلتر اسم المرفق  */
+.filters-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 25px 0;
+}
+
+/* فلتر اسم المرفق */
 .filter-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 25px 0;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
+  display: flex;
+  justify-content: center; /* توسيط الفلاتر أفقياً */
+  align-items: center;
+  gap: 15px;
+  margin: 25px 0 40px 0; /* مسافة بين الفلاتر والجدول */
+  flex-wrap: wrap;
+}
   
   .filter-box label {
     font-weight: bold;
@@ -55,9 +64,11 @@ body.dark .logs-table tr:hover {
     background-color: rgba(255, 255, 255, 0.08); 
   }
   
-  .table-wrapper {
-    overflow-x: auto;
-  }
+/* الجدول */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 50px; /* مساحة تحت الجدول */
+}
   
   .logs-table {
     width: 100%;
@@ -100,8 +111,22 @@ body.dark .logs-table tr:hover {
   }
   
   .attachments {
-    margin-top: 15px;
-  }
+
+  display: flex;
+  justify-content: center; /* توسيط المحتوى أفقياً */
+  margin-bottom: 30px;     /* مسافة تحت */
+  margin-top: 15px;        /* مسافة فوق شوي */
+}
+.attachments .attachment {
+  max-width: 300px; 
+  width: 100%;
+  text-align: center;
+}
+.logs-section h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
   
   .attachment {
     background: var(--card-bg);
@@ -127,7 +152,10 @@ body.dark .logs-table tr:hover {
     display: block;
   }
 
- 
+ /* منع هوفر على صف العناوين */
+.logs-table thead tr:hover {
+  cursor: default;
+}
   
   .hidden {
     display: none;

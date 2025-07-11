@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const facilityFilter = document.getElementById("facilityFilter");
   const yearFilter = document.getElementById("yearFilter");
   const analysisBox = document.getElementById("analysisBox");
   const analysisText = document.getElementById("analysisText");
@@ -7,11 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const summaryTableSection = document.getElementById("summaryTableSection");
   const summaryTableBody = document.getElementById("summaryTableBody");
   const tableActions = document.getElementById("tableActions");
-  const exportExcelBtn = document.getElementById("exportExcelBtn");
-  const exportPdfBtn = document.getElementById("exportPdfBtn");
   const detailedDataBtn = document.getElementById("detailedDataBtn");
-  const detailedTableSection = document.getElementById("detailedTableSection");
-  const detailedTableBody = document.getElementById("detailedTableBody");
 
   const ctx = document.getElementById("faultChart").getContext("2d");
 
@@ -21,9 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
       type: "escalator",
       name: "سلم كهربائي 1",
       faults: [
-        { date: "2024-06-10", faultType: "كهربائي", technician: "محمد" },
+        { date: "2024-01-10", faultType: "كهربائي", technician: "محمد" },
         { date: "2024-06-25", faultType: "ميكانيكي", technician: "علي" },
         { date: "2024-07-02", faultType: "كهربائي", technician: "أحمد" },
+        { date: "2024-07-15", faultType: "ميكانيكي", technician: "سارة" },
+        { date: "2024-08-10", faultType: "كهربائي", technician: "مريم" },
       ],
     },
     {
@@ -34,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         { date: "2024-01-14", faultType: "ميكانيكي", technician: "سارة" },
         { date: "2024-03-21", faultType: "كهربائي", technician: "خالد" },
         { date: "2024-06-10", faultType: "كهربائي", technician: "مريم" },
+        { date: "2024-07-22", faultType: "ميكانيكي", technician: "ماجد" },
+        { date: "2024-09-02", faultType: "كهربائي", technician: "علي" },
       ],
     },
     {
@@ -41,26 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
       type: "elevator",
       name: "مصعد 5",
       faults: [
-        { date: "2024-06-08", faultType: "كهربائي", technician: "خالد" },
+        { date: "2024-02-08", faultType: "كهربائي", technician: "خالد" },
         { date: "2024-07-09", faultType: "ميكانيكي", technician: "علي" },
         { date: "2024-06-20", faultType: "كهربائي", technician: "محمد" },
+        { date: "2024-07-11", faultType: "ميكانيكي", technician: "نور" },
+        { date: "2024-08-14", faultType: "كهربائي", technician: "سارة" },
       ],
     },
   ];
 
   const months = [
-    "يناير",
-    "فبراير",
-    "مارس",
-    "أبريل",
-    "مايو",
-    "يونيو",
-    "يوليو",
-    "أغسطس",
-    "سبتمبر",
-    "أكتوبر",
-    "نوفمبر",
-    "ديسمبر",
+    "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+    "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر",
   ];
 
   // ملء قائمة السنوات (حسب بيانات rawData)
@@ -80,36 +71,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // فلترة البيانات حسب نوع المرفق والسنة
-  function filterData(facilityType, year) {
-    return rawData
-      .filter((f) => facilityType === "all" || f.type === facilityType)
-      .map((f) => ({
-        ...f,
-        faults: f.faults.filter(
-          (fault) => new Date(fault.date).getFullYear() === +year
-        ),
-      }))
-      .filter((f) => f.faults.length > 0);
-  }
+  // حساب الأعطال الشهرية لكل نوع مرفق
+  function getMonthlyFaultCountsByType(year) {
+    const counts = {
+      escalator: new Array(12).fill(0),
+      gate: new Array(12).fill(0),
+      elevator: new Array(12).fill(0),
+    };
 
-  // حساب الأعطال الشهرية
-  function getMonthlyFaultCounts(filteredData) {
-    const counts = new Array(12).fill(0);
-    filteredData.forEach((facility) => {
+    rawData.forEach((facility) => {
       facility.faults.forEach((fault) => {
-        const month = new Date(fault.date).getMonth();
-        counts[month]++;
+        const faultYear = new Date(fault.date).getFullYear();
+        if (faultYear === year) {
+          const month = new Date(fault.date).getMonth();
+          counts[facility.type][month]++;
+        }
       });
     });
+
     return counts;
   }
 
-  // إيجاد الشهر الذي به أكبر عدد أعطال
-  function getMaxFaultMonth(monthCounts) {
+  // حساب إجمالي الأعطال الشهرية لجميع المرافق
+  function getTotalMonthlyFaults(monthlyCounts) {
+    const total = new Array(12).fill(0);
+    for (let i = 0; i < 12; i++) {
+      total[i] =
+        monthlyCounts.escalator[i] +
+        monthlyCounts.gate[i] +
+        monthlyCounts.elevator[i];
+    }
+    return total;
+  }
+
+  // إيجاد أكثر شهر فيه أعطال (حسب الإجمالي)
+  function getMaxFaultMonth(totalCounts) {
     let maxCount = 0;
     let maxMonthIndex = 0;
-    monthCounts.forEach((count, i) => {
+    totalCounts.forEach((count, i) => {
       if (count > maxCount) {
         maxCount = count;
         maxMonthIndex = i;
@@ -118,206 +117,165 @@ document.addEventListener("DOMContentLoaded", () => {
     return { maxMonthIndex, maxCount };
   }
 
-  // إيجاد نوع العطل الأكثر شيوعاً
-  function getMostCommonFaultType(filteredData) {
-    const faultTypeCounts = {};
-    filteredData.forEach((facility) => {
-      facility.faults.forEach((fault) => {
-        faultTypeCounts[fault.faultType] =
-          (faultTypeCounts[fault.faultType] || 0) + 1;
-      });
-    });
-    let maxCount = 0;
-    let maxType = null;
-    for (const [type, count] of Object.entries(faultTypeCounts)) {
-      if (count > maxCount) {
-        maxCount = count;
-        maxType = type;
-      }
-    }
-    return { maxType, maxCount };
-  }
-
   // تحديث جدول ملخص الأعطال الشهري
-  function updateMonthlySummaryTable(monthCounts) {
+  function updateMonthlySummaryTable(totalCounts) {
     summaryTableBody.innerHTML = "";
     months.forEach((monthName, index) => {
       summaryTableBody.innerHTML += `
-      <tr>
-        <td>${monthName}</td>
-        <td>${monthCounts[index]}</td>
-      </tr>`;
+        <tr>
+          <td>${monthName}</td>
+          <td>${totalCounts[index]}</td>
+        </tr>
+      `;
     });
     summaryTableSection.style.display = "block";
   }
 
-  // رسم الرسم البياني
+  // تحديث التنبيه الذكي وزر البيانات المفصلة
+  function updateSmartAlert(totalCounts) {
+    const { maxMonthIndex, maxCount } = getMaxFaultMonth(totalCounts);
+    analysisText.textContent = `⚠️ أكثر شهر فيه أعطال هو ${months[maxMonthIndex]} وعدد الأعطال فيه ${maxCount}.`;
+    analysisBox.style.display = "flex";
+    reportBtn.style.display = "none";
+    detailedDataBtn.style.display = "inline-block";
+    tableActions.style.display = "flex";
+  }
+
+  // الرسم البياني مع التأثير البصري عند hover
   let faultChart = null;
-  function updateChart(filteredData, year) {
-    const monthCounts = getMonthlyFaultCounts(filteredData);
+  function updateChart(year) {
+    const monthlyCounts = getMonthlyFaultCountsByType(year);
+    const totalCounts = getTotalMonthlyFaults(monthlyCounts);
 
     if (faultChart) {
       faultChart.destroy();
     }
+
+    const datasets = [
+      {
+        label: "مصعد",
+        data: monthlyCounts.elevator,
+        backgroundColor: "rgba(0, 123, 255, 0.8)", // أزرق داكن
+      },
+      {
+        label: "سلم كهربائي",
+        data: monthlyCounts.escalator,
+        backgroundColor: "rgba(135, 206, 250, 0.7)", // أزرق فاتح (SkyBlue)
+      },
+      {
+        label: "بوابة إلكترونية",
+        data: monthlyCounts.gate,
+        backgroundColor: "rgba(255, 255, 224, 0.7)", // أصفر باهت (LightYellow)
+      },
+    ];
+
     faultChart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: months,
-        datasets: [
-          {
-            label: `عدد مرات العطل في ${year}`,
-            data: monthCounts,
-            backgroundColor: "#007bff",
-          },
-        ],
+        datasets: datasets,
       },
       options: {
         responsive: true,
+        interaction: {
+          mode: "nearest",
+          axis: "x",
+          intersect: true,
+        },
+        plugins: {
+          tooltip: {
+            enabled: true,
+            mode: "nearest",
+            intersect: true,
+            callbacks: {
+              label: (ctx) => {
+                const label = ctx.dataset.label || "";
+                const value = ctx.parsed.y || 0;
+                const month = ctx.chart.data.labels[ctx.dataIndex];
+                return `${label}: ${value} أعطال `;
+              },
+            },
+          },
+          legend: {
+            labels: {
+              boxWidth: 20,
+              padding: 15,
+              font: { size: 14, weight: "bold" },
+            },
+          },
+          title: {
+            display: true,
+            text: `عدد الأعطال حسب النوع والشهر للسنة ${year}`,
+            font: { size: 16, weight: "bold" },
+          },
+        },
         scales: {
           x: {
+            stacked: true,
             grid: { display: false },
           },
           y: {
+            stacked: true,
             beginAtZero: true,
-            stepSize: 1,
-            ticks: {
-              precision: 0,
-            },
+            ticks: { stepSize: 1, precision: 0 },
           },
         },
-        plugins: {
-          legend: {
-            display: true,
-            position: "top",
-            labels: {
-              font: { size: 16 },
-              color: "#0c1f4a",
-            },
-          },
-          tooltip: {
-            enabled: true,
-          },
+        hover: {
+          mode: "nearest",
+          intersect: true,
         },
       },
+      plugins: [
+        {
+          id: "hoverGlowLift",
+          afterDatasetDraw(chart) {
+            const { ctx, tooltip } = chart;
+            if (tooltip._active && tooltip._active.length) {
+              const activePoint = tooltip._active[0];
+              const datasetIndex = activePoint.datasetIndex;
+              const index = activePoint.index;
+              const meta = chart.getDatasetMeta(datasetIndex);
+              const bar = meta.data[index];
+
+              ctx.save();
+
+              ctx.shadowColor = "rgba(140, 151, 154, 0.11)";
+              ctx.shadowBlur = 20;
+              ctx.shadowOffsetX = 0;
+              ctx.shadowOffsetY = 0;
+
+              ctx.translate(0, -8);
+
+              bar.draw(ctx);
+
+              ctx.restore();
+            }
+          },
+        },
+      ],
     });
+
+    updateMonthlySummaryTable(totalCounts);
+    updateSmartAlert(totalCounts);
   }
 
-  // تحديث التنبيه الذكي
-  function updateSmartAlert(facilityType, filteredData, monthCounts) {
-    if (facilityType === "all") {
-      // التنبيه عن الشهر الأكثر أعطال
-      const { maxMonthIndex, maxCount } = getMaxFaultMonth(monthCounts);
-      analysisText.textContent = `⚠️ أكثر شهر فيه أعطال هو ${months[maxMonthIndex]} وعدد الأعطال فيه ${maxCount}.`;
-      analysisBox.style.display = "flex";
-      reportBtn.style.display = "none";
-      detailedDataBtn.style.display = "none";
-      detailedTableSection.style.display = "none";
-      tableActions.style.display = "none";
-    } else {
-      // التنبيه عن الشهر الأكثر أعطال ونوع العطل الأكثر شيوعاً
-      const { maxMonthIndex, maxCount } = getMaxFaultMonth(monthCounts);
-      const { maxType } = getMostCommonFaultType(filteredData);
-      analysisText.textContent = `⚠️ أكثر فترة تخريب في ${months[maxMonthIndex]} (${maxCount} أعطال). نوع العطل الأكثر هو: ${maxType}.`;
-      analysisBox.style.display = "flex";
-      reportBtn.style.display = "none";
-      detailedDataBtn.style.display = "inline-block";
-      detailedTableSection.style.display = "none";
-      tableActions.style.display = "none";
-    }
-  }
-
-  // عرض الجدول التفصيلي
-  function showDetailedData(filteredData) {
-    detailedTableBody.innerHTML = "";
-    filteredData.forEach((facility) => {
-      facility.faults.forEach((fault) => {
-        detailedTableBody.innerHTML += `
-        <tr>
-          <td>${facility.name}</td>
-          <td>${fault.date}</td>
-          <td>${fault.faultType}</td>
-          <td>${fault.technician}</td>
-        </tr>`;
-      });
-    });
-    detailedTableSection.style.display = "block";
-    tableActions.style.display = "flex";
-  }
-
-  // عند اختيار الفلتر
-  function onFilterChange() {
-    const selectedFacility = facilityFilter.value;
+  // حدث تغيير السنة
+  yearFilter.addEventListener("change", () => {
     const selectedYear = +yearFilter.value;
-    const filteredData = filterData(selectedFacility, selectedYear);
-    const monthCounts = getMonthlyFaultCounts(filteredData);
-
-    updateChart(filteredData, selectedYear);
-
-    if (selectedFacility === "all") {
-      updateMonthlySummaryTable(monthCounts);
-      analysisBox.style.display = "flex";
-      detailedDataBtn.style.display = "none";
-      detailedTableSection.style.display = "none";
-      tableActions.style.display = "none";
-      updateSmartAlert(selectedFacility, filteredData, monthCounts);
-    } else {
-      updateMonthlySummaryTable(monthCounts);
-      updateSmartAlert(selectedFacility, filteredData, monthCounts);
-      detailedDataBtn.style.display = "inline-block";
-  detailedTableSection.style.display = "none";
-  tableActions.style.display = "flex"; 
-
-    }
-  }
-
-  // تصدير Excel باستخدام SheetJS
-  function exportTableToExcel() {
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.table_to_sheet(detailedTableSection.querySelector("table"));
-    XLSX.utils.book_append_sheet(wb, ws, "تفاصيل الأعطال");
-    XLSX.writeFile(wb, "تفاصيل_الأعطال.xlsx");
-  }
-
-  // تصدير PDF باستخدام jsPDF
-  function exportTableToPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "landscape" });
-    doc.setFontSize(14);
-    doc.text("تفاصيل الأعطال", 40, 40);
-    doc.autoTable({ html: detailedTableSection.querySelector("table"), startY: 60 });
-    doc.save("تفاصيل_الأعطال.pdf");
-  }
-
-  // أحداث أزرار التصدير
-  exportExcelBtn.addEventListener("click", () => {
-    if (detailedTableSection.style.display === "block") {
-      exportTableToExcel();
-    }
+    updateChart(selectedYear);
   });
 
-  exportPdfBtn.addEventListener("click", () => {
-    if (detailedTableSection.style.display === "block") {
-      exportTableToPDF();
-    }
-  });
-
-  // عند الضغط على بيانات مفصلة
+  // زر "بيانات مفصلة" يفتح صفحة التفاصيل
   detailedDataBtn.addEventListener("click", () => {
-    const selectedFacility = facilityFilter.value;
-    const selectedYear = +yearFilter.value;
-    const filteredData = filterData(selectedFacility, selectedYear);
-    showDetailedData(filteredData);
+    window.location.href = "detailed-log.html";
   });
 
   // تهيئة الصفحة
   fillYearFilter();
-  // اختر أول سنة تلقائيًا
+
   if (yearFilter.options.length > 0) {
     yearFilter.value = yearFilter.options[yearFilter.options.length - 1].value;
   }
 
-  facilityFilter.addEventListener("change", onFilterChange);
-  yearFilter.addEventListener("change", onFilterChange);
-
-  onFilterChange();
+  updateChart(+yearFilter.value);
 });

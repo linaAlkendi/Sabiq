@@ -17,41 +17,41 @@
   <!-- الهيدر -->
   <header class="top-bar">
     <!-- زر الوضع الليلي  -->
-<label class="theme-toggle-switch">
-  <input type="checkbox" id="theme-toggle-switch">
-  <span class="slider">
-    <!-- شمس SVG -->
-    <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z"/>
-    </svg>
-    <!-- هلال SVG -->
-    <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z"/>
-    </svg>
-  </span>
-</label>
-    
+    <label class="theme-toggle-switch">
+      <input type="checkbox" id="theme-toggle-switch" />
+      <span class="slider">
+        <!-- شمس SVG -->
+        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z" />
+        </svg>
+        <!-- هلال SVG -->
+        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
+        </svg>
+      </span>
+    </label>
+
     <!-- زر المنيو -->
-  <button class="menu-toggle" id="menuToggle">☰</button>
-  <!-- القائمة الجانبية -->
-  <aside class="side-menu" id="sideMenu">
-    <br><br><br>
-    <nav class="menu-nav">
-      <ul>
-        <li><a href="dashboard.html">لوحة التحكم</a></li>
-        <li><a href="notifications.html">التنبيهات</a></li>
-        <li><a href="log.html">سجل الأعطال</a></li>
-        <li><a href="new-report.html">رفع بلاغ</a></li>
-        <li><a href="reports.html">البلاغات</a></li>
-        <li><a href="settings.html">الإعدادات</a></li>
-      </ul>
-    </nav>
-    <div class="menu-footer">
-      <a href="index.html" class="logout-link">تسجيل الخروج</a>
-    </div>
-  </aside>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <!-- القائمة الجانبية -->
+    <aside class="side-menu" id="sideMenu">
+      <br /><br /><br />
+      <nav class="menu-nav">
+        <ul>
+          <li><a href="dashboard.html">لوحة التحكم</a></li>
+          <li><a href="notifications.html">التنبيهات</a></li>
+          <li><a href="log.html">سجل الأعطال</a></li>
+          <li><a href="new-report.html">رفع بلاغ</a></li>
+          <li><a href="reports.html">البلاغات</a></li>
+          <li><a href="settings.html">الإعدادات</a></li>
+        </ul>
+      </nav>
+      <div class="menu-footer">
+        <a href="index.html" class="logout-link">تسجيل الخروج</a>
+      </div>
+    </aside>
     <a href="dashboard.html">
-      <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo">
+      <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo" />
     </a>
     <h1>سجل الأعطال</h1>
   </header>
@@ -59,19 +59,33 @@
   <!-- المحتوى -->
   <main class="logs-section">
     <h2>سجل الأعطال السابقة</h2>
-    <div class="filter-box">
-      <label for="typeFilter">تصفية حسب نوع العطل:</label>
-      <select id="typeFilter">
-        <option value="all">الكل</option>
-        <option value="كهربائي">كهربائي</option>
-        <option value="ميكانيكي">ميكانيكي</option>
-       
-      </select>
+
+    <div class="filters-container" style="justify-content:center; gap:30px; margin: 25px 0;">
+      <div class="filter-box">
+        <label for="typeFilter">تصفية حسب نوع العطل:</label>
+        <select id="typeFilter">
+          <option value="all">الكل</option>
+          <option value="كهربائي">كهربائي</option>
+          <option value="ميكانيكي">ميكانيكي</option>
+        </select>
+      </div>
+
+      <div class="filter-box">
+        <label for="facilityTypeFilter">تصفية حسب نوع المرفق:</label>
+        <select id="facilityTypeFilter">
+          <option value="all">كل المرافق</option>
+          <option value="بوابة إلكترونية">بوابة إلكترونية</option>
+          <option value="سلم كهربائي">سلم كهربائي</option>
+          <option value="مصعد">مصعد</option>
+        </select>
+      </div>
     </div>
+
     <div class="table-wrapper">
       <table class="logs-table" id="logsTable">
         <thead>
           <tr>
+            <th>نوع المرفق</th>
             <th>اسم المرفق</th>
             <th>تاريخ العطل</th>
             <th>نوع العطل</th>
@@ -81,46 +95,52 @@
         </thead>
         <tbody>
           <tr data-index="0">
-            <td>بوابةإلكترونية</td>
+            <td>بوابة إلكترونية</td>
+            <td>بوابة إلكترونية A</td>
             <td>2025-06-01</td>
             <td>كهربائي</td>
             <td>2 ساعة</td>
             <td>انقطاع مفاجئ</td>
           </tr>
           <tr data-index="1">
-             <td>سلم كهربائي</td>
+            <td>سلم كهربائي</td>
+            <td>سلم كهربائي 1</td>
             <td>2025-05-28</td>
             <td>ميكانيكي</td>
             <td>1.5 ساعة</td>
             <td>مشكلة في الباب</td>
           </tr>
           <tr data-index="2">
-             <td>مصعد</td>
+            <td>مصعد</td>
+            <td>مصعد 5</td>
             <td>2025-05-15</td>
             <td>كهربائي</td>
             <td>45 دقيقة</td>
-            <td>انقطاع مفاجئ </td>
+            <td>انقطاع مفاجئ</td>
           </tr>
           <tr data-index="3">
             <td>مصعد</td>
+            <td>مصعد 3</td>
             <td>2025-04-22</td>
             <td>كهربائي</td>
             <td>3 ساعات</td>
             <td>تلف في القاطع</td>
           </tr>
           <tr data-index="4">
-               <td>سلم كهربائي</td>
+            <td>سلم كهربائي</td>
+            <td>سلم كهربائي 2</td>
             <td>2025-03-18</td>
             <td>ميكانيكي</td>
             <td>1 ساعة</td>
             <td>احتكاك داخلي</td>
           </tr>
           <tr data-index="5">
-               <td>بوابة إلكترونية</td>
+            <td>بوابة إلكترونية</td>
+            <td>بوابة إلكترونية B</td>
             <td>2025-02-05</td>
             <td>كهربائي</td>
             <td>30 دقيقة</td>
-            <td>تلف في القاطع  </td>
+            <td>تلف في القاطع</td>
           </tr>
         </tbody>
       </table>
@@ -135,9 +155,6 @@
       <div class="attachments">
         <div class="attachment">
           <a href="#" target="_blank" id="pdfLink" class="pdf-link">📄 تقرير صيانة PDF</a>
-         
-        </div>
-      
         </div>
       </div>
     </section>

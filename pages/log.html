@@ -61,14 +61,7 @@
   <main class="log-main">
     <h2>تحليل بيانات الأعطال السنوية</h2>
 
-    <section id="filters">
-      <select id="facilityFilter" aria-label="اختر نوع المرفق">
-        <option value="all">كل المرافق</option>
-        <option value="escalator">سلم كهربائي</option>
-        <option value="gate">بوابة إلكترونية</option>
-        <option value="elevator">مصعد</option>
-      </select>
-
+    <section id="filters" style="justify-content: center; margin-bottom: 30px;">
       <select id="yearFilter" aria-label="اختر السنة">
         <!-- تعبأ تلقائيًا -->
       </select>
@@ -80,10 +73,9 @@
 
     <section id="analysisBox">
       <div id="analysisText"></div>
-      <button id="reportBtn" title="البلاغ الوقائي">بلاغ وقائي</button>
     </section>
 
-    <section id="summaryTableSection" style="display:none;">
+    <section id="summaryTableSection">
       <table class="summary-table" aria-label="جدول ملخص الأعطال حسب الشهر">
         <thead>
           <tr>
@@ -93,28 +85,11 @@
         </thead>
         <tbody id="summaryTableBody"></tbody>
       </table>
+      <div style="text-align:center; margin-top: 20px;">
+        <a href="detailed-log.html"><button id="detailedDataBtn">بيانات مفصلة</button></a>
+      </div>
     </section>
 
-    <section id="tableActions" style="display:none;">
- <a href="detailed-log.html" ><button id="detailedDataBtn" style="display:none;">بيانات مفصلة</button></a>
-  <button id="exportExcelBtn" style="display:none;">تصدير Excel</button>
-  <button id="exportPdfBtn" style="display:none;">تصدير PDF</button>
-</section>
-
-
-    <section id="detailedTableSection">
-      <table class="detailed-table" aria-label="جدول البيانات التفصيلية للأعطال">
-        <thead>
-          <tr>
-            <th>اسم المرفق</th>
-            <th>تاريخ العطل</th>
-            <th>نوع العطل</th>
-            <th>اسم الفني</th>
-          </tr>
-        </thead>
-        <tbody id="detailedTableBody"></tbody>
-      </table>
-    </section>
   </main>
 
   <script src="../js/header.js"></script>
