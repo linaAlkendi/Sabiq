@@ -1,25 +1,5 @@
-let incidents = JSON.parse(localStorage.getItem("incidents")) || [
-  {
-    id: 1,
-    facility: "سلم متحرك 2",
-    issueType: "تسرب وقود",
-    description: "تم ملاحظة تسرب خفيف من أحد أنابيب الوقود تحت السلم.",
-    reportedBy: "رائد الفني",
-    reportedAt: "2025-07-10 15:23",
-    status: "pending"
-  },
-  {
-    id: 2,
-    facility: "بوابة A3",
-    issueType: "عطل كهربائي",
-    description: "انطفأت الأنوار فجأة عند مدخل البوابة، بحاجة لصيانة.",
-    reportedBy: "المفتشة نورة",
-    reportedAt: "2025-07-10 11:48",
-    status: "resolved"
-  }
-];
 
-localStorage.setItem("incidents", JSON.stringify(incidents));
+let incidents = Database.loadIncidents();
 
 function renderIncidents(list) {
   const container = document.getElementById('incident-list');

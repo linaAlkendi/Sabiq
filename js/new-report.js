@@ -1,3 +1,4 @@
+
 // new-report.html form logic
 const form = document.querySelector("form");
 if (form) {
@@ -25,9 +26,7 @@ if (form) {
             status: "pending"
         };
 
-        let updatedIncidents = JSON.parse(localStorage.getItem("incidents")) || [];
-        updatedIncidents.push(newIncident);
-        localStorage.setItem("incidents", JSON.stringify(updatedIncidents));
+        Database.addIncident(newIncident);
 
         form.reset();
         successBox.classList.add("visible")
