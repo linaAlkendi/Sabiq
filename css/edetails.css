@@ -45,24 +45,24 @@ canvas#usageChart {
   font-weight: bold;
 }
 
+
+ 
+
 #alertMessageBox {
-  background-color: var(--status-danger-bg);
+  background-color: var(--status-good-bg);
   color: var(--status-danger-text);
   padding: 18px 24px;
   border-radius: 16px;
   font-weight: bold; 
   text-align: center;
   margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+  box-shadow: 0 4px 12px rgba(54, 194, 101, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
-
-
-
 
 .status.good {
   background-color: var(--status-good-bg);

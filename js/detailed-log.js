@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       {
         actions: [
           "تم الإبلاغ عن طريق النظام",
-          " أرسلت فرقة صيانة",
+          "إعادة تشغيل السيرفر",
           "الفني: خالد العنزي",
           "تاريخ الصيانة: 2025-02-06"
         ],
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
     typeFilter.addEventListener("change", () => {
       const type = typeFilter.value;
       rows.forEach(row => {
-        const faultType = row.children[1].textContent.trim();
+        const faultType = row.children[2].textContent.trim();
         row.style.display = (type === "all" || faultType === type) ? "" : "none";
       });
   

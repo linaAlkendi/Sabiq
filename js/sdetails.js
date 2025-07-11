@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const usageData = {
-    facility: "بوابة 5",
+    facility: "سلم متحرك 1",
     lastMaintenance: "2025-07-10",
     threshold: 100,
-    dailyUsage: [80, 95, 100, 330, 130, 110, 140],
+    dailyUsage: [80, 295, 50,30, 60, 75, 85],
     labels: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"]
   };
 
