@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة المشرف - SABIQ</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/supervisor-dashboard.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <a href="dashboard.html">
+      <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo" />
+    </a>
+    <h1>لوحة المشرف</h1>
+    <label class="theme-toggle-switch">
+      <input type="checkbox" id="theme-toggle-switch" />
+      <span class="slider">
+        <svg class="icon sun-icon" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79..." /></svg>
+        <svg class="icon moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9..." /></svg>
+      </span>
+    </label>
+  </header>
+
+  <main class="supervisor-main">
+    <section class="overview-cards">
+      <div class="card">
+        <h3>الفنيون النشطون</h3>
+        <p id="activeTechs">0</p>
+      </div>
+      <div class="card">
+        <h3>المهام الجارية</h3>
+        <p id="ongoingTasks">0</p>
+      </div>
+      <div class="card">
+        <h3>مهام منجزة اليوم</h3>
+        <p id="completedToday">0</p>
+      </div>
+    </section>
+
+    <section class="task-list">
+      <div class="filters-wrapper">
+        <select id="statusFilter">
+          <option value="all">كل الحالات</option>
+          <option value="قيد التنفيذ">قيد التنفيذ</option>
+          <option value="تم الإنجاز">تم الإنجاز</option>
+          <option value="بانتظار التوجيه">بانتظار التوجيه</option>
+          <option value="late">المهام المتأخرة</option>
+        </select>
+
+        <select id="faultFilter">
+          <option value="all">كل الأعطال</option>
+          <option value="كهربائي">كهربائي</option>
+          <option value="ميكانيكي">ميكانيكي</option>
+        </select>
+
+        <input type="search" id="searchInput" placeholder="ابحث بالاسم أو المرفق...">
+        <button id="assignBtn">+ إسناد مهمة</button>
+      </div>
+
+      <div id="taskTableWrapper"></div>
+    </section>
+  </main>
+
+  <!-- نافذة إسناد مهمة -->
+  <div id="assignModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>إسناد مهمة لفني</h3>
+      <label>اسم الفني:<input id="technicianInput" type="text" /></label>
+      <label>اسم المرفق:<input id="facilityInput" type="text" /></label>
+      <label>نوع العطل:
+        <select id="faultTypeInput">
+          <option value="كهربائي">كهربائي</option>
+          <option value="ميكانيكي">ميكانيكي</option>
+        </select>
+      </label>
+      <label>الوصف:<input id="actionInput" type="text" /></label>
+      <div class="modal-actions">
+        <button id="submitAssignment">إسناد</button>
+        <button id="cancelAssignment">إلغاء</button>
+      </div>
+    </div>
+  </div>
+  <div id="successToast" class="success-toast" role="alert" aria-live="polite">
+    <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <circle cx="12" cy="12" r="10" stroke-width="2" stroke="white" fill="#4CAF50"/>
+      <path stroke="white" stroke-width="2" d="M8 12l2 2l4-4" />
+    </svg>
+    <span>تم إسناد المهمة بنجاح</span>
+  </div>
+
+  <script src="../js/supervisor-dashboard.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/header.js"></script>
+</body>
+</html>
