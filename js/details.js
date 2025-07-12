@@ -57,8 +57,4 @@ document.addEventListener("DOMContentLoaded", () => {
     alertBox.classList.add("status", "good");
   }
 
-  document.getElementById("manualReportBtn").addEventListener("click", () => {
-    const facility = usageData.facility;
-    window.location.href = `new-report.html?facility=${encodeURIComponent(facility)}`;
-  });
 });

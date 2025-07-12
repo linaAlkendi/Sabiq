@@ -95,28 +95,3 @@ canvas#usageChart {
   color: var(--status-danger-text);
 }
 
-.manual-report {
-  text-align: center;
-  margin-top: 30px;
-}
-
-
-
-.btn {
-  display: inline-block;
-  padding: 10px 24px;
-  background: var(--primary-btn);
-  color: white;
-  font-weight: bold;
-  border-radius: 14px;
-  text-decoration: none;
-  font-size: 14px;
-  border: none;         
-  outline: none;         
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-.btn:hover {
-  background: var(--primary-btn-hover);
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
-}
