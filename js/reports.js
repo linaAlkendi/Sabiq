@@ -1,5 +1,13 @@
 
-let incidents = Database.loadIncidents();
+fetch("http://localhost:3000/incidents")
+  .then(res => res.json())
+  .then(incidents => {
+    renderIncidents(incidents);
+  })
+  .catch(error => {
+    console.error("Failed to fetch incidents:", error);
+  });
+
 
 function renderIncidents(list) {
   const container = document.getElementById('incident-list');
@@ -26,5 +34,3 @@ function renderIncidents(list) {
     container.appendChild(card);
   });
 }
-
-renderIncidents(incidents);

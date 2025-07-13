@@ -26,10 +26,26 @@ if (form) {
             status: "pending"
         };
 
-        Database.addIncident(newIncident);
-
-        form.reset();
-        successBox.classList.add("visible")
-        setTimeout(() => successBox.classList.remove("visible"), 4000);
+        fetch("http://localhost:3000/incidents", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newIncident)
+        })
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to submit");
+                return res.json();
+            })
+            .then(data => {
+                console.log("Success:", data);
+                form.reset();
+                successBox.classList.add("visible")
+                setTimeout(() => successBox.classList.remove("visible"), 4000);
+            })
+            .catch(err => {
+                console.error("Error submitting incident:", err);
+                alert("تعذر إرسال البلاغ. حاول مرة أخرى.");
+            });
     });
 }
