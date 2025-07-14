@@ -1,0 +1,306 @@
+:root {
+  --form-gap: 20px;
+  --form-padding: 30px 25px;
+}
+
+.complete-task {
+  padding: var(--dashboard-padding);
+  max-width: 800px;
+  margin: 40px auto 60px; /* مسافة من الأعلى والأسفل */
+}
+
+
+form#taskForm {
+  background-color: var(--card-bg);
+  padding: var(--form-padding);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: var(--section-title);
+  font-size: 15px;
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea,
+.form-group input[type="file"] {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background-color: white;
+  color: var(--text-color);
+}
+
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group textarea {
+  background-color: #2a2a40;
+  border-color: #555;
+  color: white;
+}
+
+textarea {
+   resize: none;
+}
+
+.submit-btn {
+  display: block;
+  margin: 30px auto 0; /* يوسّط الزر أفقيًا */
+  padding: 12px 30px;
+  background: var(--primary-btn);
+  color: white;
+  font-weight: bold;
+  width: 30%;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.submit-btn:hover {
+  background: var(--primary-btn-hover);
+}
+
+footer {
+  text-align: center;
+  padding: 30px 0 20px;
+  font-size: 14px;
+  color: var(--usage-color);
+}
+
+select {
+  padding: 12px 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+select:focus {
+  border-color: var(--primary-btn);
+  outline: none;
+}
+.confirm-popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.confirm-popup {
+  background-color: #ffffff;
+  color: var(--text-color);
+  padding: 24px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  min-width: 280px;
+  max-width: 90%;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .confirm-popup {
+  background-color: #2a2a40;
+  color: var(--text-color);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+}
+
+.confirm-message {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-confirm-yes,
+.btn-confirm-no {
+  padding: 10px 28px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 80px;
+}
+
+.btn-confirm-yes {
+  background: var(--primary-btn);
+  color: white;
+}
+
+.btn-confirm-yes:hover {
+  background: var(--primary-btn-hover);
+}
+
+.btn-confirm-no {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-confirm-no:hover {
+  background-color: #bbb;
+}
+
+body.dark .btn-confirm-no {
+  background-color: #555;
+  color: #eee;
+}
+
+body.dark .btn-confirm-no:hover {
+  background-color: #777;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background-color: white; /* لا يتغير حتى بعد الكتابة */
+  outline: none;
+  border-color: var(--primary-btn); /* فقط تحديد border بلون مميز */
+}
+
+body.dark .form-group input:focus,
+body.dark .form-group select:focus,
+body.dark .form-group textarea:focus {
+  background-color: #2a2a40;
+  border-color: var(--primary-btn);
+}
+.thank-you-container {
+  text-align: center;
+  margin-top: 80px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.icon-wrapper {
+  margin-bottom: 25px;
+}
+
+/* SVG أنيميشن دائرية ✅ */
+.checkmark-icon {
+  width: 90px;
+  height: 90px;
+  stroke: var(--primary-btn);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: scaleIn 0.4s ease-out;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 157;
+  stroke-dashoffset: 157;
+  animation: strokeIn 0.5s ease-out forwards;
+}
+
+.checkmark-check {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: strokeCheck 0.4s 0.5s ease-out forwards;
+}
+
+/* رسائل */
+#thankYouText {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--section-title);
+  margin-bottom: 30px;
+}
+
+/* زر العودة */
+.back-to-tasks-btn {
+  display: inline-block;
+  background: var(--primary-btn);
+  color: white;
+  transition: background-color 0.3s ease;
+  padding: 12px 28px;
+  border-radius: 14px;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-to-tasks-btn:hover {
+  background: var(--primary-btn-hover);
+  
+}
+
+/* الوضع الليلي */
+body.dark .back-to-tasks-btn {
+  border-color: white;
+  color: white;
+}
+
+body.dark .back-to-tasks-btn:hover {
+  background-color: white;
+  color: var(--primary-btn);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes strokeIn {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes strokeCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .submit-btn {
+    width: 80%;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .complete-task {
+    padding: 40px 20px;
+  }
+
+  form#taskForm {
+    padding: 20px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

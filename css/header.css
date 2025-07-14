@@ -59,7 +59,7 @@ header .menu-toggle {
   font-size: 28px;
   color: var(--header-color);
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 

@@ -58,6 +58,15 @@ body {
   color: var(--text-color);
 }
 
+
+footer {
+  text-align: center;
+  padding: 30px 0 20px;
+  font-size: 14px;
+  color: var(--usage-color);
+}
+
+
 @media (max-width: 768px) {
   html {
     font-size: 14px;
