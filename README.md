@@ -18,8 +18,7 @@ sabiq/
 │   │   └── facilities.js
 │   │
 │   ├── server.js              # Express server entry point
-│   ├── package.json           # Node dependencies
-│   └── .gitignore
+│   └── package.json           # Node dependencies
 │
 ├── pages/                    # Frontend HTML pages
 ├── js/                       # Frontend JavaScript files
