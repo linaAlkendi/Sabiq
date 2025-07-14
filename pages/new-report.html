@@ -59,9 +59,13 @@
   </header>
 
   <main class="report-container">
-    <form class="report-form">
+    <form class="report-form" id="report-form" >
       <label for="facility">اسم المرفق</label>
-      <input type="text" id="facility" name="facility" placeholder="مثال: سلم متحرك 2" required />
+      <select id="facilitySelect">
+        <option disabled selected>اختر مرفقًا...</option>
+        <!-- JS will insert <option> elements here -->
+      </select>
+
 
       <label for="issue">نوع المشكلة</label>
       <select id="issue" name="issue" required>

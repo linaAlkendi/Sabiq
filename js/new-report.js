@@ -1,51 +1,56 @@
-
 // new-report.html form logic
-const form = document.querySelector("form");
-if (form) {
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("report-form");
+    const facilitySelect = document.getElementById("facilitySelect");
+    const issueType = document.getElementById("issue");
+    const description = document.getElementById("desc");
     const successBox = document.getElementById("success-box");
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const facility = document.getElementById("facility").value.trim();
-        const issue = document.getElementById("issue").value.trim();
-        const desc = document.getElementById("desc").value.trim();
-
-        if (!facility || !issue || !desc) {
-            alert("يرجى تعبئة جميع الحقول.");
-            return;
-        }
-
-        const newIncident = {
-            id: Date.now(),
-            facility,
-            issueType: issue,
-            description: desc,
-            reportedBy: "مستخدم النظام", // Placeholder user
-            reportedAt: new Date().toLocaleString("sv-SE").replace("T", " "),
-            status: "pending"
-        };
-
-        fetch("http://localhost:3000/incidents", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newIncident)
-        })
-            .then(res => {
-                if (!res.ok) throw new Error("Failed to submit");
-                return res.json();
-            })
-            .then(data => {
-                console.log("Success:", data);
-                form.reset();
-                successBox.classList.add("visible")
-                setTimeout(() => successBox.classList.remove("visible"), 4000);
-            })
-            .catch(err => {
-                console.error("Error submitting incident:", err);
-                alert("تعذر إرسال البلاغ. حاول مرة أخرى.");
+    // Populate facility dropdown from backend
+    fetch("http://localhost:3000/facilities")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((facility) => {
+                const option = document.createElement("option");
+                option.value = facility.name;
+                option.textContent = facility.name;
+                facilitySelect.appendChild(option);
             });
-    });
-}
+        })
+        .catch((error) => {
+            console.error("Failed to fetch facilities:", error);
+        });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const payload = {
+                facility: facilitySelect.value,
+                issueType: issueType.value,
+                description: description.value,
+                reportedBy: "مستخدم النظام",
+                reportedAt: new Date().toISOString().replace("T", " ").slice(0, 19),
+                status: "pending"
+            };
+
+            fetch("http://localhost:3000/incidents", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+                .then((res) => res.json())
+                .then(() => {
+                    successBox.style.display = "block";
+                    form.reset();
+                    setTimeout(() => {
+                        successBox.style.display = "none";
+                    }, 3000);
+                })
+                .catch((err) => {
+                    console.error("Failed to submit report:", err);
+                });
+        });
+    }
+});
