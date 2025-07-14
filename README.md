@@ -9,14 +9,21 @@ This project is a prototype for reporting and visualizing technical safety incid
 ```
 sabiq/
 ├── backend/
-│   ├── server.js           # Express server
-│   ├── incidents.json      # Incident data
-│   ├── facilities.json     # Facilities data for dashboard
-│   └── package.json        # Node dependencies
+│   ├── data/                  # JSON data files
+│   │   ├── incidents.json
+│   │   └── facilities.json
+│   │
+│   ├── routes/                # Route logic (modularized)
+│   │   ├── incidents.js
+│   │   └── facilities.js
+│   │
+│   ├── server.js              # Express server entry point
+│   ├── package.json           # Node dependencies
+│   └── .gitignore
 │
-├── pages/                  # Frontend HTML pages
-├── js/                     # Frontend JavaScript files
-├── css/                    # Stylesheets
+├── pages/                    # Frontend HTML pages
+├── js/                       # Frontend JavaScript files
+├── css/                      # Stylesheets
 ├── .gitignore
 └── README.md
 ```
@@ -53,7 +60,7 @@ http://localhost:3000
 
 ## 🌐 Frontend
 
-Simply open any HTML file inside the `pages/` folder in your browser (e.g. `reports.html`, `new-report.html`). The pages will communicate with the backend via API calls to `http://localhost:3000`.
+Simply open any HTML file inside the `pages/` folder in your browser (e.g. `reports.html`, `new-report.html`, `dashboard.html`). The pages will communicate with the backend via API calls to `http://localhost:3000`.
 
 ---
 

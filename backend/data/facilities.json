@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "سلم متحرك 1",
-    "currentUsage": 296,
+    "currentUsage": 295,
     "maxUsage": 300,
     "status": "warning",
     "detailsPage": "sdetails.html"
