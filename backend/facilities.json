@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "سلم متحرك 1",
+    "currentUsage": 296,
+    "maxUsage": 300,
+    "status": "warning",
+    "detailsPage": "sdetails.html"
+  },
+  {
+    "id": 2,
+    "name": "مصعد 2",
+    "currentUsage": 180,
+    "maxUsage": 300,
+    "status": "good",
+    "detailsPage": "edetails.html"
+  },
+  {
+    "id": 3,
+    "name": "بوابة 5",
+    "currentUsage": 320,
+    "maxUsage": 300,
+    "status": "danger",
+    "detailsPage": "details.html"
+  }
+]

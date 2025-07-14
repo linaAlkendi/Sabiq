@@ -10,7 +10,8 @@ This project is a prototype for reporting and visualizing technical safety incid
 sabiq/
 ├── backend/
 │   ├── server.js           # Express server
-│   ├── incidents.json      # JSON file storing incident reports
+│   ├── incidents.json      # Incident data
+│   ├── facilities.json     # Facilities data for dashboard
 │   └── package.json        # Node dependencies
 │
 ├── pages/                  # Frontend HTML pages
@@ -59,7 +60,6 @@ Simply open any HTML file inside the `pages/` folder in your browser (e.g. `repo
 ## 👥 Team
 
 - **Mona** – Operational analysis, connecting system idea to airport operations and international regulations
-- **Fatimah** – Developed AI-powered fault prediction and data analytics model
 - **Lina** – Designed and developed the UI, tracked workflow and task coordination
-- **Shurooq** – Designed and developed the UI
+- **Shroog** – Designed and developed the UI
 - **Rami** – Integrated database and backend systems with frontend

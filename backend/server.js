@@ -33,6 +33,13 @@ app.post("/incidents", (req, res) => {
   res.status(201).json({ message: "Incident saved", incident: newIncident });
 });
 
+// GET facilities
+app.get("/facilities", (req, res) => {
+  const data = fs.readFileSync("facilities.json", "utf-8");
+  res.json(JSON.parse(data));
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
