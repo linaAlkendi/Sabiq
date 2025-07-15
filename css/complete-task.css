@@ -257,6 +257,61 @@ body.dark .back-to-tasks-btn:hover {
   background-color: white;
   color: var(--primary-btn);
 }
+/* تنسيق حقل درجة الخطورة */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.radio-option {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--text-color);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* الدائرة الخارجية */
+.custom-radio {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 18px;
+  width: 18px;
+  background-color: rgb(126, 126, 255);
+  border: 2px solid var(--primary-btn);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* لما يتم اختيار الزر */
+.radio-option input[type="radio"]:checked + .custom-radio {
+  background-color: white;
+  box-shadow: inset 0 0 0 4px rgb(126, 126, 255);
+}
+
+/* دعم الوضع الليلي */
+body.dark .custom-radio {
+  background-color: #6ecaa5;
+  border-color: #ffffff;
+}
+
+body.dark .radio-option input[type="radio"]:checked + .custom-radio {
+  background-color: #ebfff7;
+  box-shadow: inset 0 0 0 4px #6ecaa5;
+}
 
 /* Animations */
 @keyframes fadeIn {

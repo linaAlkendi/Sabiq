@@ -65,8 +65,12 @@ main.technician-main {
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-  color: white;
-  background-color: var(--secondary-color);
+  color: #fff;
+  background-color: #4066bdaf;
+}
+body.dark .status{
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* حالات مختلفة */

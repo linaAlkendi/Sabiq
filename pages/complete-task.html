@@ -13,23 +13,20 @@
 </head>
 <body>
 <!-- الهيدر -->
-  <<header class="top-bar">
-  
-    <!-- زر الوضع الليلي  -->
-    <label class="theme-toggle-switch">
-      <input type="checkbox" id="theme-toggle-switch">
-      <span class="slider">
-        <!-- شمس SVG -->
-        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z" />
-        </svg>
-        <!-- هلال SVG -->
-        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
-        </svg>
-      </span>
-    </label>
+  <header class="top-bar">
+  <label class="theme-toggle-switch">
+    <input type="checkbox" id="theme-toggle-switch">
+    <span class="slider">
+      <!-- شمس SVG -->
+      <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z"/>
+      </svg>
+      <!-- هلال SVG -->
+      <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z"/>
+      </svg>
+    </span>
+  </label>
     <!-- زر المنيو -->
     <button class="menu-toggle" id="menuToggle">☰</button>
     <!-- القائمة الجانبية -->
@@ -71,10 +68,34 @@
         <label for="duration">مدة التوقف</label>
         <input type="text" id="duration" name="duration" placeholder="مثال: 2 ساعة" required>
       </div>
+      <div class="form-group">
+  <label>درجة الخطورة</label>
+  <div class="radio-group">
+    <label class="radio-option">
+      <input type="radio" name="severity" value="عالية" required>
+      <span class="custom-radio"></span>
+      خطير
+    </label>
+    <label class="radio-option">
+      <input type="radio" name="severity" value="ةمتوسط">
+      <span class="custom-radio"></span>
+      متوسط
+    </label>
+    <label class="radio-option">
+      <input type="radio" name="severity" value="منخفضة">
+      <span class="custom-radio"></span>
+      بسيط
+    </label>
+  </div>
+</div>
 
       <div class="form-group">
-        <label for="description">وصف المشكلة</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
+        <label for="description">سبب المشكلة</label>
+        <textarea id="description" name="description" rows="4" placeholder="مثال: خلل في المحرك" required></textarea>
+      </div>
+        <div class="form-group">
+        <label for="action"> الإجراء المتخذ</label>
+        <textarea id="action" name="action" rows="4" placeholder="مثال: إستبدال المحرك " required></textarea>
       </div>
 
       <div class="form-group">
@@ -88,8 +109,8 @@
       </div>
 
       <div class="form-group">
-        <label>تقرير الصيانة (PDF)</label>
-        <input type="file" accept="application/pdf" required>
+        <label>تقرير الصيانة إن وجد (PDF)</label>
+        <input type="file" accept="application/pdf" >
       </div>
 
       <button type="submit" class="submit-btn">إنهاء المهمة</button>
@@ -103,7 +124,7 @@
         </svg>
       </div>
       <h2 id="thankYouText">شكرًا لك يا [اسم الفني] على تنفيذ المهمة!</h2>
-      <a href="dashboard.html" class="back-to-tasks-btn">العودة للمهام</a>
+      <a href="technician-dashboard.html" class="back-to-tasks-btn">العودة للمهام</a>
     </div>
 
 

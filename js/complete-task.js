@@ -4,26 +4,37 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnYes = document.getElementById("confirmYes");
   const btnNo = document.getElementById("confirmNo");
 
+  // تأكيد التوثيق عند الضغط على "إرسال"
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    popup.style.display = "flex"; // إظهار النافذة
+
+    // تحقق من اختيار درجة الخطورة
+    const severitySelected = document.querySelector('input[name="severity"]:checked');
+    if (!severitySelected) {
+      alert("يرجى تحديد درجة الخطورة قبل الإرسال");
+      return;
+    }
+
+    popup.style.display = "flex"; // إظهار النافذة المنبثقة
   });
 
-  confirmYes.addEventListener("click", () => {
-    // إغلاق النافذة
-    confirmPopup.style.display = "none";
+  // في حال الضغط على "نعم"
+  btnYes.addEventListener("click", () => {
+    popup.style.display = "none";
 
     // إخفاء الفورم
     document.getElementById("taskForm").style.display = "none";
 
-    // إظهار رسالة الشكر
+    // جلب اسم الفني 
+    const techName = localStorage.getItem("technicianName") || "الفني";
+
+    // عرض رسالة الشكر
     const thankYou = document.getElementById("thankYouMessage");
-    const techName = "اسم الفني"; // localStorage.getItem("technicianName") || "الفني";
     document.getElementById("thankYouText").textContent = `شكرًا لك يا ${techName} على تنفيذ المهمة!`;
     thankYou.style.display = "block";
   });
 
-
+  // إلغاء التوثيق
   btnNo.addEventListener("click", function () {
     popup.style.display = "none";
   });

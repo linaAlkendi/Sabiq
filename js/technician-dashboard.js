@@ -9,21 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "فحص مصعد A",
       facility: "المبنى الإداري",
       type: "ميكانيكي",
-      status: "قيد التنفيذ",
+      status: "تأكيد التنفيذ",
       date: "2025-07-12"
     },
     {
       title: "إصلاح السلم الكهربائي 3",
       facility: "المبنى C",
       type: "كهربائي",
-      status: "قيد التنفيذ",
+      status: "تأكيد التنفيذ",
       date: "2025-07-11"
     },
     {
       title: "فحص بوابة 5",
       facility: "المبنى B",
       type: "كهربائي",
-      status: "قيد التنفيذ",
+      status: " تأكيد التنفيذ",
       date: "2025-07-10"
     }
   ];
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   card.className = "task-card";
   card.innerHTML = `
     <div class="task-title">${task.title}</div>
-    <div class="task-info">المرفق: ${task.facility}</div>
+    <div class="task-info">الموقع: ${task.facility}</div>
     <div class="task-info">النوع: ${task.type}</div>
     <div class="task-info">تاريخ الإسناد: ${task.date}</div>
     <div class="status">${task.status}</div>
