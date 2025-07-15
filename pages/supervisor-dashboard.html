@@ -11,25 +11,18 @@
 </head>
 <body>
   <header class="top-bar">
-  
-    <!-- زر الوضع الليلي  -->
     <label class="theme-toggle-switch">
       <input type="checkbox" id="theme-toggle-switch">
       <span class="slider">
-        <!-- شمس SVG -->
         <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z" />
+          <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z" />
         </svg>
-        <!-- هلال SVG -->
         <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
         </svg>
       </span>
     </label>
-    <!-- زر المنيو -->
     <button class="menu-toggle" id="menuToggle">☰</button>
-    <!-- القائمة الجانبية -->
     <aside class="side-menu" id="sideMenu">
       <br><br><br>
       <nav class="menu-nav">
@@ -71,11 +64,10 @@
     <section class="task-list">
       <div class="filters-wrapper">
         <select id="statusFilter">
+          <option value="all">كل المهام</option>
           <option value="قيد التنفيذ">قيد التنفيذ</option>
           <option value="تم الإنجاز">تم الإنجاز</option>
         </select>
-
-      
 
         <select id="faultFilter">
           <option value="all">كل الأعطال</option>
@@ -90,7 +82,6 @@
 
       <div id="taskTableWrapper"></div>
 
-      <!-- زر تأكيد المهام المنجزة يظهر فقط عند اختيار "تم الإنجاز" -->
       <div id="confirmCompletedWrapper" style="display:none; text-align:center; margin-top:15px;">
         <button id="confirmCompletedBtn" style="padding: 10px 25px; border:none; border-radius:12px; background: var(--primary-btn); color:#fff; cursor:pointer; font-weight:bold;">
           تأكيد المهام المحددة
@@ -111,16 +102,7 @@
           <option value="ميكانيكي">ميكانيكي</option>
         </select>
       </label>
-      <label>درجة الخطورة:
-        <select id="severityInput">
-          <option value="خطير">خطير</option>
-          <option value="وسط">وسط</option>
-          <option value="بسيط">بسيط</option>
-        </select>
-      </label>
-      <label>سبب المشكلة<input id="actionInput" type="text" /></label>
-          <label>الإجراء المتخذ<input id="actionInput" type="text" /></label>
-
+    
       <div class="modal-actions">
         <button id="submitAssignment">إسناد</button>
         <button id="cancelAssignment">إلغاء</button>
@@ -136,6 +118,32 @@
         <button id="confirmYes" class="btn-confirm-yes">نعم</button>
         <button id="confirmNo" class="btn-confirm-no">لا</button>
       </div>
+    </div>
+  </div>
+
+  <!-- نافذة تفاصيل المهمة المنجزة -->
+  <div id="taskDetailsModal" class="modal-overlay" style="display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 9999;">
+    <div class="modal-content" style="background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto;">
+      <h3>تفاصيل المهمة المنجزة</h3>
+      <p><strong>الفني:</strong> <span id="detailTechnician"></span></p>
+      <p><strong>المرفق:</strong> <span id="detailFacility"></span></p>
+      <p><strong>نوع العطل:</strong> <span id="detailFault"></span></p>
+      <p><strong>درجة الخطورة:</strong> <span id="detailSeverity"></span></p>
+      <p><strong>سبب المشكلة:</strong> <span id="detailDescription"></span></p>
+      <p><strong>الإجراء المتخذ:</strong> <span id="detailAction"></span></p>
+
+      <p><strong>صورة قبل الإصلاح:</strong></p>
+      <img id="beforeImage" style="max-width:100%; margin-bottom: 10px;" />
+
+      <p><strong>صورة بعد الإصلاح:</strong></p>
+      <img id="afterImage" style="max-width:100%; margin-bottom: 10px;" />
+
+      <p><strong>تقرير الصيانة:</strong> 
+        <a id="reportPdfLink" href="#" target="_blank" style="color: var(--primary-btn);">عرض التقرير</a>
+      </p>
+
+      <br>
+      <button id="closeDetailsBtn" style="padding: 8px 16px;">إغلاق</button>
     </div>
   </div>
 

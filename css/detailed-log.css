@@ -69,7 +69,12 @@ body.dark .logs-table tr:hover {
   overflow-x: auto;
   margin-bottom: 50px; /* مساحة تحت الجدول */
 }
-  
+.table-wrapper thead{
+  background-color:rgba(0, 56, 161, 0.555)
+}
+body.dark .table-wrapper thead{
+  background-color: #2a2a40;
+}
   .logs-table {
     width: 100%;
     min-width: 800px;
