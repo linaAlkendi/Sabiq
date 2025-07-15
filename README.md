@@ -11,11 +11,16 @@ sabiq/
 ├── backend/
 │   ├── data/                  # JSON data files
 │   │   ├── incidents.json
-│   │   └── facilities.json
+│   │   ├── facilities.json
+│   │   └── notifications.json
 │   │
 │   ├── routes/                # Route logic (modularized)
 │   │   ├── incidents.js
-│   │   └── facilities.js
+│   │   ├── facilities.js
+│   │   └── notifications.js
+│   │
+│   ├── helpers/              # Utility/helper functions
+│   │   └── notifier.js
 │   │
 │   ├── server.js              # Express server entry point
 │   └── package.json           # Node dependencies
