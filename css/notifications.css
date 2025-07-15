@@ -327,3 +327,36 @@ body.dark .btn-confirm-no:hover {
   margin-bottom: 12px;
   transition: background-color 0.3s;
 }
+
+.notification-card.L {
+  background-color: var(--alert-good-bg);
+  color: var(--alert-good-color);
+  border-inline-start: 6px solid var(--alert-good-color);
+}
+
+.notification-card.M {
+  background-color: var(--alert-warning-bg);
+  color: var(--alert-warning-color);
+  border-inline-start: 6px solid var(--alert-warning-color);
+}
+
+.notification-card.H {
+  background-color: var(--alert-danger-bg);
+  color: var(--alert-danger-color);
+  border-inline-start: 6px solid var(--alert-danger-color);
+}
+
+body.dark .notification-card.L {
+  background-color: var(--alert-good-bg);
+  color: var(--alert-good-color);
+}
+
+body.dark .notification-card.M {
+  background-color: var(--alert-warning-bg);
+  color: var(--alert-warning-color);
+}
+
+body.dark .notification-card.H {
+  background-color: var(--alert-danger-bg);
+  color: var(--alert-danger-color);
+}

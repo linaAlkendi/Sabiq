@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
   notifier.createNotification({
     title: "بلاغ جديد",
     description: `تم تسجيل بلاغ في ${newIncident.facility} - نوع العطل: ${newIncident.issueType}`,
-    color: "orange",
+    severity: "M",
   });
 
   res.status(201).json({ message: "Incident saved", incident: newIncident });
