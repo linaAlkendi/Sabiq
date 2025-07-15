@@ -75,275 +75,32 @@ body.dark .search-filter-bar select {
   gap: 24px;
 }
 
-.alert-card {
-  padding: 20px 24px;
-  border-radius: var(--card-radius);
-  box-shadow: var(--shadow);
-  background-color: var(--card-bg, white);
-  transition: transform 0.2s ease;
-  position: relative;
-  border-inline-start: 5px solid transparent;
-}
-
-.alert-card:hover {
-  transform: scale(1.01);
-}
-
-.alert-card h3 {
-  margin: 0 0 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.alert-card p {
-  margin: 0 0 10px;
-  font-size: 15px;
-}
-
-.alert-card .timestamp {
-  font-size: 13px;
-  color: gray;
-}
-
-.alert-card.good {
-  background-color: var(--alert-good-bg);
-  color: var(--alert-good-color);
-  border-inline-start-color: var(--alert-good-color);
-}
-
-.alert-card.warning {
-  background-color: var(--alert-warning-bg);
-  color: var(--alert-warning-color);
-  border-inline-start-color: var(--alert-warning-color);
-}
-
-.alert-card.danger {
-  background-color: var(--alert-danger-bg);
-  color: var(--alert-danger-color);
-  border-inline-start-color: var(--alert-danger-color);
-}
-
-body.dark .alert-card {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.card-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.btn-report,
-.btn-dismiss {
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: bold;
-  border: none;
-  width: 48%;
-  max-width: 150px;
-}
-
-.btn-report {
-  background: var(--primary-btn);
-  color: white;
-}
-
-.btn-report:hover {
-  background: var(--primary-btn-hover);
-}
-
-.btn-dismiss {
-  background: #ccc;
-  color: #333;
-}
-
-.btn-dismiss:hover {
-  background: #bbb;
-}
-
-.confirm-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3); /* خلفية شفافة وخفيفة */
-  backdrop-filter: blur(6px); /* تأثير ضبابي للخلفية */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-/* النافذة المنبثقة */
-.confirm-popup {
-  background-color: #ffffff; /* أبيض في الوضع الافتراضي */
-  color: var(--text-color);
-  padding: 24px 32px;
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  min-width: 280px;
-  max-width: 90%;
-  text-align: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* الوضع الليلي */
-body.dark .confirm-popup {
-  background-color: #2a2a40; /* لون داكن */
-  color: var(--text-color);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
-}
-
-.confirm-message {
-  font-size: 18px;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.confirm-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.btn-confirm-yes,
-.btn-confirm-no {
-  padding: 10px 28px;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  min-width: 80px;
-}
-
-.btn-confirm-yes {
-  background: var(--primary-btn);
-  color: white;
-}
-
-.btn-confirm-yes:hover {
-  background: var(--primary-btn-hover);
-}
-
-.btn-confirm-no {
-  background-color: #ccc;
-  color: #333;
-}
-
-.btn-confirm-no:hover {
-  background-color: #bbb;
-}
-
-body.dark .confirm-popup {
-  background-color: #2a2a40;
-  color: var(--text-color);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
-}
-
-body.dark .btn-confirm-no {
-  background-color: #555;
-  color: #eee;
-}
-
-body.dark .btn-confirm-no:hover {
-  background-color: #777;
-}
-
-/* ✅ Media Queries لتصغير الخطوط وتحسين التناسب */
-
-@media (max-width: 768px) {
-  .alerts-main {
-    padding: 70px 15px 30px;
-  }
-
-  .alert-card h3 {
-    font-size: 16px;
-  }
-
-  .alert-card p {
-    font-size: 14px;
-  }
-
-  .alert-card .timestamp {
-    font-size: 12px;
-  }
-
-  .btn-report,
-  .btn-dismiss {
-    font-size: 13px;
-    padding: 8px 14px;
-    width: 100%;
-  }
-
-  .search-filter-bar input,
-  .search-filter-bar select {
-    max-width: 100%;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .alert-card h3 {
-    font-size: 14px;
-  }
-
-  .alert-card p {
-    font-size: 13px;
-  }
-
-  .alert-card .timestamp {
-    font-size: 11px;
-  }
-
-  .btn-report,
-  .btn-dismiss {
-    font-size: 12px;
-    padding: 8px 12px;
-  }
-
-  .confirm-message {
-    font-size: 16px;
-  }
-
-  .btn-confirm-yes,
-  .btn-confirm-no {
-    font-size: 14px;
-    padding: 8px 20px;
-  }
-}
-
 .notification-card {
-  background-color: var(--card-bg);
+  background-color: var(--card-bg, white);
   color: var(--text-color);
-  border-radius: 6px;
+  border-radius: var(--card-radius);
   padding: 16px;
-  margin-bottom: 12px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
+  border-inline-start: 6px solid transparent;
+  box-shadow: var(--shadow);
 }
 
 .notification-card.L {
   background-color: var(--alert-good-bg);
   color: var(--alert-good-color);
-  border-inline-start: 6px solid var(--alert-good-color);
+  border-inline-start-color: var(--alert-good-color);
 }
 
 .notification-card.M {
   background-color: var(--alert-warning-bg);
   color: var(--alert-warning-color);
-  border-inline-start: 6px solid var(--alert-warning-color);
+  border-inline-start-color: var(--alert-warning-color);
 }
 
 .notification-card.H {
   background-color: var(--alert-danger-bg);
   color: var(--alert-danger-color);
-  border-inline-start: 6px solid var(--alert-danger-color);
+  border-inline-start-color: var(--alert-danger-color);
 }
 
 body.dark .notification-card.L {
@@ -359,4 +116,60 @@ body.dark .notification-card.M {
 body.dark .notification-card.H {
   background-color: var(--alert-danger-bg);
   color: var(--alert-danger-color);
+}
+
+.notification-card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.notification-card p {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.notification-card .timestamp {
+  font-size: 13px;
+  color: gray;
+}
+
+/* ✅ Responsive Tweaks */
+
+@media (max-width: 768px) {
+  .alerts-main {
+    padding: 70px 15px 30px;
+  }
+
+  .notification-card h3 {
+    font-size: 16px;
+  }
+
+  .notification-card p {
+    font-size: 14px;
+  }
+
+  .notification-card .timestamp {
+    font-size: 12px;
+  }
+
+  .search-filter-bar input,
+  .search-filter-bar select {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-card h3 {
+    font-size: 14px;
+  }
+
+  .notification-card p {
+    font-size: 13px;
+  }
+
+  .notification-card .timestamp {
+    font-size: 11px;
+  }
 }
