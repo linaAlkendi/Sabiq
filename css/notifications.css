@@ -76,46 +76,39 @@ body.dark .search-filter-bar select {
 }
 
 .notification-card {
-  background-color: var(--card-bg, white);
-  color: var(--text-color);
+  position: relative;
+  background-color: #1f2b4d; /* consistent card color */
+  color: white;
   border-radius: var(--card-radius);
-  padding: 16px;
-  transition: background-color 0.3s ease;
-  border-inline-start: 6px solid transparent;
+  padding: 16px 16px 16px 24px;
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
-.notification-card.L {
-  background-color: var(--alert-good-bg);
-  color: var(--alert-good-color);
-  border-inline-start-color: var(--alert-good-color);
+/* Ribbon effect using ::before */
+.notification-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0; /* For RTL */
+  width: 6px;
+  height: 100%;
+  background-color: transparent;
+  border-top-left-radius: var(--card-radius);
+  border-bottom-left-radius: var(--card-radius);
 }
 
-.notification-card.M {
-  background-color: var(--alert-warning-bg);
-  color: var(--alert-warning-color);
-  border-inline-start-color: var(--alert-warning-color);
+/* Ribbon colors by severity */
+.notification-card.L::before {
+  background-color: var(--alert-good-color);
 }
 
-.notification-card.H {
-  background-color: var(--alert-danger-bg);
-  color: var(--alert-danger-color);
-  border-inline-start-color: var(--alert-danger-color);
+.notification-card.M::before {
+  background-color: var(--alert-warning-color);
 }
 
-body.dark .notification-card.L {
-  background-color: var(--alert-good-bg);
-  color: var(--alert-good-color);
-}
-
-body.dark .notification-card.M {
-  background-color: var(--alert-warning-bg);
-  color: var(--alert-warning-color);
-}
-
-body.dark .notification-card.H {
-  background-color: var(--alert-danger-bg);
-  color: var(--alert-danger-color);
+.notification-card.H::before {
+  background-color: var(--alert-danger-color);
 }
 
 .notification-card h3 {

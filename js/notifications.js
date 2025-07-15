@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach((notif) => {
           const card = document.createElement("div");
           card.className = `notification-card ${notif.severity}`;
-          card.style.borderRight = `6px solid ${notif.color || "#3498db"}`;
 
           card.innerHTML = `
             <h3>${notif.title}</h3>
