@@ -44,12 +44,11 @@
     <section class="task-list">
       <div class="filters-wrapper">
         <select id="statusFilter">
-          <option value="all">كل الحالات</option>
           <option value="قيد التنفيذ">قيد التنفيذ</option>
           <option value="تم الإنجاز">تم الإنجاز</option>
-          <option value="بانتظار التوجيه">بانتظار التوجيه</option>
-          <option value="late">المهام المتأخرة</option>
         </select>
+
+      
 
         <select id="faultFilter">
           <option value="all">كل الأعطال</option>
@@ -57,11 +56,19 @@
           <option value="ميكانيكي">ميكانيكي</option>
         </select>
 
-        <input type="search" id="searchInput" placeholder="ابحث بالاسم أو المرفق...">
+        <input type="search" id="searchInput" placeholder="ابحث بالاسم أو المرفق..." />
+
         <button id="assignBtn">+ إسناد مهمة</button>
       </div>
 
       <div id="taskTableWrapper"></div>
+
+      <!-- زر تأكيد المهام المنجزة يظهر فقط عند اختيار "تم الإنجاز" -->
+      <div id="confirmCompletedWrapper" style="display:none; text-align:center; margin-top:15px;">
+        <button id="confirmCompletedBtn" style="padding: 10px 25px; border:none; border-radius:12px; background: var(--primary-btn); color:#fff; cursor:pointer; font-weight:bold;">
+          تأكيد المهام المحددة
+        </button>
+      </div>
     </section>
   </main>
 
@@ -77,6 +84,13 @@
           <option value="ميكانيكي">ميكانيكي</option>
         </select>
       </label>
+      <label>درجة الخطورة:
+        <select id="severityInput">
+          <option value="خطير">خطير</option>
+          <option value="وسط">وسط</option>
+          <option value="بسيط">بسيط</option>
+        </select>
+      </label>
       <label>الوصف:<input id="actionInput" type="text" /></label>
       <div class="modal-actions">
         <button id="submitAssignment">إسناد</button>
@@ -84,6 +98,18 @@
       </div>
     </div>
   </div>
+
+  <!-- نافذة التأكيد المنبثقة -->
+  <div id="confirmPopup" class="confirm-popup-overlay" style="display:none;">
+    <div class="confirm-popup">
+      <p class="confirm-message"></p>
+      <div class="confirm-buttons">
+        <button id="confirmYes" class="btn-confirm-yes">نعم</button>
+        <button id="confirmNo" class="btn-confirm-no">لا</button>
+      </div>
+    </div>
+  </div>
+
   <div id="successToast" class="success-toast" role="alert" aria-live="polite">
     <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <circle cx="12" cy="12" r="10" stroke-width="2" stroke="white" fill="#4CAF50"/>
@@ -92,8 +118,8 @@
     <span>تم إسناد المهمة بنجاح</span>
   </div>
 
-  <script src="../js/supervisor-dashboard.js"></script>
   <script src="../js/theme.js"></script>
   <script src="../js/header.js"></script>
+  <script src="../js/supervisor-dashboard.js"></script>
 </body>
 </html>

@@ -13,31 +13,38 @@ document.addEventListener("DOMContentLoaded", () => {
       date: "2025-07-12"
     },
     {
-      title: "إصلاح إنارة ممر 3",
-      facility: "المستودعات",
+      title: "إصلاح السلم الكهربائي 3",
+      facility: "المبنى C",
       type: "كهربائي",
-      status: "بانتظار القطع",
+      status: "قيد التنفيذ",
       date: "2025-07-11"
     },
     {
-      title: "فحص أنظمة الطوارئ",
+      title: "فحص بوابة 5",
       facility: "المبنى B",
       type: "كهربائي",
-      status: "تم الإنجاز",
+      status: "قيد التنفيذ",
       date: "2025-07-10"
     }
   ];
 
   tasks.forEach(task => {
-    const card = document.createElement("div");
-    card.className = "task-card";
-    card.innerHTML = `
-      <div class="task-title">${task.title}</div>
-      <div class="task-info">المرفق: ${task.facility}</div>
-      <div class="task-info">النوع: ${task.type}</div>
-      <div class="task-info">تاريخ الإسناد: ${task.date}</div>
-      <div class="status">${task.status}</div>
-    `;
-    taskContainer.appendChild(card);
+  const card = document.createElement("div");
+  card.className = "task-card";
+  card.innerHTML = `
+    <div class="task-title">${task.title}</div>
+    <div class="task-info">المرفق: ${task.facility}</div>
+    <div class="task-info">النوع: ${task.type}</div>
+    <div class="task-info">تاريخ الإسناد: ${task.date}</div>
+    <div class="status">${task.status}</div>
+  `;
+
+  // التنقل إلى صفحة توثيق المهمة عند الضغط
+  card.addEventListener("click", () => {
+    window.location.href = "complete-task.html";
   });
+
+  taskContainer.appendChild(card);
+});
+
 });

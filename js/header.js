@@ -1,9 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleBtn = document.getElementById("menuToggle");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
   const sideMenu = document.getElementById("sideMenu");
 
-  // فتح / إغلاق القائمة الجانبية
-  toggleBtn.addEventListener("click", () => {
-    sideMenu.classList.toggle("active");
-  });
+  if (menuToggle && sideMenu) {
+    menuToggle.addEventListener("click", () => {
+      sideMenu.classList.toggle("active");
+    });
+  }
 });
