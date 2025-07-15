@@ -34,7 +34,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
-  font-family: 'Tajawal', sans-serif;
+  font-family: "Tajawal", sans-serif;
 }
 
 .alerts-main {
@@ -167,7 +167,10 @@ body.dark .alert-card {
 
 .confirm-popup-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.3); /* خلفية شفافة وخفيفة */
   backdrop-filter: blur(6px); /* تأثير ضبابي للخلفية */
   display: flex;
@@ -253,7 +256,6 @@ body.dark .btn-confirm-no:hover {
   background-color: #777;
 }
 
-
 /* ✅ Media Queries لتصغير الخطوط وتحسين التناسب */
 
 @media (max-width: 768px) {
@@ -315,4 +317,13 @@ body.dark .btn-confirm-no:hover {
     font-size: 14px;
     padding: 8px 20px;
   }
+}
+
+.notification-card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s;
 }

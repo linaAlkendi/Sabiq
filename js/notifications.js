@@ -1,20 +1,51 @@
 // فلترة التنبيهات
-    document.getElementById("filterType").addEventListener("change", function () {
-      const value = this.value;
-      document.querySelectorAll(".alert-card").forEach(card => {
-        card.style.display = (value === "all" || card.classList.contains(value)) ? "block" : "none";
-      });
-    });
+document.getElementById("filterType").addEventListener("change", function () {
+  const value = this.value;
+  document.querySelectorAll(".alert-card").forEach((card) => {
+    card.style.display =
+      value === "all" || card.classList.contains(value) ? "block" : "none";
+  });
+});
 
-    // بحث بالكلمات
-    document.getElementById("searchInput").addEventListener("input", function () {
-      const val = this.value.toLowerCase();
-      document.querySelectorAll(".alert-card").forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(val) ? "block" : "none";
-      });
-    });
+// بحث بالكلمات
+document.getElementById("searchInput").addEventListener("input", function () {
+  const val = this.value.toLowerCase();
+  document.querySelectorAll(".alert-card").forEach((card) => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(val) ? "block" : "none";
+  });
+});
 
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".notification-list");
+
+  fetch("http://localhost:3000/notifications")
+    .then((res) => res.json())
+    .then((notifications) => {
+      container.innerHTML = ""; // Clear old static HTML
+
+      notifications
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Most recent first
+        .forEach((notif) => {
+          const card = document.createElement("div");
+          card.className = "notification-card";
+          card.style.borderRight = `6px solid ${notif.color || "#3498db"}`;
+
+          card.innerHTML = `
+            <h3>${notif.title}</h3>
+            <p>${notif.description}</p>
+            <span class="timestamp">${notif.timestamp}</span>
+          `;
+
+          container.appendChild(card);
+        });
+    })
+    .catch((err) => {
+      console.error("Failed to load notifications:", err);
+    });
+});
+
+/* UNUSED UI 
   // زر رفع بلاغ
 document.querySelectorAll('.btn-report').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -72,3 +103,4 @@ function closeConfirmPopup() {
   const popup = document.getElementById('confirmPopup');
   popup.style.display = 'none';
 }
+  */
