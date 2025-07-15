@@ -29,7 +29,16 @@ function renderIncidents(list) {
       <div><span class="label">👤 المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
       <div><span class="label">🕒 وقت البلاغ:</span> <span class="value">${incident.reportedAt}</span></div>
       <div><span class="label">📌 الحالة:</span> <span class="value status-${incident.status}">${statusLabel}</span></div>
-    `;
+      <div class="incident-action">
+        <label for="actionSelect">الإجراء:</label>
+        <select class="action-select">
+          <option disabled selected>اختر إجراء</option>
+          <option value="malfunction">تحويل إلى عطل</option>
+          <option value="close">إغلاق</option>
+        </select>
+        <button class="confirm-action-btn">تأكيد</button>
+      </div>
+      `;
 
     container.appendChild(card);
   });

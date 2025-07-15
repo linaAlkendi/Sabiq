@@ -89,3 +89,46 @@ body.dark .status-pending {
 body.dark .status-resolved {
   color: #55efc4;
 }
+
+.incident-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.incident-action label {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.incident-action select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.incident-action .confirm-action-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.incident-action .confirm-action-btn:hover {
+  background: #0056b3;
+}
+
+
+body.dark .incident-action select {
+  background-color: #2a2a40;
+  color: var(--text-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
