@@ -90,18 +90,7 @@
     </section>
   </main>
 
-  <!-- نافذة إسناد مهمة -->
-  <div id="assignModal" class="modal-overlay">
-    <div class="modal-content">
-      <h3>إسناد مهمة لفني</h3>
-      <label>اسم الفني:<input id="technicianInput" type="text" /></label>
-      <label>اسم المرفق:<input id="facilityInput" type="text" /></label>
-      <label>نوع العطل:
-        <select id="faultTypeInput">
-          <option value="كهربائي">كهربائي</option>
-          <option value="ميكانيكي">ميكانيكي</option>
-        </select>
-      </label>
+
     
       <div class="modal-actions">
         <button id="submitAssignment">إسناد</button>
@@ -121,39 +110,7 @@
     </div>
   </div>
 
-  <!-- نافذة تفاصيل المهمة المنجزة -->
-  <div id="taskDetailsModal" class="modal-overlay" style="display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 9999;">
-    <div class="modal-content" style="background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto;">
-      <h3>تفاصيل المهمة المنجزة</h3>
-      <p><strong>الفني:</strong> <span id="detailTechnician"></span></p>
-      <p><strong>المرفق:</strong> <span id="detailFacility"></span></p>
-      <p><strong>نوع العطل:</strong> <span id="detailFault"></span></p>
-      <p><strong>درجة الخطورة:</strong> <span id="detailSeverity"></span></p>
-      <p><strong>سبب المشكلة:</strong> <span id="detailDescription"></span></p>
-      <p><strong>الإجراء المتخذ:</strong> <span id="detailAction"></span></p>
-
-      <p><strong>صورة قبل الإصلاح:</strong></p>
-      <img id="beforeImage" style="max-width:100%; margin-bottom: 10px;" />
-
-      <p><strong>صورة بعد الإصلاح:</strong></p>
-      <img id="afterImage" style="max-width:100%; margin-bottom: 10px;" />
-
-      <p><strong>تقرير الصيانة:</strong> 
-        <a id="reportPdfLink" href="#" target="_blank" style="color: var(--primary-btn);">عرض التقرير</a>
-      </p>
-
-      <br>
-      <button id="closeDetailsBtn" style="padding: 8px 16px;">إغلاق</button>
-    </div>
-  </div>
-
-  <div id="successToast" class="success-toast" role="alert" aria-live="polite">
-    <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <circle cx="12" cy="12" r="10" stroke-width="2" stroke="white" fill="#4CAF50"/>
-      <path stroke="white" stroke-width="2" d="M8 12l2 2l4-4" />
-    </svg>
-    <span>تم إسناد المهمة بنجاح</span>
-  </div>
+  
 
   <script src="../js/theme.js"></script>
   <script src="../js/header.js"></script>

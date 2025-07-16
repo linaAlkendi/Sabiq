@@ -165,10 +165,7 @@ main.supervisor-main h2 {
   color: var(--status-warning-text);
 }
 
-.status.بانتظار-التوجيه {
-  background-color: var(--status-danger-bg);
-  color: var(--status-danger-text);
-}
+
 
 /* الوضع الليلي */
 body.dark .task-table thead tr {
