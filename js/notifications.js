@@ -1,46 +1,81 @@
-// فلترة التنبيهات
-document.getElementById("filterType").addEventListener("change", function () {
-  const value = this.value.toUpperCase(); // Only declare once
-  document.querySelectorAll(".notification-card").forEach((card) => {
-    const matches = value === "ALL" || card.classList.contains(value);
-    card.style.display = matches ? "block" : "none";
-  });
-});
-
-
-// بحث بالكلمات
-document.getElementById("searchInput").addEventListener("input", function () {
-  const val = this.value.toLowerCase();
-  document.querySelectorAll(".notification-card").forEach((card) => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(val) ? "block" : "none";
-  });
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".notification-list");
+  const filterType = document.getElementById("filterType");
+  const filterStatus = document.getElementById("filterStatus");
 
-  fetch("http://localhost:3000/notifications")
-    .then((res) => res.json())
-    .then((notifications) => {
-      container.innerHTML = ""; // Clear old static HTML
+  // بيانات التنبيهات
+  const notifications = [
+    {
+      title: "سلم كهربائي 1 عاد للعمل",
+      description: "سلم كهربائي تم تشغيله بعد إجراء الصيانة.",
+      severity: "L", // منخفض
+      status: "positive", // إيجابي
+      timestamp: "الآن"
+    },
+    {
+      title: "النظام بحاجة لصيانة استباقية",
+      description: "النظام يتوقع حدوث عطل في المستقبل القريب.",
+      severity: "M", // متوسط
+      status: "negative", // سلبي
+      timestamp: "قبل ساعة "
+    },
+    {
+      title: "مصعد 5 تحمّل فوق طاقته",
+      description: "المصعد تحمل فوق طاقته ويحتاج إلى صيانة فورية.",
+      severity: "H", // عالي
+      status: "negative", // سلبي
+      timestamp: "قبل 25 دقيقة"
+    }
+  ];
 
-      notifications
-        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Most recent first
-        .forEach((notif) => {
-          const card = document.createElement("div");
-          card.className = `notification-card ${notif.severity}`;
+  // فلترة التنبيهات بناءً على الفلاتر
+  function filterNotifications() {
+    const severityFilter = filterType.value;
+    const statusFilter = filterStatus.value;
 
-          card.innerHTML = `
-            <h3>${notif.title}</h3>
-            <p>${notif.description}</p>
-            <span class="timestamp">${notif.timestamp}</span>
-          `;
+    // تصفية التنبيهات بناءً على الفلاتر
+    const filteredNotifications = notifications.filter((notif) => {
+      const matchesSeverity =
+        severityFilter === "ALL" || notif.severity === severityFilter;
+      const matchesStatus =
+        statusFilter === "ALL" || notif.status === statusFilter;
 
-          container.appendChild(card);
-        });
-    })
-    .catch((err) => {
-      console.error("Failed to load notifications:", err);
+      return matchesSeverity && matchesStatus;
     });
+
+    // تحديث عرض التنبيهات
+    container.innerHTML = "";
+    filteredNotifications.forEach((notif) => {
+      const card = document.createElement("div");
+      card.classList.add("notification-card", notif.severity);
+
+      card.innerHTML = `
+        <h3>${notif.title}</h3>
+        <p>${notif.description}</p>
+        <span class="timestamp">${notif.timestamp}</span>
+      `;
+
+      // إظهار زر إسناد مهمة فقط في التنبيهات السلبية
+      if (notif.status === "negative") {
+        card.innerHTML += `
+          <button class="assign-task-btn" onclick="assignTask('${notif.title}')" >إسناد مهمة </button>
+        `;
+      }
+
+      container.appendChild(card);
+    });
+  }
+
+  // إضافة أحداث الفلاتر
+  filterType.addEventListener("change", filterNotifications);
+  filterStatus.addEventListener("change", filterNotifications);
+
+  // عرض التنبيهات عند تحميل الصفحة
+  filterNotifications();
 });
+
+// وظيفة إسناد المهمة
+function assignTask(taskTitle) {
+  // توجيه المستخدم إلى صفحة المشرف مع تمرير عنوان المهمة
+  window.location.href = `supervisor-dashboard.html?task=${encodeURIComponent(taskTitle)}`;
+}

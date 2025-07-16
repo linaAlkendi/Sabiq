@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>التنبيهات - SABIQ</title>
   <link rel="stylesheet" href="../css/header.css">
   <link rel="stylesheet" href="../css/base.css">
@@ -25,7 +24,6 @@
           <path
             d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z" />
         </svg>
-
         <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
         </svg>
@@ -57,7 +55,6 @@
 
   </header>
 
-
   <!-- المحتوى الرئيسي -->
   <main class="alerts-main">
     <!-- البحث والفلترة -->
@@ -69,6 +66,11 @@
         <option value="M">متوسط</option>
         <option value="H">عالي</option>
       </select>
+      <select id="filterStatus">
+        <option value="ALL">كل الأوضاع</option>
+        <option value="positive">إيجابي</option>
+        <option value="negative">سلبي</option>
+      </select>
     </div>
 
     <!-- التنبيهات -->
@@ -77,19 +79,9 @@
         <!-- Notifications will be loaded here -->
       </div>
 
-      </div>
     </section>
   </main>
-  <!-- نافذة التأكيد المنبثقة -->
-  <!--<div id="confirmPopup" class="confirm-popup-overlay" style="display:none;">
-    <div class="confirm-popup">
-      <p class="confirm-message"></p>
-      <div class="confirm-buttons">
-        <button id="confirmYes" class="btn-confirm-yes">نعم</button>
-        <button id="confirmNo" class="btn-confirm-no">لا</button>
-      </div>
-    </div>
-  </div>-->
+
   <!-- JavaScript -->
   <script src="../js/header.js"></script>
   <script src="../js/theme.js"></script>
