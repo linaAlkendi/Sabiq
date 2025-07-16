@@ -6,7 +6,7 @@
     "description": "تم ملاحظة تسرب خفيف من أحد أنابيب الوقود تحت السلم.",
     "reportedBy": "رائد الفني",
     "reportedAt": "2025-07-10 15:23",
-    "status": "pending"
+    "status": "open"
   },
   {
     "id": 2,
@@ -15,87 +15,24 @@
     "description": "انطفأت الأنوار فجأة عند مدخل البوابة، بحاجة لصيانة.",
     "reportedBy": "المفتشة نورة",
     "reportedAt": "2025-07-10 11:48",
-    "status": "resolved"
+    "status": "closed"
   },
   {
-    "facility": "بوابة 5",
-    "issueType": "أخرى",
-    "description": "test 22",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:22:26",
-    "status": "pending",
-    "id": 3
+    "id": 3,
+    "facility": "بوابة A3",
+    "issueType": "عطل كهربائي",
+    "description": "انطفأت الأنوار فجأة عند مدخل البوابة، بحاجة لصيانة.",
+    "reportedBy": "المفتشة نورة",
+    "reportedAt": "2025-07-10 11:48",
+    "status": "converted"
   },
   {
     "facility": "مصعد 2",
     "issueType": "كهربائية",
-    "description": "asdasda",
+    "description": "fghfghfgh",
     "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:46:48",
-    "status": "pending",
+    "reportedAt": "2025-07-16 19:04:24",
+    "status": "open",
     "id": 4
-  },
-  {
-    "facility": "سلم متحرك 1",
-    "issueType": "كهربائية",
-    "description": "asdasd",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:47:34",
-    "status": "pending",
-    "id": 5
-  },
-  {
-    "facility": "مصعد 2",
-    "issueType": "كهربائية",
-    "description": "asdasd",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:48:42",
-    "status": "pending",
-    "id": 6
-  },
-  {
-    "facility": "مصعد 2",
-    "issueType": "كهربائية",
-    "description": "asdasd",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:48:44",
-    "status": "pending",
-    "id": 7
-  },
-  {
-    "facility": "مصعد 2",
-    "issueType": "كهربائية",
-    "description": "asdasdasd",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:50:53",
-    "status": "pending",
-    "id": 8
-  },
-  {
-    "facility": "سلم متحرك 1",
-    "issueType": "كهربائية",
-    "description": "asdasd",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:51:32",
-    "status": "pending",
-    "id": 9
-  },
-  {
-    "facility": "مصعد 2",
-    "issueType": "أخرى",
-    "description": "asdasd",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 12:53:56",
-    "status": "pending",
-    "id": 10
-  },
-  {
-    "facility": "اختر مرفقًا...",
-    "issueType": "أخرى",
-    "description": "123",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-15 21:27:47",
-    "status": "pending",
-    "id": 11
   }
 ]
