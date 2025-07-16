@@ -2,42 +2,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const usageData = {
     facility: "مصعد 2",
     lastMaintenance: "2025-07-10",
-
-    // ✅ بيانات الاستخدام
-    currentUsage: 180,
-    maxUsage: 300,
-
-    // ✅ بيانات الساعات الحالية (اليوم فقط)
-    hourlyUsage: [5, 10, 15, 20, 18, 22, 25, 28, 30, 32, 35, 40],
-    hourLabels: ["1 ص", "2 ص", "3 ص", "4 ص", "5 ص", "6 ص", "7 ص", "8 ص", "9 ص", "10 ص", "11 ص", "12 ظ"],
-
-    // ✅ بيانات إضافية
-    temperature: 41,
-    vibration: "طبيعي",
-    operatingHours: 1145
+    currentUsage: 1800,
+    maxUsage: 3000,
+    temperature: 36,
+    vibration: 2.1,
+    operationHours: 1120,
+    hourlyUsage: [30, 20, 25, 15, 10, 5, 0, 50, 100, 200, 300, 400, 350, 280, 260, 230, 800, 180, 150, 120, 80, 60, 40, 1800],
+    labels: Array.from({ length: 24 }, (_, i) => `${i}:00`)
   };
 
-  // تحديث العنوان
+  // تحديث العنوان وتاريخ الصيانة
   document.getElementById("pageTitle").textContent = `تفاصيل ${usageData.facility}`;
   document.getElementById("maintenanceDate").textContent = usageData.lastMaintenance;
 
-  // عرض البيانات المباشرة
-  document.getElementById("tempVal").textContent = `${usageData.temperature}°C`;
-  document.getElementById("vibrationVal").textContent = usageData.vibration;
-  document.getElementById("hoursVal").textContent = `${usageData.operatingHours} ساعة`;
-
-  // الاستخدام الحالي
-  const usageBox = document.getElementById("usageValue");
-  usageBox.textContent = `${usageData.currentUsage} / ${usageData.maxUsage} استخدام`;
-
-  // رسم الرسم البياني
+  // رسم البيانات على مدار الساعة
   const ctx = document.getElementById("usageChart").getContext("2d");
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: usageData.hourLabels,
+      labels: usageData.labels,
       datasets: [{
-        label: "الاستخدام خلال اليوم",
+        label: "عدد الاستخدام لكل ساعة",
         data: usageData.hourlyUsage,
         fill: true,
         borderColor: "#007bff",
@@ -54,24 +39,28 @@ document.addEventListener("DOMContentLoaded", () => {
       scales: {
         y: {
           beginAtZero: true,
-          suggestedMax: Math.max(...usageData.hourlyUsage) + 10
+          suggestedMax: 500
         }
       }
     }
   });
 
-  // حالة التنبيه بناءً على الاستخدام الحقيقي
-  const usagePercent = (usageData.currentUsage / usageData.maxUsage) * 100;
+  // حالة التنبيه بناء على الاستخدام الحالي
   const alertBox = document.getElementById("alertMessage");
-
-  if (usagePercent >= 100) {
+  if (usageData.currentUsage >= usageData.maxUsage) {
     alertBox.textContent = "🔴 الاستخدام تجاوز الحد!";
     alertBox.classList.add("status", "danger");
-  } else if (usagePercent >= 80) {
+  } else if (usageData.currentUsage >= usageData.maxUsage * 0.8) {
     alertBox.textContent = "⚠️ الاستخدام يقترب من الحد!";
     alertBox.classList.add("status", "warning");
   } else {
     alertBox.textContent = "✅ الوضع طبيعي";
     alertBox.classList.add("status", "good");
   }
+
+  // عرض القيم
+  document.getElementById("usageValue").textContent = `${usageData.currentUsage} / ${usageData.maxUsage}`;
+  document.getElementById("temperatureValue").textContent = `${usageData.temperature}°C`;
+  document.getElementById("vibrationValue").textContent = `${usageData.vibration} مم/ث`;
+  document.getElementById("hoursValue").textContent = `${usageData.operationHours} ساعة`;
 });

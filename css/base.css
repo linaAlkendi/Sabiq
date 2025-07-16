@@ -5,7 +5,7 @@
   --card-bg: #ffffff;
   --card-shadow: rgba(0, 0, 0, 0.08);
 
-  --status-good-bg: #d4fbe5;
+  --status-good-bg: hsl(146, 83%, 91%);
   --status-good-text: #1b873f;
   --status-warning-bg: #fff6da;
   --status-warning-text: #a17f00;

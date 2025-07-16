@@ -11,12 +11,10 @@
   margin-bottom: 20px;
 }
 
-.status.message{
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 30px;
-
-
+.status.message {
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -32,6 +30,8 @@ canvas#usageChart {
   width: 100% !important;
   max-height: 400px;
 }
+
+/* تنسيق كارد الإحصائيات */
 .stats-section h3 {
   font-size: 20px;
   color: var(--section-title);
@@ -60,6 +60,7 @@ canvas#usageChart {
   color: var(--primary-btn);
 }
 
+/* تنسيق قيمة الاستخدام */
 #usageValue {
   font-size: 20px;
   font-weight: bold;
@@ -67,7 +68,7 @@ canvas#usageChart {
   margin-top: 10px;
 }
 
-/* كارد الصيانة */
+/* تنسيق كارد الصيانة */
 .maintenance-card h3 {
   font-size: 18px;
   margin-bottom: 12px;
@@ -79,31 +80,13 @@ canvas#usageChart {
   font-weight: bold;
 }
 
-#alertMessageBox {
-  background-color: var(--status-danger-bg);
-  color: var(--status-danger-text);
-  padding: 18px 24px;
-  border-radius: 16px;
-  font-weight: bold; 
-  text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-
-
-
+/* تنسيق الرسائل التنبيهية */
 #alertMessageBox {
   background-color: var(--status-warning-bg);
   color: var(--status-warning-text);
   padding: 18px 24px;
   border-radius: 16px;
-  font-weight: bold; 
+  font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
   box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
@@ -114,6 +97,7 @@ canvas#usageChart {
   flex-wrap: wrap;
 }
 
+/* رسائل التنبيه بناءً على الحالة */
 .status.good {
   background-color: var(--status-good-bg);
   color: var(--status-good-text);
@@ -128,4 +112,3 @@ canvas#usageChart {
   background-color: var(--status-danger-bg);
   color: var(--status-danger-text);
 }
-

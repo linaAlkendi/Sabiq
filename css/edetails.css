@@ -83,13 +83,15 @@ canvas#usageChart {
 
 /* ✅ تنبيه */
 #alertMessageBox {
+  display: flex;
+  background-color: var(--status-good-bg); /* خلفية حمراء */
+  color: var(--status-good-text); /* خط أحمر */
   padding: 18px 24px;
   border-radius: 16px;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
-  display: flex;
+  box-shadow: 0 4px 12px rgba(76, 240, 125, 0.2); /* ظل خفيف */
   justify-content: center;
   align-items: center;
   gap: 10px;

@@ -2,42 +2,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const usageData = {
     facility: "بوابة 5",
     lastMaintenance: "2025-07-10",
-
-    // ✅ بيانات الاستخدام الفعلي (الحقيقي)
-    currentUsage: 320,
-    maxUsage: 300,
-
-    // ✅ بيانات اليوم الحالي فقط (بالساعات)
-    hourlyUsage: [10, 15, 22, 28, 30, 35, 40, 45, 50, 55, 60, 65],
-    hourLabels: ["1 ص", "2 ص", "3 ص", "4 ص", "5 ص", "6 ص", "7 ص", "8 ص", "9 ص", "10 ص", "11 ص", "12 ظ"],
-
-    // ✅ بيانات إضافية
-    temperature: 62,
-    vibration: "عالي",
-    operatingHours: 1870
+    currentUsage: 3300, 
+    maxUsage: 3200,
+    temperature: 63,
+    vibration: 6,
+    operationHours: 1870,
+    hourlyUsage: [30, 20, 25, 15, 10, 5, 0, 50, 100, 200, 300, 400, 3050, 2080, 2060, 2300, 2000, 1800, 1500, 1200, 2400, 2600, 3000, 3200],
+    labels: Array.from({ length: 24 }, (_, i) => `${i}:00`)
   };
 
-  // تحديث العنوان
+  // تحديث عنوان الصفحة
   document.getElementById("pageTitle").textContent = `تفاصيل ${usageData.facility}`;
+  
+  // تحديث تاريخ آخر صيانة
   document.getElementById("maintenanceDate").textContent = usageData.lastMaintenance;
 
-  // عرض البيانات المباشرة
-  document.getElementById("tempVal").textContent = `${usageData.temperature}°C`;
-  document.getElementById("vibrationVal").textContent = usageData.vibration;
-  document.getElementById("hoursVal").textContent = `${usageData.operatingHours} ساعة`;
-
-  // ✅ عرض الاستخدام الحالي / الأقصى
-  const usageBox = document.getElementById("usageValue");
-  usageBox.textContent = `${usageData.currentUsage} / ${usageData.maxUsage} استخدام`;
-
-  // ✅ عرض الرسم البياني لليوم
+  // رسم البيانات باستخدام Chart.js
   const ctx = document.getElementById("usageChart").getContext("2d");
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: usageData.hourLabels,
+      labels: usageData.labels,
       datasets: [{
-        label: "الاستخدام خلال اليوم",
+        label: "عدد الاستخدام لكل ساعة",
         data: usageData.hourlyUsage,
         fill: true,
         borderColor: "#007bff",
@@ -54,24 +41,28 @@ document.addEventListener("DOMContentLoaded", () => {
       scales: {
         y: {
           beginAtZero: true,
-          suggestedMax: Math.max(...usageData.hourlyUsage) + 10
+          suggestedMax: 500
         }
       }
     }
   });
 
-  // ✅ تنبيه بناءً على الاستخدام الفعلي (320/300)
-  const usagePercent = (usageData.currentUsage / usageData.maxUsage) * 100;
+  // الرسالة التنبيهية
   const alertBox = document.getElementById("alertMessage");
-
-  if (usagePercent >= 100) {
+  if (usageData.currentUsage > usageData.maxUsage) {
     alertBox.textContent = "🔴 الاستخدام تجاوز الحد!";
     alertBox.classList.add("status", "danger");
-  } else if (usagePercent >= 80) {
+  } else if (usageData.currentUsage >= usageData.maxUsage * 0.8) {
     alertBox.textContent = "⚠️ الاستخدام يقترب من الحد!";
     alertBox.classList.add("status", "warning");
   } else {
     alertBox.textContent = "✅ الوضع طبيعي";
     alertBox.classList.add("status", "good");
   }
+
+  // تحديث العناصر لتعرض البيانات
+  document.getElementById("usageValue").textContent = `${usageData.currentUsage} / ${usageData.maxUsage}`;
+  document.getElementById("tempVal").textContent = `${usageData.temperature}°C`;
+  document.getElementById("vibrationVal").textContent = `${usageData.vibration}`;
+  document.getElementById("hoursVal").textContent = `${usageData.operationHours} ساعة`;
 });

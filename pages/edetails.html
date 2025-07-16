@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>مصعد  2 - SABIQ</title>
+  <title>مصعد 2 - SABIQ</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/base.css" />
@@ -46,53 +46,52 @@
   <a href="dashboard.html">
     <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo" />
   </a>
-  <h1 id="pageTitle">تفاصيل مصعد2</h1>
+  <h1 id="pageTitle">تفاصيل مصعد 2</h1>
 </header>
 
 <main class="dashboard">
 
-  <h2 class="section-title">استخدام المرفق خلال الأيام</h2>
+  <h2 class="section-title">استخدام المرفق خلال اليوم</h2>
 
   <!-- كارد الرسم البياني -->
   <section class="chart-section card">
     <canvas id="usageChart"></canvas>
   </section>
 
+  <section id="alertMessageBox">
+    <span id="alertMessage"></span>
+  </section>
 
-<section id="alertMessageBox">
-  <span id="alertMessage"></span>
-</section>
-<!-- كارد الاستخدام الحالي -->
-<section class="card">
-  <h3>الاستخدام الحالي</h3>
-  <p id="usageValue">--</p>
-</section>
+  <!-- كارد الاستخدام الحالي -->
+  <section class="card">
+    <h3>الاستخدام الحالي</h3>
+    <p id="usageValue">--</p>
+  </section>
 
-<!-- كارد بيانات المرفق -->
-<section class="stats-section card">
-  <h3>بيانات المرفق</h3>
-  <div class="facility-stats">
-    <div class="stat">
-      <span class="stat-label">الحرارة</span>
-      <span class="stat-value" id="tempVal">--</span>
+  <!-- كارد بيانات المرفق -->
+  <section class="stats-section card">
+    <h3>بيانات المرفق</h3>
+    <div class="facility-stats">
+      <div class="stat">
+        <span class="stat-label">الحرارة</span>
+        <span class="stat-value" id="temperatureValue">--</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">الاهتزاز</span>
+        <span class="stat-value" id="vibrationValue">--</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">ساعات التشغيل</span>
+        <span class="stat-value" id="hoursValue">--</span>
+      </div>
     </div>
-    <div class="stat">
-      <span class="stat-label">الاهتزاز</span>
-      <span class="stat-value" id="vibrationVal">--</span>
-    </div>
-    <div class="stat">
-      <span class="stat-label">ساعات التشغيل</span>
-      <span class="stat-value" id="hoursVal">--</span>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- كارد الصيانة -->
   <section class="maintenance-card card">
     <h3>آخر صيانة</h3>
     <p id="maintenanceDate">—</p>
   </section>
-
 
 </main>
 
