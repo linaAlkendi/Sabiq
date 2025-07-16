@@ -31,16 +31,37 @@ document.addEventListener("DOMContentLoaded", () => {
           const card = document.createElement("div");
           card.classList.add("notification-card", notif.severity);
 
+          // تحديد الأيقونة بناءً على حالة التنبيه
+          let icon = '';
+          let iconColor = ''; // متغير لتحديد اللون
+
+          if (notif.severity === "P") {
+            icon = `<i class="fa fa-check-circle"></i>`; // أيقونة إيجابية
+            iconColor = 'green'; // اللون الأخضر للتنبيه الإيجابي
+          } else if (notif.severity === "L") {
+            icon = `<i class="fa fa-check-circle"></i>`; // أيقونة منخفضة الخطورة
+            iconColor = 'lightblue'; // اللون الأزرق الفاتح أو أي لون تختاره للخطورة المنخفضة
+          } else if (notif.severity === "M") {
+            icon = `<i class="fa fa-exclamation-triangle"></i>`; // أيقونة متوسطة
+            iconColor = 'orange'; // اللون البرتقالي
+          } else if (notif.severity === "H") {
+            icon = `<i class="fa fa-times-circle"></i>`; // أيقونة عالية الخطورة
+            iconColor = 'red'; // اللون الأحمر
+          }
+
           card.innerHTML = `
-            <h3>${notif.title}</h3>
-            <p>${notif.description}</p>
-            <span class="timestamp">${notif.timestamp}</span>
+            <div class="icon" style="color: ${iconColor};">${icon}</div>
+            <div class="content">
+              <h3>${notif.title}</h3>
+              <p>${notif.description}</p>
+              <span class="timestamp">${notif.timestamp}</span>
+            </div>
           `;
 
-          // إظهار زر إسناد مهمة فقط في التنبيهات السلبية
+          // إظهار زر "إسناد مهمة" فقط في التنبيهات السلبية
           if (notif.status === "negative") {
             card.innerHTML += `
-              <button class="assign-task-btn" onclick="assignTask('${notif.title}')" >إسناد مهمة</button>
+              <button class="assign-task-btn" onclick="assignTask('${notif.title}')">إسناد مهمة</button>
             `;
           }
 
