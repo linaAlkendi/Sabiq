@@ -57,11 +57,32 @@
   <section class="chart-section card">
     <canvas id="usageChart"></canvas>
   </section>
-
-
-<section id="alertMessageBox">
+  <section id="alertMessageBox">
   <span id="alertMessage"></span>
 </section>
+<section class="card">
+  <h3>الاستخدام الحالي</h3>
+  <p id="usageValue">—</p>
+</section>
+
+<section class="card stats-section">
+  <h3>بيانات المرفق</h3>
+  <div class="facility-stats">
+    <div class="stat">
+      <span>درجة الحرارة</span>
+      <span class="stat-value" id="temperatureValue">—</span>
+    </div>
+    <div class="stat">
+      <span>الاهتزاز</span>
+      <span class="stat-value" id="vibrationValue">—</span>
+    </div>
+    <div class="stat">
+      <span>عدد ساعات التشغيل</span>
+      <span class="stat-value" id="hoursValue">—</span>
+    </div>
+  </div>
+</section>
+
 
   <!-- كارد الصيانة -->
   <section class="maintenance-card card">

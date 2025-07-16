@@ -18,6 +18,33 @@
 
 
 }
+.stats-section h3 {
+  font-size: 20px;
+  color: var(--section-title);
+  margin-bottom: 20px;
+}
+
+.facility-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  background: rgba(0, 191, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--section-title);
+}
+
+.stat-value {
+  font-weight: bold;
+  color: var(--primary-btn);
+}
 
 .card {
   background-color: var(--card-bg);

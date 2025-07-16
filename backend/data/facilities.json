@@ -2,25 +2,34 @@
   {
     "id": 1,
     "name": "سلم متحرك 1",
-    "currentUsage": 295,
-    "maxUsage": 300,
+    "currentUsage": 2950,
+    "maxUsage": 3000,
     "status": "warning",
+    "temperature": 48,
+    "vibration": "متوسط",
+    "operatingHours": 1350,
     "detailsPage": "sdetails.html"
   },
   {
     "id": 2,
     "name": "مصعد 2",
-    "currentUsage": 180,
-    "maxUsage": 300,
+    "currentUsage": 1800,
+    "maxUsage": 3000,
     "status": "good",
+    "temperature": 36,
+    "vibration": "منخفض",
+    "operatingHours": 1120,
     "detailsPage": "edetails.html"
   },
   {
     "id": 3,
     "name": "بوابة 5",
-    "currentUsage": 320,
-    "maxUsage": 300,
+    "currentUsage": 3200,
+    "maxUsage": 3000,
     "status": "danger",
+    "temperature": 62,
+    "vibration": "عالي",
+    "operatingHours": 1870,
     "detailsPage": "details.html"
   }
 ]

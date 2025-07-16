@@ -2,22 +2,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const usageData = {
     facility: "مصعد 2",
     lastMaintenance: "2025-07-10",
-    threshold: 100,
-    dailyUsage: [80, 95, 180, 30, 70, 110, 66],
-    labels: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"]
+
+    // ✅ بيانات الاستخدام
+    currentUsage: 180,
+    maxUsage: 300,
+
+    // ✅ بيانات الساعات الحالية (اليوم فقط)
+    hourlyUsage: [5, 10, 15, 20, 18, 22, 25, 28, 30, 32, 35, 40],
+    hourLabels: ["1 ص", "2 ص", "3 ص", "4 ص", "5 ص", "6 ص", "7 ص", "8 ص", "9 ص", "10 ص", "11 ص", "12 ظ"],
+
+    // ✅ بيانات إضافية
+    temperature: 41,
+    vibration: "طبيعي",
+    operatingHours: 1145
   };
 
+  // تحديث العنوان
   document.getElementById("pageTitle").textContent = `تفاصيل ${usageData.facility}`;
   document.getElementById("maintenanceDate").textContent = usageData.lastMaintenance;
 
+  // عرض البيانات المباشرة
+  document.getElementById("tempVal").textContent = `${usageData.temperature}°C`;
+  document.getElementById("vibrationVal").textContent = usageData.vibration;
+  document.getElementById("hoursVal").textContent = `${usageData.operatingHours} ساعة`;
+
+  // الاستخدام الحالي
+  const usageBox = document.getElementById("usageValue");
+  usageBox.textContent = `${usageData.currentUsage} / ${usageData.maxUsage} استخدام`;
+
+  // رسم الرسم البياني
   const ctx = document.getElementById("usageChart").getContext("2d");
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: usageData.labels,
+      labels: usageData.hourLabels,
       datasets: [{
-        label: "عدد الاستخدام",
-        data: usageData.dailyUsage,
+        label: "الاستخدام خلال اليوم",
+        data: usageData.hourlyUsage,
         fill: true,
         borderColor: "#007bff",
         backgroundColor: "rgba(0, 123, 255, 0.1)",
@@ -26,39 +47,31 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     options: {
       responsive: true,
-      interaction: { mode: 'index', intersect: false },
       plugins: {
         tooltip: { enabled: true },
-        legend: {
-          display: true,
-          position: "bottom"
-        }
+        legend: { display: true, position: "bottom" }
       },
       scales: {
         y: {
           beginAtZero: true,
-          suggestedMax: usageData.threshold + 50
+          suggestedMax: Math.max(...usageData.hourlyUsage) + 10
         }
       }
     }
   });
 
-  const latestValue = usageData.dailyUsage.at(-1);
+  // حالة التنبيه بناءً على الاستخدام الحقيقي
+  const usagePercent = (usageData.currentUsage / usageData.maxUsage) * 100;
   const alertBox = document.getElementById("alertMessage");
 
-  if (latestValue >= usageData.threshold) {
+  if (usagePercent >= 100) {
     alertBox.textContent = "🔴 الاستخدام تجاوز الحد!";
     alertBox.classList.add("status", "danger");
-  } else if (latestValue >= usageData.threshold * 0.8) {
+  } else if (usagePercent >= 80) {
     alertBox.textContent = "⚠️ الاستخدام يقترب من الحد!";
     alertBox.classList.add("status", "warning");
   } else {
     alertBox.textContent = "✅ الوضع طبيعي";
     alertBox.classList.add("status", "good");
   }
-
-  document.getElementById("manualReportBtn").addEventListener("click", () => {
-    const facility = usageData.facility;
-    window.location.href = `new-report.html?facility=${encodeURIComponent(facility)}`;
-  });
 });
