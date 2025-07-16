@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 description: description.value,
                 reportedBy: "مستخدم النظام",
                 reportedAt: new Date().toISOString().replace("T", " ").slice(0, 19),
-                status: "pending"
+                status: "open"
             };
 
             fetch("http://localhost:3000/incidents", {

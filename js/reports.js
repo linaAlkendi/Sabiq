@@ -16,11 +16,29 @@ function renderIncidents(list) {
   list.forEach(incident => {
     const card = document.createElement('div');
 
-    // Arabic label based on status
-    const statusLabel = incident.status === "resolved" ? "تم الحل" : "قيد المعالجة";
+    function getStatusBadge(status) {
+      const statusMap = {
+        open: `
+      <span class="status-badge status-open">
+        <span class="status-dot"></span> بلاغ جديد
+      </span>`,
+        closed: `
+      <span class="status-badge status-closed">
+        <span class="status-dot"></span> مغلق
+      </span>`,
+        converted: `
+      <span class="status-badge status-converted">
+        <span class="status-dot"></span> عطل
+      </span>`,
+      };
 
-    // Apply dynamic card class based on status
-    card.className = `incident-card ${incident.status}`;
+      return statusMap[status.toLowerCase()] || '';
+    }
+
+
+    const badge = getStatusBadge(incident.status);
+
+    card.className = `incident-card ${incident.severity}`;
 
     card.innerHTML = `
       <div><span class="label">📍 اسم المرفق:</span> <span class="value">${incident.facility}</span></div>
@@ -28,7 +46,7 @@ function renderIncidents(list) {
       <div><span class="label">📝 وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
       <div><span class="label">👤 المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
       <div><span class="label">🕒 وقت البلاغ:</span> <span class="value">${incident.reportedAt}</span></div>
-      <div><span class="label">📌 الحالة:</span> <span class="value status-${incident.status}">${statusLabel}</span></div>
+      <div><strong>الحالة:</strong> ${badge}</div>
       <div class="incident-action">
         <label for="actionSelect">الإجراء:</label>
         <select class="action-select">
