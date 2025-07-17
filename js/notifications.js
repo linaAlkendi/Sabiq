@@ -4,49 +4,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterStatus = document.getElementById("filterStatus");
   const searchInput = document.getElementById("searchInput");
 
-  // جلب التنبيهات من السيرفر
   fetch("http://localhost:3000/notifications")
-    .then((res) => res.json()) // تحويل الاستجابة إلى JSON
+    .then((res) => res.json())
     .then((notifications) => {
-      // فلترة التنبيهات بناءً على الفلاتر
       function filterNotifications() {
         const severityFilter = filterType.value;
         const statusFilter = filterStatus.value;
-        const searchTerm = searchInput.value.toLowerCase().trim(); // البحث بحرف أو كلمة
+        const searchTerm = searchInput.value.toLowerCase().trim();
 
-        // تصفية التنبيهات بناءً على الفلاتر
         const filteredNotifications = notifications.filter((notif) => {
           const matchesSeverity =
             severityFilter === "ALL" || notif.severity === severityFilter;
           const matchesStatus =
             statusFilter === "ALL" || notif.status === statusFilter;
-          const matchesSearch = notif.title.toLowerCase().startsWith(searchTerm); // البحث عن بداية الكلمة
+          const matchesSearch = notif.title.toLowerCase().startsWith(searchTerm);
 
           return matchesSeverity && matchesStatus && matchesSearch;
         });
 
-        // تحديث عرض التنبيهات
         container.innerHTML = "";
         filteredNotifications.forEach((notif) => {
           const card = document.createElement("div");
           card.classList.add("notification-card", notif.severity);
 
-          // تحديد الأيقونة بناءً على حالة التنبيه
           let icon = '';
-          let iconColor = ''; // متغير لتحديد اللون
+          let iconColor = '';
 
           if (notif.severity === "P") {
-            icon = `<i class="fa fa-check-circle"></i>`; // أيقونة إيجابية
-            iconColor = 'green'; // اللون الأخضر للتنبيه الإيجابي
+            icon = `<i class="fa fa-check-circle"></i>`;
+            iconColor = 'green';
           } else if (notif.severity === "L") {
-            icon = `<i class="fa fa-check-circle"></i>`; // أيقونة منخفضة الخطورة
-            iconColor = 'lightblue'; // اللون الأزرق الفاتح أو أي لون تختاره للخطورة المنخفضة
+            icon = `<i class="fa fa-exclamation-circle"></i>`;
+            iconColor = 'lightorange';
           } else if (notif.severity === "M") {
-            icon = `<i class="fa fa-exclamation-triangle"></i>`; // أيقونة متوسطة
-            iconColor = 'orange'; // اللون البرتقالي
+            icon = `<i class="fa fa-exclamation-triangle"></i>`;
+            iconColor = 'orange';
           } else if (notif.severity === "H") {
-            icon = `<i class="fa fa-times-circle"></i>`; // أيقونة عالية الخطورة
-            iconColor = 'red'; // اللون الأحمر
+            icon = `<i class="fa fa-times-circle"></i>`;
+            iconColor = 'red';
           }
 
           card.innerHTML = `
@@ -58,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
           `;
 
-          // إظهار زر "إسناد مهمة" فقط في التنبيهات السلبية
           if (notif.status === "negative") {
             card.innerHTML += `
               <button class="assign-task-btn" onclick="assignTask('${notif.title}')">إسناد مهمة</button>
@@ -69,12 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // إضافة أحداث الفلاتر
       filterType.addEventListener("change", filterNotifications);
       filterStatus.addEventListener("change", filterNotifications);
-      searchInput.addEventListener("input", filterNotifications); // إضافة حدث البحث
+      searchInput.addEventListener("input", filterNotifications);
 
-      // عرض التنبيهات عند تحميل الصفحة
       filterNotifications();
     })
     .catch((err) => {
@@ -82,8 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// وظيفة إسناد المهمة
 function assignTask(taskTitle) {
-  // توجيه المستخدم إلى صفحة المشرف مع تمرير عنوان المهمة
   window.location.href = `supervisor-dashboard.html?task=${encodeURIComponent(taskTitle)}`;
 }

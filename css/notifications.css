@@ -5,11 +5,14 @@
   --alert-warning-bg: #faf5dd;
   --alert-warning-color: #a38d00;
 
-  --alert-danger-bg: #fceaea;
+   --alert-danger-bg: #fceaea;
   --alert-danger-color: #9d1c1c;
 
-  --alert-low-bg: #d3f4f0; /* اللون الجديد للخطورة المنخفضة */
-  --alert-low-color: #36a75e; /* اللون الأخضر الجديد للخطورة المنخفضة */
+  --alert-low-bg: #d3f4f0;     
+  --alert-low-color: #36a75e; 
+
+  --alert-med-bg: #fbe8e1; 
+  --alert-med-color: #a34900;      
 
   --card-radius: 10px;
   --shadow: 0 4px 16px rgba(142, 140, 140, 0.47);
@@ -25,8 +28,10 @@ body.dark {
   --alert-danger-bg: #452d32;
   --alert-danger-color: #ffb3b3;
 
-  --alert-low-bg: #1e3a34; /* اللون الجديد للخطورة المنخفضة في الوضع الداكن */
-  --alert-low-color: #8ff5c2; /* اللون الأخضر الجديد للخطورة المنخفضة في الوضع الداكن */
+ 
+
+  --alert-med-bg:  #573920; /* اللون الجديد للخطورة المتوسطة في الوضع الداكن */
+  --alert-med-color:#fccbb3; /* اللون المناسب للخطورة المتوسطة في الوضع الداكن */
 
   --text-color: #f1f1f1;
   --bg-color: #1e1e2f;
@@ -106,37 +111,37 @@ body.dark .search-filter-bar select {
 }
 
 /* Ribbon colors by severity */
-.notification-card.P { /* تغيير حرف الإيجابي إلى P */
+.notification-card.P {
   background-color: var(--alert-good-bg);
-  color: var(--alert-good-color); /* اللون الأخضر للنصوص في التنبيهات الإيجابية */
+  color: var(--alert-good-color);
 }
 
-.notification-card.L { /* الخطورة المنخفضة */
-  background-color: var(--alert-low-bg);
-  color: var(--alert-low-color); /* اللون الأخضر المنخفض للخطورة */
+.notification-card.L {
+  background-color: var(--alert-warning-bg);  /* اللون الجديد للخطورة المنخفضة */
+  color: var(--alert-warning-color);           /* اللون الجديد للخطورة المنخفضة */
 }
 
 .notification-card.M {
-  background-color: var(--alert-warning-bg);
-  color: var(--alert-warning-color); /* اللون الأصفر للنصوص في التنبيهات المتوسطة */
+  background-color: var(--alert-med-bg);  /* اللون الجديد للخطورة المتوسطة */
+  color: var(--alert-med-color);           /* اللون الجديد للخطورة المتوسطة */
 }
 
 .notification-card.H {
   background-color: var(--alert-danger-bg);
-  color: var(--alert-danger-color); /* اللون الأحمر للنصوص في التنبيهات السلبية */
+  color: var(--alert-danger-color);
 }
 
 .notification-card h3 {
   margin: 0 0 10px;
   font-size: 18px;
   font-weight: bold;
-  color: inherit; /* اللون سيتبع حالة التنبيه */
+  color: inherit;
 }
 
 .notification-card p {
   margin: 0 0 10px;
   font-size: 15px;
-  color: inherit; /* اللون سيتبع حالة التنبيه */
+  color: inherit;
 }
 
 .notification-card .timestamp {

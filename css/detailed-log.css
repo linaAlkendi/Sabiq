@@ -165,3 +165,135 @@ body.dark .table-wrapper thead{
   .hidden {
     display: none;
   }
+
+
+/* ✅ Responsive Tweaks */
+@media (max-width: 768px) {
+  .alerts-main {
+    padding: 70px 15px 30px;
+  }
+
+  .notification-card h3 {
+    font-size: 16px;
+  }
+
+  .notification-card p {
+    font-size: 14px;
+  }
+
+  .notification-card .timestamp {
+    font-size: 12px;
+  }
+
+  .search-filter-bar input,
+  .search-filter-bar select {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+
+  .logs-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .logs-table th,
+  .logs-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+  }
+
+  .logs-table tr {
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .logs-table tr:hover {
+    background-color: #eef9ff;
+  }
+
+  .logs-table thead {
+    background-color: rgba(0, 56, 161, 0.555)
+  }
+}
+
+@media (max-width: 480px) {
+  .logs-table {
+    font-size: 10px;
+  }
+
+  .logs-table th,
+  .logs-table td {
+    padding: 6px;
+    font-size: 10px;
+  }
+
+  .logs-table thead {
+    font-size: 12px;
+  }
+
+  .logs-section h3 {
+    font-size: 16px;
+  }
+
+  .filters-container {
+    display: block;
+    gap: 10px;
+  }
+
+  .filter-box select {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .actions-section {
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 12px;
+  }
+
+  .attachments .attachment {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .attachment {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .pdf-link {
+    font-size: 12px;
+  }
+}
+
+body.dark .logs-table th,
+body.dark .logs-table td {
+  background-color: #333;
+  color: #f1f1f1;
+}
+
+body.dark .logs-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .attachment {
+  background-color: #2a2a40;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+body.dark .actions-section {
+  background: #333;
+  color: #fff;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
