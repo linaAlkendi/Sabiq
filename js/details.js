@@ -11,13 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     labels: Array.from({ length: 24 }, (_, i) => `${i}:00`)
   };
 
-  // تحديث عنوان الصفحة
   document.getElementById("pageTitle").textContent = `تفاصيل ${usageData.facility}`;
-  
-  // تحديث تاريخ آخر صيانة
   document.getElementById("maintenanceDate").textContent = usageData.lastMaintenance;
 
-  // رسم البيانات باستخدام Chart.js
   const ctx = document.getElementById("usageChart").getContext("2d");
   new Chart(ctx, {
     type: "line",
@@ -47,20 +43,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // الرسالة التنبيهية
   const alertBox = document.getElementById("alertMessage");
+  let alerts = [];
+
   if (usageData.currentUsage > usageData.maxUsage) {
-    alertBox.textContent = "🔴 الاستخدام تجاوز الحد!";
-    alertBox.classList.add("status", "danger");
+    alerts.push("🔴 عدد الاستخدام تجاوز الحد الأقصى (3200)");
   } else if (usageData.currentUsage >= usageData.maxUsage * 0.8) {
-    alertBox.textContent = "⚠️ الاستخدام يقترب من الحد!";
-    alertBox.classList.add("status", "warning");
+    alerts.push("⚠️ الاستخدام يقترب من الحد!");
+  }
+
+  if (usageData.temperature > 60) {
+    alerts.push("🔥 درجة الحرارة مرتفعة (أعلى من 60°C)");
+  }
+
+  if (usageData.vibration > 5) {
+    alerts.push("⚠️ مستوى الاهتزاز مرتفع (أعلى من 5)");
+  }
+
+  if (usageData.operationHours > 1800) {
+    alerts.push("⏱️ عدد ساعات التشغيل تجاوز 1800 ساعة");
+  }
+
+  if (alerts.length > 0) {
+    alertBox.innerHTML = alerts.join("<br>");
+    alertBox.classList.add("status", "danger");
   } else {
     alertBox.textContent = "✅ الوضع طبيعي";
     alertBox.classList.add("status", "good");
   }
 
-  // تحديث العناصر لتعرض البيانات
   document.getElementById("usageValue").textContent = `${usageData.currentUsage} / ${usageData.maxUsage}`;
   document.getElementById("tempVal").textContent = `${usageData.temperature}°C`;
   document.getElementById("vibrationVal").textContent = `${usageData.vibration}`;
