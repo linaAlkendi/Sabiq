@@ -35,4 +35,27 @@ router.post("/", (req, res) => {
   res.status(201).json({ message: "Incident saved", incident: newIncident });
 });
 
+// PATCH an incident status
+router.patch("/:id/status", (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  if (!status) {
+    return res.status(400).json({ error: "Status is required" });
+  }
+
+  const incidents = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+  const incidentIndex = incidents.findIndex((i) => i.id === parseInt(id));
+
+  if (incidentIndex === -1) {
+    return res.status(404).json({ error: "Incident not found" });
+  }
+
+  incidents[incidentIndex].status = status.toLowerCase();
+  fs.writeFileSync(DATA_FILE, JSON.stringify(incidents, null, 2), "utf-8");
+
+  res.status(200).json({ message: "Status updated", incident: incidents[incidentIndex] });
+});
+
+
 module.exports = router;
