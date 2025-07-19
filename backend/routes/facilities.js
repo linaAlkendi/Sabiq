@@ -11,4 +11,26 @@ router.get("/", (req, res) => {
   res.json(JSON.parse(data));
 });
 
+// PATCH facility status by name
+router.patch("/status", (req, res) => {
+  const { name, status } = req.body;
+
+  if (!name || !status) {
+    return res.status(400).json({ error: "Missing 'name' or 'status' in body" });
+  }
+
+  const facilities = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+  const facility = facilities.find(f => f.name === name);
+
+  if (!facility) {
+    return res.status(404).json({ error: "Facility not found" });
+  }
+
+  facility.status = status;
+
+  fs.writeFileSync(DATA_FILE, JSON.stringify(facilities, null, 2), "utf-8");
+
+  res.json({ message: "Facility status updated", facility });
+});
+
 module.exports = router;

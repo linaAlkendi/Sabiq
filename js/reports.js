@@ -60,7 +60,6 @@ function renderIncidents(list) {
     container.appendChild(card);
   });
 
-  // ✅ Attach handlers to the action buttons after rendering
   document.querySelectorAll(".confirm-action-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const incidentId = btn.dataset.id;
@@ -78,11 +77,17 @@ function renderIncidents(list) {
         if (badgeContainer) {
           badgeContainer.innerHTML = getStatusBadge(updated.status);
         }
+
+        // If status is converted, also update the facility status by name
+        if (selectedValue === "converted") {
+          await updateFacilityStatusByName(updated.facility, "danger");
+        }
       }
     });
   });
 }
 
+// API calls:
 
 async function updateIncidentStatus(id, status) {
   try {
@@ -101,4 +106,21 @@ async function updateIncidentStatus(id, status) {
     return null;
   }
 }
+
+async function updateFacilityStatusByName(facilityName, status) {
+  try {
+    const res = await fetch(`http://localhost:3000/facilities/status`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: facilityName, status }),
+    });
+
+    if (!res.ok) throw new Error("Facility status update failed");
+    const data = await res.json();
+    return data.facility;
+  } catch (err) {
+    console.error("Facility status update error:", err);
+  }
+}
+
 
