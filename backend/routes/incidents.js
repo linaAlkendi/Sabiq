@@ -25,13 +25,6 @@ router.post("/", (req, res) => {
   incidents.push(newIncident);
   fs.writeFileSync(DATA_FILE, JSON.stringify(incidents, null, 2), "utf-8");
 
-  // Generate a notification after successful incident creation
-  notifier.createNotification({
-    title: "بلاغ جديد",
-    description: `تم تسجيل بلاغ في ${newIncident.facility} - نوع العطل: ${newIncident.issueType}`,
-    severity: "M",
-  });
-
   res.status(201).json({ message: "Incident saved", incident: newIncident });
 });
 
@@ -54,8 +47,20 @@ router.patch("/:id/status", (req, res) => {
   incidents[incidentIndex].status = status.toLowerCase();
   fs.writeFileSync(DATA_FILE, JSON.stringify(incidents, null, 2), "utf-8");
 
-  res.status(200).json({ message: "Status updated", incident: incidents[incidentIndex] });
-});
+  res
+    .status(200)
+    .json({ message: "Status updated", incident: incidents[incidentIndex] });
 
+  if (status.toLowerCase() === "converted") {
+    const incident = incidents[incidentIndex];
+
+    notifier.createNotification({
+      title: `بلاغ عطل جديد - ${incident.facility}`,
+      description: `نوع العطل: ${incident.issueType}`,
+      severity: "H",
+      status: "negative"
+    });
+  }
+});
 
 module.exports = router;

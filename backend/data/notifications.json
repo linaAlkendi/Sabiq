@@ -23,7 +23,7 @@
     "status": "negative",
     "timestamp": "قبل 25 دقيقة"
   },
-   {
+  {
     "id": 5,
     "title": "مصعد 3 بحاجة للصيانة الدورية",
     "description": "المصعد بحاجة لفحص دوري وصيانة وقائية بعد فترة من التشغيل.",
@@ -38,6 +38,13 @@
     "severity": "H",
     "status": "negative",
     "timestamp": "قبل 50 دقيقة"
+  },
+  {
+    "id": 6,
+    "title": "بلاغ عطل جديد - سلم متحرك 1",
+    "description": "نوع العطل: كهربائية",
+    "severity": "H",
+    "status": "negative",
+    "timestamp": "2025-07-20 10:58:09"
   }
- 
 ]

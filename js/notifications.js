@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             severityFilter === "ALL" || notif.severity === severityFilter;
           const matchesStatus =
             statusFilter === "ALL" || notif.status === statusFilter;
-          const matchesSearch = notif.title.toLowerCase().startsWith(searchTerm);
+          const matchesSearch = notif.title.toLowerCase().includes(searchTerm);
 
           return matchesSeverity && matchesStatus && matchesSearch;
         });
@@ -27,37 +27,41 @@ document.addEventListener("DOMContentLoaded", () => {
           const card = document.createElement("div");
           card.classList.add("notification-card", notif.severity);
 
-          let icon = '';
-          let iconColor = '';
+          let icon = "";
+          let iconColor = "";
 
-          if (notif.severity === "P") {
-            icon = `<i class="fa fa-check-circle"></i>`;
-            iconColor = 'green';
-          } else if (notif.severity === "L") {
-            icon = `<i class="fa fa-exclamation-circle"></i>`;
-            iconColor = 'lightorange';
-          } else if (notif.severity === "M") {
-            icon = `<i class="fa fa-exclamation-triangle"></i>`;
-            iconColor = 'orange';
-          } else if (notif.severity === "H") {
-            icon = `<i class="fa fa-times-circle"></i>`;
-            iconColor = 'red';
+          switch (notif.severity) {
+            case "P":
+              icon = `<i class="fa fa-check-circle"></i>`;
+              iconColor = "green";
+              break;
+            case "L":
+              icon = `<i class="fa fa-exclamation-circle"></i>`;
+              iconColor = "lightorange";
+              break;
+            case "M":
+              icon = `<i class="fa fa-exclamation-triangle"></i>`;
+              iconColor = "orange";
+              break;
+            case "H":
+              icon = `<i class="fa fa-times-circle"></i>`;
+              iconColor = "red";
+              break;
           }
 
           card.innerHTML = `
-            <div class="icon" style="color: ${iconColor};">${icon}</div>
-            <div class="content">
-              <h3>${notif.title}</h3>
-              <p>${notif.description}</p>
-              <span class="timestamp">${notif.timestamp}</span>
-            </div>
-          `;
-
-          if (notif.status === "negative") {
-            card.innerHTML += `
-              <button class="assign-task-btn" onclick="assignTask('${notif.title}')">إسناد مهمة</button>
-            `;
-          }
+      <div class="icon" style="color: ${iconColor};">${icon}</div>
+      <div class="content">
+        <h3>${notif.title}</h3>
+        <p>${notif.description}</p>
+        <span class="timestamp">🕒 ${notif.timestamp}</span>
+        ${
+          notif.status === "negative"
+            ? `<button class="assign-task-btn" onclick="assignTask('${notif.title}')">إسناد المهمة</button>`
+            : ""
+        }
+      </div>
+    `;
 
           container.appendChild(card);
         });
@@ -75,5 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function assignTask(taskTitle) {
-  window.location.href = `supervisor-dashboard.html?task=${encodeURIComponent(taskTitle)}`;
+  window.location.href = `supervisor-dashboard.html?task=${encodeURIComponent(
+    taskTitle
+  )}`;
 }

@@ -13,7 +13,7 @@ function saveNotifications(notifications) {
   fs.writeFileSync(NOTIFICATIONS_FILE, JSON.stringify(notifications, null, 2), "utf-8");
 }
 
-function createNotification({ title, description, severity }) {
+function createNotification({ title, description, severity, status }) {
 
   const notifications = loadNotifications();
   const newId = notifications.reduce((max, n) => (n.id > max ? n.id : max), 0) + 1;
@@ -23,6 +23,7 @@ function createNotification({ title, description, severity }) {
     title,
     description,
     severity,
+    status,
     timestamp: new Date().toISOString().replace("T", " ").slice(0, 19)
   };
 
