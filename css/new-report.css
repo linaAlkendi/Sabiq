@@ -22,6 +22,11 @@
   color: var(--section-title);
 }
 
+.field-error {
+  border-color: red !important;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
 .report-form input[type="text"],
 .report-form select,
 .report-form textarea {
@@ -90,6 +95,18 @@
 .success-box.visible {
   display: block;
 }
+
+.error-box {
+  background-color: #ffe5e5;
+  color: #b00020;
+  border: 1px solid #ffaaaa;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
 
 
 /* الوضع الليلي للقائمة المنسدلة */

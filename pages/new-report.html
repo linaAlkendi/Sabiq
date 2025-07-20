@@ -59,10 +59,10 @@
   </header>
 
   <main class="report-container">
-    <form class="report-form" id="report-form" >
+    <form class="report-form" id="report-form">
       <label for="facility">اسم المرفق</label>
       <select id="facilitySelect">
-        <option disabled selected>اختر مرفقًا...</option>
+        <option disabled selected>اختر مرفق</option>
         <!-- JS will insert <option> elements here -->
       </select>
 
@@ -81,6 +81,7 @@
 
       <input type="submit" value="إرسال البلاغ" class="btn" />
     </form>
+    <div id="error-box" class="error-box" style="display: none;">يرجى اختيار مرفق قبل إرسال البلاغ</div>
     <div id="success-box" class="success-box">تم إرسال البلاغ بنجاح!</div>
   </main>
 

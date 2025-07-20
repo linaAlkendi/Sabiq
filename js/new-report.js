@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const issueType = document.getElementById("issue");
     const description = document.getElementById("desc");
     const successBox = document.getElementById("success-box");
+    const errorBox = document.getElementById("error-box");
 
     // Populate facility dropdown from backend
     fetch("http://localhost:3000/facilities")
@@ -25,6 +26,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
+
+            // Validation for facility selection
+            if (!facilitySelect.value || facilitySelect.value === "اختر مرفق") {
+                facilitySelect.classList.add("field-error");
+                errorBox.style.display = "block";
+
+                // Hide the error box after 3 seconds
+                setTimeout(() => {
+                    errorBox.style.display = "none";
+                }, 3000);
+                return;
+            } else {
+                facilitySelect.classList.remove("field-error");
+                errorBox.style.display = "none";
+            }
 
             const payload = {
                 facility: facilitySelect.value,
