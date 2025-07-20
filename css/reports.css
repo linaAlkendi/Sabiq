@@ -243,6 +243,28 @@ body.dark .incident-action button.confirm-action-btn {
 body.dark .incident-action button.confirm-action-btn:hover {
   background: linear-gradient(to left, #00bfff, #6be2a1);
 }
+.filters {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  font-size: 1rem;
+}
+
+.filters label {
+  font-weight: bold;
+  margin-inline-start: 8px;
+}
+
+.filters select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #ccc);
+  background-color: var(--card-bg, #fff);
+  color: var(--text-color, #333);
+}
 
 /* Responsive Tweaks */
 @media (max-width: 768px) {

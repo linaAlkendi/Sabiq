@@ -16,5 +16,23 @@
     "reportedAt": "2025-07-20 11:22:34",
     "status": "open",
     "id": 2
+  },
+  {
+    "facility": "اختر مرفقًا...",
+    "issueType": "ميكانيكية",
+    "description": "البوابة لاتعمل",
+    "reportedBy": "مستخدم النظام",
+    "reportedAt": "2025-07-20 11:28:37",
+    "status": "open",
+    "id": 3
+  },
+  {
+    "facility": "اختر مرفقًا...",
+    "issueType": "ميكانيكية",
+    "description": "......",
+    "reportedBy": "مستخدم النظام",
+    "reportedAt": "2025-07-20 11:30:42",
+    "status": "open",
+    "id": 4
   }
 ]

@@ -9,6 +9,7 @@ function formatDateTime(dateString) {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
+    hour12: true,
     timeZone: "Asia/Riyadh" // Adjust to KSA timezone
   });
 }
@@ -40,6 +41,7 @@ function getStatusBadge(status) {
 
   return statusMap[status.toLowerCase()] || "";
 }
+
 
 function renderIncidents(list) {
   const container = document.getElementById("incident-list");

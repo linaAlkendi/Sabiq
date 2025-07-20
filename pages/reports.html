@@ -61,7 +61,26 @@
     <h1>قائمة البلاغات</h1>
 
   </header>
+ <div class="filters">
+    <select id="sortSelect">
+      <option value="newest">من الأحدث إلى الأقدم</option>
+      <option value="oldest">من الأقدم إلى الأحدث</option>
+    </select>
 
+    <select id="statusFilter">
+      <option value="all">كل البلاغات</option>
+      <option value="new">بلاغات جديدة</option>
+      <option value="confirmed">بلاغات مؤكدة</option>
+      <option value="closed">بلاغات مغلقة</option>
+    </select>
+
+    <select id="typeFilter">
+      <option value="all">كل الأنواع</option>
+      <option value="elevator">مصعد</option>
+      <option value="escalator">سلم متحرك</option>
+      <!-- أضف المزيد حسب الحاجة -->
+    </select>
+  </div>
   <!-- Main Content -->
   <main class="content">
     <div id="incident-list" class="incident-container"></div>
