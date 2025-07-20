@@ -1,10 +1,23 @@
+// Format date for display
+function formatDateTime(dateString) {
+  const date = new Date(dateString);
+  if (isNaN(date)) return dateString; // fallback to raw string
+  return date.toLocaleString("ar-EG", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+}
 
 fetch("http://localhost:3000/incidents")
-  .then(res => res.json())
-  .then(incidents => {
+  .then((res) => res.json())
+  .then((incidents) => {
     renderIncidents(incidents);
   })
-  .catch(error => {
+  .catch((error) => {
     console.error("Failed to fetch incidents:", error);
   });
 
@@ -37,14 +50,15 @@ function renderIncidents(list) {
     const badge = getStatusBadge(incident.status);
 
     card.className = `incident-card ${incident.severity}`;
-    card.id = `incident-${incident.id}`; // ✅ So we can access it later
+    card.id = `incident-${incident.id}`;
 
     card.innerHTML = `
-      <div><span class="label">📍 اسم المرفق:</span> <span class="value">${incident.facility}</span></div>
-      <div><span class="label">🔧 نوع المشكلة:</span> <span class="value">${incident.issueType}</span></div>
-      <div><span class="label">📝 وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
-      <div><span class="label">👤 المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
-      <div><span class="label">🕒 وقت البلاغ:</span> <span class="value">${incident.reportedAt}</span></div>
+      <div><span class="label"><span class="material-icons">location_on</span> اسم المرفق:</span> <span class="value">${incident.facility}</span></div>
+<div><span class="label"><span class="material-icons">build</span> نوع المشكلة:</span> <span class="value">${incident.issueType}</span></div>
+<div><span class="label"><span class="material-icons">description</span> وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
+<div><span class="label"><span class="material-icons">person</span> المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
+<div><span class="label"><span class="material-icons">schedule</span> وقت البلاغ:</span> <span class="value">${formatDateTime(incident.reportedAt)}</span></div>
+
       <div><strong>الحالة:</strong> <span class="badge-container">${badge}</span></div>
       <div class="incident-action">
         <label for="actionSelect">الإجراء:</label>
@@ -63,32 +77,91 @@ function renderIncidents(list) {
   document.querySelectorAll(".confirm-action-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const incidentId = btn.dataset.id;
-      const select = btn.previousElementSibling;
+      // Safer select lookup
+      const select = btn.parentElement.querySelector("select.action-select");
       const selectedValue = select.value;
 
       if (!["converted", "closed"].includes(selectedValue)) {
-        alert("يرجى اختيار إجراء صالح");
+        showErrorPopup("يرجى اختيار إجراء صالح");
         return;
       }
 
-      const updated = await updateIncidentStatus(incidentId, selectedValue);
-      if (updated) {
-        const badgeContainer = document.querySelector(`#incident-${incidentId} .badge-container`);
-        if (badgeContainer) {
-          badgeContainer.innerHTML = getStatusBadge(updated.status);
-        }
+      const confirmMessage =
+        selectedValue === "converted"
+          ? "هل أنت متأكد من تحويل البلاغ إلى عطل؟"
+          : "هل أنت متأكد من إغلاق البلاغ؟";
 
-        // If status is converted, also update the facility status by name
-        if (selectedValue === "converted") {
-          await updateFacilityStatusByName(updated.facility, "danger");
+      showConfirmationPopup(confirmMessage, async () => {
+        const updated = await updateIncidentStatus(incidentId, selectedValue);
+        if (updated) {
+          const badgeContainer = document.querySelector(
+            `#incident-${incidentId} .badge-container`
+          );
+          if (badgeContainer) {
+            badgeContainer.innerHTML = getStatusBadge(updated.status);
+          }
+
+          if (selectedValue === "converted") {
+            await updateFacilityStatusByName(updated.facility, "danger");
+            showSuccessPopup("تم تحويل البلاغ إلى عطل");
+          } else if (selectedValue === "closed") {
+            showSuccessPopup("تم إغلاق البلاغ");
+          }
         }
-      }
+      });
     });
   });
 }
 
-// API calls:
+// عرض نافذة التأكيد مع رسالة وزرَي نعم ولا
+function showConfirmationPopup(message, onConfirm) {
+  const popup = document.getElementById("confirmPopup");
+  const msg = popup.querySelector(".confirm-message");
+  const yesBtn = document.getElementById("confirmYes");
+  const noBtn = document.getElementById("confirmNo");
 
+  msg.textContent = message;
+  popup.style.display = "flex";
+
+  yesBtn.onclick = () => {
+    popup.style.display = "none";
+    onConfirm();
+  };
+
+  noBtn.onclick = () => {
+    popup.style.display = "none";
+  };
+}
+
+// عرض نافذة النجاح مع زر إغلاق
+function showSuccessPopup(message) {
+  const popup = document.getElementById("successPopup");
+  const msg = document.getElementById("successMessage");
+
+  msg.textContent = message;
+  popup.style.display = "flex";
+
+  // إخفاء النافذة بعد 2 ثواني
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2000);
+}
+
+// عرض نافذة الخطأ مع زر إغلاق
+function showErrorPopup(message) {
+  const popup = document.getElementById("errorPopup");
+  const msg = document.getElementById("errorMessage");
+
+  msg.textContent = message;
+  popup.style.display = "flex";
+
+  // إخفاء النافذة بعد 2 ثواني
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2000);
+}
+
+// ✅ تحديث حالة البلاغ
 async function updateIncidentStatus(id, status) {
   try {
     const res = await fetch(`http://localhost:3000/incidents/${id}/status`, {
@@ -102,11 +175,12 @@ async function updateIncidentStatus(id, status) {
     return data.incident;
   } catch (err) {
     console.error(err);
-    alert("خطأ في تحديث الحالة");
+    showErrorPopup("حدث خطأ أثناء تحديث الحالة");
     return null;
   }
 }
 
+// ✅ تحديث حالة المرفق
 async function updateFacilityStatusByName(facilityName, status) {
   try {
     const res = await fetch(`http://localhost:3000/facilities/status`, {
@@ -122,5 +196,3 @@ async function updateFacilityStatusByName(facilityName, status) {
     console.error("Facility status update error:", err);
   }
 }
-
-

@@ -4,7 +4,7 @@
     "name": "سلم متحرك 1",
     "currentUsage": 2950,
     "maxUsage": 3000,
-    "status": "warning",
+    "status": "danger",
     "temperature": 48,
     "vibration": "متوسط",
     "operatingHours": 1350,
