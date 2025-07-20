@@ -55,24 +55,38 @@ function renderIncidents(list) {
     card.className = `incident-card ${incident.severity}`;
     card.id = `incident-${incident.id}`;
 
+    let actionOptions = `
+  <option disabled selected>اختر إجراء</option>
+  <option value="converted">تحويل إلى عطل</option>
+  <option value="closed">إغلاق</option>`;
+
+    if (incident.status === "converted") {
+      // Only show 'Close'
+      actionOptions = `
+    <option disabled selected>اختر إجراء</option>
+    <option value="closed">إغلاق</option>`;
+    }
+
     card.innerHTML = `
       <div><span class="label"><span class="material-icons">location_on</span> اسم المرفق:</span> <span class="value">${incident.facility}</span></div>
-<div><span class="label"><span class="material-icons">build</span> نوع المشكلة:</span> <span class="value">${incident.issueType}</span></div>
-<div><span class="label"><span class="material-icons">description</span> وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
-<div><span class="label"><span class="material-icons">person</span> المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
-<div><span class="label"><span class="material-icons">schedule</span> وقت البلاغ:</span> <span class="value">${formatDateTime(incident.reportedAt)}</span></div>
+      <div><span class="label"><span class="material-icons">build</span> نوع المشكلة:</span> <span class="value">${incident.issueType}</span></div>
+      <div><span class="label"><span class="material-icons">description</span> وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
+      <div><span class="label"><span class="material-icons">person</span> المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
+      <div><span class="label"><span class="material-icons">schedule</span> وقت البلاغ:</span> <span class="value">${formatDateTime(incident.reportedAt)}</span></div>
 
       <div><strong>الحالة:</strong> <span class="badge-container">${badge}</span></div>
       <div class="incident-action">
         <label for="actionSelect">الإجراء:</label>
-        <select class="action-select">
-          <option disabled selected>اختر إجراء</option>
-          <option value="converted">تحويل إلى عطل</option>
-          <option value="closed">إغلاق</option>
-        </select>
+        <select class="action-select">${actionOptions}</select>
         <button class="confirm-action-btn" data-id="${incident.id}">تأكيد</button>
       </div>
     `;
+
+    // Hide action controls if closed
+    if (incident.status === "closed") {
+      const actionDiv = card.querySelector(".incident-action");
+      if (actionDiv) actionDiv.style.display = "none";
+    }
 
     container.appendChild(card);
   });
@@ -164,7 +178,7 @@ function showErrorPopup(message) {
   }, 2000);
 }
 
-// ✅ تحديث حالة البلاغ
+// تحديث حالة البلاغ
 async function updateIncidentStatus(id, status) {
   try {
     const res = await fetch(`http://localhost:3000/incidents/${id}/status`, {
@@ -174,7 +188,14 @@ async function updateIncidentStatus(id, status) {
     });
 
     if (!res.ok) throw new Error("Status update failed");
+
     const data = await res.json();
+
+    // Re-fetch and re-render updated list
+    const refreshed = await fetch("http://localhost:3000/incidents");
+    const updatedIncidents = await refreshed.json();
+    renderIncidents(updatedIncidents);
+
     return data.incident;
   } catch (err) {
     console.error(err);
@@ -183,7 +204,8 @@ async function updateIncidentStatus(id, status) {
   }
 }
 
-// ✅ تحديث حالة المرفق
+
+// تحديث حالة المرفق
 async function updateFacilityStatusByName(facilityName, status) {
   try {
     const res = await fetch(`http://localhost:3000/facilities/status`, {
