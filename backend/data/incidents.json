@@ -7,5 +7,14 @@
     "reportedAt": "2025-07-19 22:21:53",
     "status": "closed",
     "id": 1
+  },
+  {
+    "facility": "مصعد 2",
+    "issueType": "كهربائية",
+    "description": "انقطاع تيار",
+    "reportedBy": "مستخدم النظام",
+    "reportedAt": "2025-07-20 11:22:34",
+    "status": "open",
+    "id": 2
   }
 ]
