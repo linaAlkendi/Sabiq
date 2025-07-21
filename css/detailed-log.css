@@ -160,6 +160,7 @@ body.dark .table-wrapper thead{
  /* منع هوفر على صف العناوين */
 .logs-table thead tr:hover {
   cursor: default;
+  
 }
   
   .hidden {
