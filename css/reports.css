@@ -88,11 +88,14 @@ body.dark .search-filter-bar select {
 /* Incident Card */
 .incident-card {
   position: relative;
-   padding: 24px 28px; /* أكبر من القديم */
+  padding: 24px 28px;
+  /* أكبر من القديم */
   display: flex;
   flex-direction: column;
-  gap: 18px; /* مسافة بين الفقرات */
-  line-height: 1.8; /* زيادة خفيفة  */
+  gap: 18px;
+  /* مسافة بين الفقرات */
+  line-height: 1.8;
+  /* زيادة خفيفة  */
   background-color: #ffffff;
   color: #1f2b4d;
   border-radius: var(--card-radius);
@@ -107,7 +110,7 @@ body.dark .search-filter-bar select {
 
 
 .incident-card:hover {
-  transform: translateY(-2px) ;
+  transform: translateY(-2px);
   box-shadow: 0 6px 25px rgba(0, 191, 255, 0.15);
 }
 
@@ -243,6 +246,20 @@ body.dark .incident-action button.confirm-action-btn {
 body.dark .incident-action button.confirm-action-btn:hover {
   background: linear-gradient(to left, #00bfff, #6be2a1);
 }
+
+.facility-characteristics {
+  font-size: 0.95em;
+  padding: 12px;
+  line-height: 1.8;
+}
+
+.facility-characteristics p {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .filters {
   display: flex;
   gap: 1rem;
@@ -290,10 +307,14 @@ body.dark .incident-action button.confirm-action-btn:hover {
     font-size: 14px;
   }
 }
+
 /* --- confirm-popup styles --- */
 .confirm-popup-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
   display: flex;
@@ -375,15 +396,15 @@ body.dark .btn-confirm-no:hover {
 
 .material-icons {
   font-size: 18px;
-  color: var(--ribbon-color); 
+  color: var(--ribbon-color);
 }
 
-#successMessage{
+#successMessage {
   color: #3ce7b4;
   font-weight: bold;
 }
 
-#errorMessage{
+#errorMessage {
   color: #e74c3c;
   font-weight: bold;
 }

@@ -2,37 +2,15 @@
   {
     "facility": "سلم متحرك 1",
     "issueType": "كهربائية",
-    "description": "مشكله في السلم",
+    "description": "test",
     "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-19 22:21:53",
-    "status": "closed",
-    "id": 1
-  },
-  {
-    "facility": "مصعد 2",
-    "issueType": "كهربائية",
-    "description": "انقطاع تيار",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-20 11:22:34",
+    "reportedAt": "2025-07-21 23:50:31",
     "status": "open",
-    "id": 2
-  },
-  {
-    "facility": "اختر مرفقًا...",
-    "issueType": "ميكانيكية",
-    "description": "البوابة لاتعمل",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-20 11:28:37",
-    "status": "open",
-    "id": 3
-  },
-  {
-    "facility": "اختر مرفقًا...",
-    "issueType": "ميكانيكية",
-    "description": "......",
-    "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-20 11:30:42",
-    "status": "open",
-    "id": 4
+    "id": 1,
+    "temperature": 48,
+    "vibration": "متوسط",
+    "currentUsage": 2950,
+    "maxUsage": 3000,
+    "operatingHours": 1350
   }
 ]

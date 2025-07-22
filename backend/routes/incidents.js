@@ -4,6 +4,7 @@ const path = require("path");
 const router = express.Router();
 
 const DATA_FILE = path.join(__dirname, "../data/incidents.json");
+const FACILITY_FILE = path.join(__dirname, "../data/facilities.json")
 const notifier = require("../utils/notifier");
 
 // GET all incidents
@@ -21,6 +22,18 @@ router.post("/", (req, res) => {
   newIncident.id = incidents.length
     ? incidents[incidents.length - 1].id + 1
     : 1;
+
+  // Capture facility parameters to the incident
+  const facilities = JSON.parse(fs.readFileSync(FACILITY_FILE, "utf-8"));
+  const matchedFacility = facilities.find((f) => f.name === newIncident.facility);
+
+  if (matchedFacility) {
+    newIncident.temperature = matchedFacility.temperature;
+    newIncident.vibration = matchedFacility.vibration;
+    newIncident.currentUsage = matchedFacility.currentUsage;
+    newIncident.maxUsage = matchedFacility.maxUsage;
+    newIncident.operatingHours = matchedFacility.operatingHours;
+  }
 
   incidents.push(newIncident);
   fs.writeFileSync(DATA_FILE, JSON.stringify(incidents, null, 2), "utf-8");
@@ -54,9 +67,17 @@ router.patch("/:id/status", (req, res) => {
   if (status.toLowerCase() === "converted") {
     const incident = incidents[incidentIndex];
 
+    const description = `
+      نوع العطل: ${incident.issueType}
+      🌡️ درجة الحرارة: ${incident.temperature ?? '—'}°C
+      📉 مستوى الاهتزاز: ${incident.vibration ?? '—'}
+      ⚙️ الاستخدام: ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}
+      ⏱️ ساعات التشغيل: ${incident.operatingHours ?? '—'}
+    `.trim();
+
     notifier.createNotification({
       title: `بلاغ عطل جديد - ${incident.facility}`,
-      description: `نوع العطل: ${incident.issueType}`,
+      description,
       severity: "H",
       status: "negative"
     });
