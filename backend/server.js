@@ -15,6 +15,12 @@ app.use("/incidents", incidentRoutes);
 app.use("/facilities", facilityRoutes);
 app.use("/notifications", notificationsRoutes);
 
+const authRoutes = require("./routes/auth");
+
+// بعد app.use(cors()) و app.use(express.json());
+app.use("/auth", authRoutes);
+
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
