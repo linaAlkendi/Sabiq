@@ -83,22 +83,22 @@ canvas#usageChart {
 /* تنسيق الرسائل التنبيهية */
 #alertMessageBox {
   display: flex;
-  background-color: var(--status-danger-bg);
-  /* خلفية حمراء */
-  color: var(--status-danger-text);
-  /* خط أحمر */
+  background-color: var(--status-danger-bg); /* خلفية حمراء */
+  color: var(--status-danger-text); /* خط أحمر */
   padding: 18px 24px;
   border-radius: 16px;
   font-weight: 600;
   text-align: center;
   margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
-  /* ظل خفيف */
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2); /* ظل خفيف */
   justify-content: center;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
+
+
+
 
 /* رسائل التنبيه بناءً على الحالة */
 .status.good {
@@ -114,25 +114,5 @@ canvas#usageChart {
 .status.danger {
   background-color: var(--status-danger-bg);
   color: var(--status-danger-text);
-
-}
-
-.back-button-container {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.back-btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--primary-color);
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.back-btn:hover {
-  background-color: var(--primary-dark);
+  
 }

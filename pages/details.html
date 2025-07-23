@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تفاصيل بوابة 5 - SABIQ</title>
+  <title id="pageTitleText">تفاصيل المرفق - SABIQ</title>
+
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/base.css" />
@@ -16,87 +18,98 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<!-- الهيدر -->
-<header class="top-bar">
-  <label class="theme-toggle-switch">
-    <input type="checkbox" id="theme-toggle-switch" />
-    <span class="slider">
-      <svg class="icon sun-icon" viewBox="0 0 24 24"><path d="..." /></svg>
-      <svg class="icon moon-icon" viewBox="0 0 24 24"><path d="..." /></svg>
-    </span>
-  </label>
-  <button class="menu-toggle" id="menuToggle">☰</button>
-  <aside class="side-menu" id="sideMenu">
-    <br><br><br>
-    <nav class="menu-nav">
-      <ul>
-        <li><a href="dashboard.html">لوحة التحكم</a></li>
-        <li><a href="notifications.html">التنبيهات</a></li>
-        <li><a href="log.html">سجل الأعطال</a></li>
-        <li><a href="new-report.html">رفع بلاغ</a></li>
-        <li><a href="reports.html">البلاغات</a></li>
-        <li><a href="settings.html">الإعدادات</a></li>
-      </ul>
-    </nav>
-    <div class="menu-footer">
-      <a href="index.html" class="logout-link">تسجيل الخروج</a>
-    </div>
-  </aside>
-  <a href="dashboard.html">
-    <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo" />
-  </a>
-  <h1 id="pageTitle">تفاصيل بوابة 5</h1>
-</header>
-
-<main class="dashboard">
-  <h2 class="section-title">استخدام المرفق خلال اليوم</h2>
-
-  <!-- كارد الرسم البياني -->
-  <section class="chart-section card">
-    <canvas id="usageChart"></canvas>
-  </section>
-
-  <section id="alertMessageBox">
-    <span id="alertMessage"></span>
-  </section>
-
-  <!-- ✅ كارد الاستخدام الحالي -->
-  <section class="card">
-    <h3>الاستخدام الحالي</h3>
-    <p id="usageValue">--</p>
-  </section>
-
-  <!-- ✅ كارد بيانات المرفق -->
-  <section class="stats-section card">
-    <h3>بيانات المرفق</h3>
-    <div class="facility-stats">
-      <div class="stat">
-        <span class="stat-label">الحرارة</span>
-        <span class="stat-value" id="tempVal">--</span>
+  <!-- الهيدر -->
+  <header class="top-bar">
+    <label class="theme-toggle-switch">
+      <input type="checkbox" id="theme-toggle-switch" />
+      <span class="slider">
+        <svg class="icon sun-icon" viewBox="0 0 24 24">
+          <path d="..." />
+        </svg>
+        <svg class="icon moon-icon" viewBox="0 0 24 24">
+          <path d="..." />
+        </svg>
+      </span>
+    </label>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <aside class="side-menu" id="sideMenu">
+      <br><br><br>
+      <nav class="menu-nav">
+        <ul>
+          <li><a href="dashboard.html">لوحة التحكم</a></li>
+          <li><a href="notifications.html">التنبيهات</a></li>
+          <li><a href="log.html">سجل الأعطال</a></li>
+          <li><a href="new-report.html">رفع بلاغ</a></li>
+          <li><a href="reports.html">البلاغات</a></li>
+          <li><a href="settings.html">الإعدادات</a></li>
+        </ul>
+      </nav>
+      <div class="menu-footer">
+        <a href="index.html" class="logout-link">تسجيل الخروج</a>
       </div>
-      <div class="stat">
-        <span class="stat-label">الاهتزاز</span>
-        <span class="stat-value" id="vibrationVal">--</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">ساعات التشغيل</span>
-        <span class="stat-value" id="hoursVal">--</span>
-      </div>
-    </div>
-  </section>
+    </aside>
+    <a href="dashboard.html">
+      <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo" />
+    </a>
+    <h1 id="facilityName">تفاصيل المرفق</h1>
+  </header>
 
-  <!-- كارد الصيانة -->
-  <section class="maintenance-card card">
-    <h3>آخر صيانة</h3>
-    <p id="maintenanceDate">—</p>
-  </section>
-</main>
+  <main class="dashboard">
+    <h2 class="section-title">استخدام المرفق خلال اليوم</h2>
 
-<!-- JavaScript -->
-<script src="../js/header.js"></script>
-<script src="../js/theme.js"></script>
-<script src="../js/details.js"></script>
+    <!-- كارد الرسم البياني -->
+    <section class="chart-section card">
+      <canvas id="usageChart"></canvas>
+    </section>
+
+    <section id="alertMessageBox">
+      <span id="alertMessage"></span>
+    </section>
+
+    <!-- ✅ كارد الاستخدام الحالي -->
+    <section class="card">
+      <h3>الاستخدام الحالي</h3>
+      <p id="usageValue">--</p>
+    </section>
+
+    <!-- ✅ كارد بيانات المرفق -->
+    <section class="stats-section card">
+      <h3>بيانات المرفق</h3>
+      <div class="facility-stats">
+        <div class="stat"><span class="stat-label">الحرارة</span><span class="stat-value" id="tempVal">--</span></div>
+        <div class="stat"><span class="stat-label">الاهتزاز</span><span class="stat-value" id="vibrationVal">--</span>
+        </div>
+        <div class="stat"><span class="stat-label">ساعات التشغيل</span><span class="stat-value" id="hoursVal">--</span>
+        </div>
+        <div class="stat"><span class="stat-label">الضغط</span><span class="stat-value" id="pressureVal">--</span></div>
+        <div class="stat"><span class="stat-label">الرطوبة</span><span class="stat-value" id="humidityVal">--</span>
+        </div>
+        <div class="stat"><span class="stat-label">تحميل المحرك</span><span class="stat-value"
+            id="motorLoadVal">--</span></div>
+      </div>
+
+    </section>
+
+    <!-- كارد الصيانة -->
+    <section class="maintenance-card card">
+      <h3>آخر صيانة</h3>
+      <p id="maintenanceDate">—</p>
+    </section>
+
+    <!-- ✅ زر العودة إلى لوحة التحكم -->
+    <section class="card back-button-container">
+      <a href="dashboard.html" class="btn back-btn">⬅ العودة إلى لوحة التحكم</a>
+    </section>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script src="../js/header.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/details.js"></script>
 </body>
+
 </html>
