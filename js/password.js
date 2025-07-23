@@ -18,11 +18,14 @@ passwordCriteria.innerHTML = `
   </ul>
 `;
 
+// دالة التحقق من كلمة المرور
 function validatePassword() {
   const password = newPasswordInput.value;
   const confirmPassword = confirmPasswordInput.value;
   let validationMessage = '';
+  let allCriteriaMet = true;  // Flag للتحقق من استيفاء جميع الشروط
 
+  // تحقق من وجود الحروف الكبيرة والصغيرة
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
   if (hasUpperCase && hasLowerCase) {
@@ -32,8 +35,10 @@ function validatePassword() {
     document.getElementById('upperCase').classList.add('invalid');
     document.getElementById('upperCase').classList.remove('valid');
     validationMessage += "يجب أن تحتوي على حروف كبيرة وصغيرة.\n";
+    allCriteriaMet = false;
   }
 
+  // تحقق من وجود الأرقام
   const hasNumbers = /\d/.test(password);
   if (hasNumbers) {
     document.getElementById('numbers').classList.add('valid');
@@ -42,8 +47,10 @@ function validatePassword() {
     document.getElementById('numbers').classList.add('invalid');
     document.getElementById('numbers').classList.remove('valid');
     validationMessage += "يجب أن تحتوي على أرقام.\n";
+    allCriteriaMet = false;
   }
 
+  // تحقق من وجود الرموز الخاصة
   const hasSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(password);
   if (hasSymbols) {
     document.getElementById('symbols').classList.add('valid');
@@ -52,8 +59,10 @@ function validatePassword() {
     document.getElementById('symbols').classList.add('invalid');
     document.getElementById('symbols').classList.remove('valid');
     validationMessage += "يجب أن تحتوي على رموز خاصة.\n";
+    allCriteriaMet = false;
   }
 
+  // تحقق من طول كلمة المرور
   const isLongEnough = password.length >= 12;
   if (isLongEnough) {
     document.getElementById('length').classList.add('valid');
@@ -62,14 +71,17 @@ function validatePassword() {
     document.getElementById('length').classList.add('invalid');
     document.getElementById('length').classList.remove('valid');
     validationMessage += "يجب أن تحتوي على 12 حرفًا على الأقل.\n";
+    allCriteriaMet = false;
   }
 
+  // تحقق من أن كلمة المرور غير قابلة للفك
   const commonPasswords = /password|12345|qwerty|abc123|welcome|letmein|password123|123123|iloveyou|monkey/i;
   const isDecipherable = commonPasswords.test(password); 
   if (isDecipherable) {
     document.getElementById('unDecipherable').classList.add('invalid');
     document.getElementById('unDecipherable').classList.remove('valid');
     validationMessage += "يجب أن تكون عبارة غير قابلة للفك.\n";
+    allCriteriaMet = false;
   } else {
     document.getElementById('unDecipherable').classList.add('valid');
     document.getElementById('unDecipherable').classList.remove('invalid');
@@ -80,35 +92,80 @@ function validatePassword() {
     document.getElementById('confirmPassword').classList.add('invalid');
     document.getElementById('confirmPassword').classList.remove('valid');
     validationMessage += "كلمة المرور الجديدة لا تتطابق مع التأكيد.\n";
+    allCriteriaMet = false;
   } else {
     document.getElementById('confirmPassword').classList.add('valid');
     document.getElementById('confirmPassword').classList.remove('invalid');
   }
 
-  // عرض رسالة التنبيه بدلاً من تعطيل الزر
+  // عرض الرسائل أو إخفائها
   if (validationMessage) {
+    messageArea.style.display = 'block';
     messageArea.textContent = validationMessage;
-    saveBtn.disabled = true;
   } else {
-    messageArea.textContent = ''; // إخفاء الرسائل إذا كانت الشروط مستوفاة
-    saveBtn.disabled = false;
+    messageArea.style.display = 'none'; // إخفاء الرسائل إذا كانت الشروط مستوفاة
   }
+
+  return allCriteriaMet;
 }
 
 function saveChanges() {
-  const currentPassword = currentPasswordInput.value;
+  const currentPassword = currentPasswordInput.value.trim();
+  const newPassword = newPasswordInput.value.trim();
+  const confirmPassword = confirmPasswordInput.value.trim();
 
+  // التحقق من كلمة المرور الحالية
   if (currentPassword !== defaultPassword) {
-    showErrorPopup("كلمة المرور الحالية خاطئة!");
+    currentPasswordInput.classList.add('invalid');
+    showError("كلمة المرور الحالية خاطئة!", 'current-password');
+    return;
   } else {
-    const newPassword = newPasswordInput.value;
-    const confirmPassword = confirmPasswordInput.value;
+    currentPasswordInput.classList.remove('invalid');
+    removeErrorMessage('current-password');
+  }
 
-    if (newPassword !== confirmPassword) {
-      showErrorPopup("كلمة المرور الجديدة غير متطابقة!");
-    } else {
-      showSuccessPopup("تم تحديث كلمة المرور بنجاح!");
-    }
+  // التحقق من كلمة المرور الجديدة
+  if (!validatePassword()) {
+    return;
+  }
+
+  // التحقق من تطابق كلمة المرور الجديدة مع كلمة التأكيد
+  if (newPassword !== confirmPassword) {
+    confirmPasswordInput.classList.add('invalid');
+    showError("كلمة المرور الجديدة غير متطابقة!", 'confirm-password');
+  } else {
+    confirmPasswordInput.classList.remove('invalid');
+    removeErrorMessage('confirm-password');
+    showSuccessPopup("تم تحديث كلمة المرور بنجاح!");
+  }
+}
+
+// عرض رسائل الخطأ أسفل الحقل مع أيقونة التحذير
+function showError(message, fieldId) {
+  const field = document.getElementById(fieldId);
+  let errorDiv = field.nextElementSibling;
+  
+  if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+    errorDiv = document.createElement('div');
+    errorDiv.classList.add('error-message');
+    field.parentNode.appendChild(errorDiv);
+  }
+  
+  // إضافة أيقونة تحذير
+  errorDiv.innerHTML = `
+    <svg width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+      <path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0z"/>
+    </svg>
+    <span class="error-message-text">${message}</span>
+  `;
+}
+
+function removeErrorMessage(fieldId) {
+  const field = document.getElementById(fieldId);
+  const errorDiv = field.nextElementSibling;
+  
+  if (errorDiv && errorDiv.classList.contains('error-message')) {
+    errorDiv.textContent = ''; // إزالة الرسالة
   }
 }
 
@@ -128,7 +185,7 @@ function showErrorPopup(message) {
   const popup = document.getElementById("errorPopup");
   const msg = document.getElementById("errorMessage");
 
-  msg.textContent = message || "كلمة المرور الحالية خاطئة!";
+  msg.textContent = message || "حدث خطأ!";
   popup.style.display = "flex";
 
   setTimeout(() => {
@@ -136,6 +193,7 @@ function showErrorPopup(message) {
   }, 2000);
 }
 
+// إضافة حدث للمستمع
 newPasswordInput.addEventListener('input', validatePassword);
 confirmPasswordInput.addEventListener('input', validatePassword);
 saveBtn.addEventListener('click', saveChanges);

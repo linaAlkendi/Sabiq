@@ -1,15 +1,31 @@
-.logs-section {
-    padding: var(--dashboard-padding);
-    max-width: 1200px;
-    margin: auto;
-    text-align: center; /* لجعل العنوان والفلاتر في المنتصف أفقياً */
-  }
+body.dark .logs-table thead {
+  background-color: #176b7c !important; 
   
-  .logs-section h2, .logs-section h3 {
-    color: var(--section-title);
-    margin-top: 30px;
-    text-align: center; /* توسيط العناوين */
-  }
+}
+body.dark .logs-table th,
+body.dark .logs-table td ,body.dark  .actions-section {
+  background-color: #2a2a40 !important; 
+
+}
+
+
+
+body.dark .logs-table tbody tr:hover {
+  background-color: rgba(138, 141, 162, 0.1) !important; }
+
+
+.logs-section {
+  padding: var(--dashboard-padding);
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.logs-section h2, .logs-section h3 {
+  color: var(--section-title);
+  margin-top: 30px;
+  text-align: center;
+}
 
 .filters-container {
   display: flex;
@@ -18,109 +34,143 @@
   margin: 25px 0;
 }
 
-/* فلتر اسم المرفق */
 .filter-box {
   display: flex;
-  justify-content: center; /* توسيط الفلاتر أفقياً */
+  justify-content: center;
   align-items: center;
   gap: 15px;
-  margin: 25px 0 40px 0; /* مسافة بين الفلاتر والجدول */
+  margin: 25px 0 40px 0;
   flex-wrap: wrap;
 }
-  
-  .filter-box label {
-    font-weight: bold;
-    color: var(--text-color);
-    font-size: 15px;
-  }
-  
-  .filter-box select {
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    font-family: inherit;
-    color: #333;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  
-  .filter-box select:focus {
-    border-color: var(--primary-btn);
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-  }
-  
-  body.dark .filter-box select {
-    background-color: #2a2a40;
-    color: #f1f1f1;
-    border-color: #444;
-  }
 
- 
-body.dark .logs-table tr:hover {
-    background-color: rgba(255, 255, 255, 0.08); 
-  }
-  
-/* الجدول */
-.table-wrapper {
-  overflow-x: auto;
-  margin-bottom: 50px; /* مساحة تحت الجدول */
+.filter-box label {
+  font-weight: bold;
+  color: var(--text-color);
+  font-size: 15px;
 }
-.table-wrapper thead{
-  background-color:rgba(0, 56, 161, 0.555)
+
+.filter-box select {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-family: inherit;
+  color: #333;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-body.dark .table-wrapper thead{
+
+.filter-box select:focus {
+  border-color: var(--primary-btn);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+body.dark .filter-box select {
   background-color: #2a2a40;
+  color: #f1f1f1;
+  border-color: #444;
 }
-  .logs-table {
-    width: 100%;
-    min-width: 800px;
-    border-collapse: collapse;
-    text-align: center;
-  }
+
+
+.card-table {
+  background-color:  #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow:  rgba(0, 0, 0, 0.08);
+  margin-bottom: 50px;
+  overflow-x: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   
-  .logs-table th,
-  .logs-table td {
-    padding: 12px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-  
-  .logs-table tr {
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  
-  .logs-table tr:hover {
-    background-color: #eef9ff;
-  }
-  
-  .actions-section {
-    line-height: 2;
-    margin-top: 20px;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .actions-section:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 28px rgba(0, 191, 255, 0.15);
-  }
+}
+
+.card-table:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(171, 198, 216, 0.25);
+}
+
+
+.logs-table thead {
+  background-color: #5770ab;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.logs-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+
+.logs-table th,
+.logs-table td {
+  padding: 12px;
+  border: 3px solid  rgba(0, 0, 0, 0.08); 
+  font-size: 14px;
+}
+
+
+.logs-table thead {
+  background-color:#5578c9;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: 3px solid rgba(0, 0, 0, 0.08);  
+}
+
+.logs-table tbody tr:hover {
+  background-color: rgba(31, 216, 237, 0.05);
+}
+
+
+
+
+
+ body.dark .card-table {
+  background-color: #2a2a40;
+  color: #f1f1f1;
+  border-color: #4d4d4d;
+}
+ body.dark .card-table {
+  background-color: #2a2a40;
+  color: #f1f1f1;
+  border-color: #4d4d4d;
+}
+
+body.dark .logs-table tr:hover {
+  background-color: rgb(118, 114, 173);
+}
+
+body.dark .logs-table thead {
+  background-color: #aabbff;
+}
+
+
+
+
+
+
+body.dark .logs-table th,
+body.dark .logs-table td {
+  border-color: rgba(255, 255, 255, 0.2) !important; 
+}
   
   .attachments {
 
   display: flex;
-  justify-content: center; /* توسيط المحتوى أفقياً */
-  margin-bottom: 30px;     /* مسافة تحت */
-  margin-top: 15px;        /* مسافة فوق شوي */
+  justify-content: center; 
+  margin-bottom: 30px;     
+  margin-top: 15px; 
+    gap: 20px;      
+ 
+     
 }
 .attachments .attachment {
   max-width: 300px; 
@@ -131,6 +181,24 @@ body.dark .table-wrapper thead{
   text-align: center;
   margin-bottom: 10px;
 }
+
+  
+  .actions-section {
+    line-height: 2;
+    margin-top: 20px;
+     background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+     box-shadow: 0 8px 20px rgba(56, 56, 56, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .actions-section:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 191, 255, 0.15);
+  }
 
   
   .attachment {
@@ -145,7 +213,7 @@ body.dark .table-wrapper thead{
     z-index: 1;
   }
   
-  .attachment:hover {
+  .attachment:hover  {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 12px 28px rgba(0, 191, 255, 0.15);
   }
@@ -157,7 +225,6 @@ body.dark .table-wrapper thead{
     display: block;
   }
 
- /* منع هوفر على صف العناوين */
 .logs-table thead tr:hover {
   cursor: default;
   
