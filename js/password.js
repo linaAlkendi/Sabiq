@@ -109,89 +109,12 @@ function validatePassword() {
   return allCriteriaMet;
 }
 
-function saveChanges() {
-  const currentPassword = currentPasswordInput.value.trim();
-  const newPassword = newPasswordInput.value.trim();
-  const confirmPassword = confirmPasswordInput.value.trim();
 
-  // التحقق من كلمة المرور الحالية
-  if (currentPassword !== defaultPassword) {
-    currentPasswordInput.classList.add('invalid');
-    showError("كلمة المرور الحالية خاطئة!", 'current-password');
-    return;
-  } else {
-    currentPasswordInput.classList.remove('invalid');
-    removeErrorMessage('current-password');
-  }
 
-  // التحقق من كلمة المرور الجديدة
-  if (!validatePassword()) {
-    return;
-  }
 
-  // التحقق من تطابق كلمة المرور الجديدة مع كلمة التأكيد
-  if (newPassword !== confirmPassword) {
-    confirmPasswordInput.classList.add('invalid');
-    showError("كلمة المرور الجديدة غير متطابقة!", 'confirm-password');
-  } else {
-    confirmPasswordInput.classList.remove('invalid');
-    removeErrorMessage('confirm-password');
-    showSuccessPopup("تم تحديث كلمة المرور بنجاح!");
-  }
-}
 
-// عرض رسائل الخطأ أسفل الحقل مع أيقونة التحذير
-function showError(message, fieldId) {
-  const field = document.getElementById(fieldId);
-  let errorDiv = field.nextElementSibling;
-  
-  if (!errorDiv || !errorDiv.classList.contains('error-message')) {
-    errorDiv = document.createElement('div');
-    errorDiv.classList.add('error-message');
-    field.parentNode.appendChild(errorDiv);
-  }
-  
-  // إضافة أيقونة تحذير
-  errorDiv.innerHTML = `
-    <svg width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
-      <path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0z"/>
-    </svg>
-    <span class="error-message-text">${message}</span>
-  `;
-}
 
-function removeErrorMessage(fieldId) {
-  const field = document.getElementById(fieldId);
-  const errorDiv = field.nextElementSibling;
-  
-  if (errorDiv && errorDiv.classList.contains('error-message')) {
-    errorDiv.textContent = ''; // إزالة الرسالة
-  }
-}
 
-function showSuccessPopup(message) {
-  const popup = document.getElementById("successPopup");
-  const msg = document.getElementById("successMessage");
-
-  msg.textContent = message || "تم تحديث كلمة المرور بنجاح!";
-  popup.style.display = "flex";
-
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 2000);
-}
-
-function showErrorPopup(message) {
-  const popup = document.getElementById("errorPopup");
-  const msg = document.getElementById("errorMessage");
-
-  msg.textContent = message || "حدث خطأ!";
-  popup.style.display = "flex";
-
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 2000);
-}
 
 // إضافة حدث للمستمع
 newPasswordInput.addEventListener('input', validatePassword);
