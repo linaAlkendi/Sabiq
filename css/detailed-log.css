@@ -76,6 +76,7 @@ body.dark .filter-box select {
 
 
 .card-table {
+  max-height: 420px; /* تقريبا 10 صفوف × 40-45 بكسل للصف */
   background-color:  #ffffff;
   border-radius: 20px;
   padding: 20px;
@@ -364,4 +365,70 @@ body.dark .actions-section {
   background: #333;
   color: #fff;
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+#predictionSummary {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 20px 25px;
+  background-color: var(--card-bg, #f9f9f9);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(205, 216, 241, 0.769);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-color, #333);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark #predictionSummary {
+  background-color: #2a2a40;
+  color: #aabbff;
+  box-shadow: 0 8px 24px rgba(170, 187, 255, 0.3);
+}
+
+#predictionSummary h3 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+#predictionSummary p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#predictionSummary h4 {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+#predictionSummary ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+#predictionSummary ul li {
+  margin: 6px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding-bottom: 6px;
+}
+
+body.dark #predictionSummary ul li {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+#predictionSummary ul li strong {
+  color: var(--primary-btn, #007bff);
+}       
+#predictiveAlert{
+  margin-bottom: 30px;
+  background-color: rgba(222, 184, 135, 0.66);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 16px;
 }
