@@ -4,8 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const actionContent = document.getElementById("actionContent");
   const typeFilter = document.getElementById("typeFilter");
   const facilityTypeFilter = document.getElementById("facilityTypeFilter");
-  const predictedFacilityEl = document.getElementById("predictedFacility");
-  const predictiveAlert = document.getElementById("predictiveAlert");
+
+  // عناصر عرض التنبؤ والتحليل
+  const predictedFacilityEl = document.getElementById("predictedFacilitySummary");
+  const commonCausesList = document.getElementById("commonCausesList");
+  const downtimeSummaryList = document.getElementById("downtimeSummaryList");
+  const insightsList = document.getElementById("insightsList");
 
   let faultDetails = []; // بيانات الإجراءات لكل سجل
 
@@ -19,15 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
         tr.setAttribute("data-index", index);
 
         tr.innerHTML = `
-          <td>${item["اسم المرفق"]}</td>
-          <td>${item["نوع المرفق"]}</td>
-          <td>${item["تاريخ العطل"]}</td>
-          <td>${item["نوع العطل"]}</td>
-          <td>${item["مدة التوقف"]}</td>
-          <td>${item["درجة الخطورة"]}</td>
-          <td>${item["سبب المشكلة"]}</td>
-          <td>${item["الإجراء المتخذ"]}</td>
-          <td>${item["اسم الفني"]}</td>
+          <td>${item["اسم المرفق"] || "-"}</td>
+          <td>${item["نوع المرفق"] || "-"}</td>
+          <td>${item["تاريخ العطل"] || "-"}</td>
+          <td>${item["نوع العطل"] || "-"}</td>
+          <td>${item["مدة التوقف"] || "-"}</td>
+          <td>${item["درجة الخطورة"] || "-"}</td>
+          <td>${item["سبب المشكلة"] || "-"}</td>
+          <td>${item["الإجراء المتخذ"] || "-"}</td>
+          <td>${item["اسم الفني"] || "-"}</td>
         `;
 
         logsTableBody.appendChild(tr);
@@ -36,11 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // تجهيز بيانات الإجراءات والروابط لكل سجل
       faultDetails = data.map(item => ({
         actions: item["تفاصيل"]?.actions || [
-          `الإجراء: ${item["الإجراء المتخذ"]}`,
-          `تاريخ العطل: ${item["تاريخ العطل"]}`
+          `الإجراء: ${item["الإجراء المتخذ"] || "غير متوفر"}`,
+          `تاريخ العطل: ${item["تاريخ العطل"] || "غير معروف"}`
         ],
-        pdf: item["تفاصيل"]?.pdf || "../files/report.pdf",
-        facility: item["نوع المرفق"]
+        pdf: item["تفاصيل"]?.pdf || "../assets/report.pdf",
+        facility: item["نوع المرفق"] || "غير معروف"
       }));
 
       setupEventListeners();
@@ -103,46 +107,35 @@ document.addEventListener("DOMContentLoaded", function () {
   typeFilter.addEventListener("change", filterTable);
   facilityTypeFilter.addEventListener("change", filterTable);
 
-  // تحديث التنبؤ الذكي: المرفق الأكثر تكرارًا بين الصفوف الظاهرة
+  // تحديث التنبؤ الذكي من بيانات الصفوف المرئية (يمكن التعديل لاحقاً)
   function updatePrediction() {
-    const rows = document.querySelectorAll("#logsTable tbody tr");
-    const visibleRows = Array.from(rows).filter(row => row.style.display !== "none");
-    const facilityCount = {};
-
-    visibleRows.forEach(row => {
-      const facility = row.children[1].textContent.trim(); // نوع المرفق
-      facilityCount[facility] = (facilityCount[facility] || 0) + 1;
-    });
-
-    const sorted = Object.entries(facilityCount).sort((a, b) => b[1] - a[1]);
-    const mostLikelyFacility = sorted.length > 0 ? sorted[0][0] : null;
-
-    if (mostLikelyFacility) {
-      predictedFacilityEl.textContent = mostLikelyFacility;
-      predictiveAlert.style.display = "block";
-    } else {
-      predictiveAlert.style.display = "none";
-      predictedFacilityEl.textContent = "";
-    }
+    // هنا يمكن ربط تحديث التنبؤ مع الفلاتر أو الاكتفاء ببيانات output.json
   }
 
   // تحميل ملف التنبؤ والإحصائيات وعرضها في القسم المخصص
   fetch('../backend/data/output.json')
-  .then(res => res.json())
-  .then(result => {
-    // تحديث ملخص التنبؤ فقط
-    document.getElementById('predictedFacilitySummary').textContent = result.prediction;
+    .then(res => res.json())
+    .then(result => {
+      // تحديث المرفق المتوقع
+      predictedFacilityEl.textContent = result.prediction || 'غير معروف';
 
-    // تنسيق التنبيه الذكي
-    const alertText = `⚠️  نوصي بإجراء صيانة استباقية وقائية للمرفق ( ${result.prediction}.) تجنبا لحدوث عطل مشابه في المستقبل .`;
-    document.getElementById('predictiveAlert').textContent = alertText;
-    document.getElementById('predictiveAlert').style.display = 'block';
+      // تحديث قائمة الأسباب الشائعة
+      commonCausesList.innerHTML = Object.entries(result.common_causes || {})
+        .map(([cause, count]) => `<li>${cause} (${count} حالة)</li>`)
+        .join('') || "<li>لا توجد بيانات</li>";
 
-    // تحديث قائمة متوسط مدة التوقف
-    const listEl = document.getElementById('downtimeSummaryList');
-    listEl.innerHTML = Object.entries(result.summary)
-      .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
-      .join('');
-  })
+      // تحديث ملخص متوسط مدة التوقف
+      downtimeSummaryList.innerHTML = Object.entries(result.summary || {})
+        .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
+        .join('') || "<li>لا توجد بيانات</li>";
 
+      // تحديث النصائح والتحليلات
+      insightsList.innerHTML = (result.insights || [])
+        .map(insight => `<li>${insight}</li>`)
+        .join('') || "<li>لا توجد بيانات</li>";
+    })
+    .catch(err => {
+      console.error("فشل تحميل بيانات التنبؤ:", err);
+      predictedFacilityEl.textContent = "خطأ في تحميل التنبؤ";
+    });
 });
