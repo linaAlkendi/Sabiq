@@ -32,7 +32,7 @@ const users = [
 // كلمات المرور الأصلية لكل مستخدم
 const plainPasswords = {
   tech_user1: "Tech@123",
-  supervisor1: "Sup@456",
+  supervisor1: "no",
   ops_manager: "Ops@789",
 };
 
