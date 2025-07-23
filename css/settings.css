@@ -1,6 +1,6 @@
 
 
-body.dark .card {
+body.dark .card , #language-select {
    background-color: #1e1e2f;
   color: #f1f1f1;
  
