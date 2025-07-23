@@ -1,101 +1,90 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const rows = document.querySelectorAll("#logsTable tbody tr");
+  const logsTableBody = document.getElementById("logsTableBody");
   const detailsSection = document.getElementById("detailsSection");
   const actionContent = document.getElementById("actionContent");
-  const pdfLink = document.getElementById("pdfLink");
   const typeFilter = document.getElementById("typeFilter");
   const facilityTypeFilter = document.getElementById("facilityTypeFilter");
   const predictedFacilityEl = document.getElementById("predictedFacility");
   const predictiveAlert = document.getElementById("predictiveAlert");
 
-  // بيانات الإجراءات وملفات PDF لكل سجل
-  const faultDetails = [
-    {
-      actions: [
-        " بلاغ مرفوع يدويا ✔️",
-        "تم إرسال فرقة صيانة",
-        "الفني: فهد العتيبي",
-        "تاريخ الصيانة: 2025-06-02"
-      ],
-      pdf: "../files/report1.pdf",
-      facility: "بوابة إلكترونية"
-    },
-    {
-      actions: [
-        "بلاغ مرفوع يدويا ✔️",
-        "تم حل المشكلة داخليًا",
-        "الفني: سارة الحربي",
-        "تاريخ الصيانة: 2025-05-29"
-      ],
-      pdf: "../files/report2.pdf",
-      facility: "سلم كهربائي"
-    },
-    {
-      actions: [
-        "تم الإبلاغ عن طريق النظام",
-        "تمت إعادة تشغيل النظام",
-        "الفني: علي القحطاني",
-        "تاريخ الصيانة: 2025-05-16"
-      ],
-      pdf: "../files/report3.pdf",
-      facility: "مصعد"
-    },
-    {
-      actions: [
-        "تم الإبلاغ عن طريق النظام",
-        "تم استبدال القاطع",
-        "الفني: نور العبدالله",
-        "تاريخ الصيانة: 2025-04-23"
-      ],
-      pdf: "../files/report4.pdf",
-      facility: "مصعد"
-    },
-    {
-      actions: [
-        "بلاغ مرفوع ✔️",
-        "تم التشحيم وإعادة التركيب",
-        "الفني: ماجد السبيعي",
-        "تاريخ الصيانة: 2025-03-19"
-      ],
-      pdf: "../files/report5.pdf",
-      facility: "سلم كهربائي"
-    },
-    {
-      actions: [
-        "تم الإبلاغ عن طريق النظام",
-        "إعادة تشغيل السيرفر",
-        "الفني: خالد العنزي",
-        "تاريخ الصيانة: 2025-02-06"
-      ],
-      pdf: "../files/report6.pdf",
-      facility: " بوابة إلكترونية"
-    }
-  ];
+  let faultDetails = []; // بيانات الإجراءات لكل سجل
 
-  // عرض التفاصيل عند الضغط على صف
-  rows.forEach((row) => {
-    row.addEventListener("click", () => {
-      const index = row.getAttribute("data-index");
-      const details = faultDetails[index];
+  // تحميل بيانات الأعطال من JSON
+  fetch("../backend/data/incidentData.json")
+    .then(response => response.json())
+    .then(data => {
+      // بناء الجدول
+      data.forEach((item, index) => {
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-index", index);
 
-      actionContent.innerHTML = details.actions
-        .map((line) => `<p>${line}</p>`)
-        .join("");
-      pdfLink.href = details.pdf;
+        tr.innerHTML = `
+          <td>${item["اسم المرفق"]}</td>
+          <td>${item["نوع المرفق"]}</td>
+          <td>${item["تاريخ العطل"]}</td>
+          <td>${item["نوع العطل"]}</td>
+          <td>${item["مدة التوقف"]}</td>
+          <td>${item["درجة الخطورة"]}</td>
+          <td>${item["سبب المشكلة"]}</td>
+          <td>${item["الإجراء المتخذ"]}</td>
+          <td>${item["اسم الفني"]}</td>
+        `;
 
-      detailsSection.classList.remove("hidden");
-      detailsSection.scrollIntoView({ behavior: "smooth" });
+        logsTableBody.appendChild(tr);
+      });
+
+      // تجهيز بيانات الإجراءات والروابط لكل سجل
+      faultDetails = data.map(item => ({
+        actions: item["تفاصيل"]?.actions || [
+          `الإجراء: ${item["الإجراء المتخذ"]}`,
+          `تاريخ العطل: ${item["تاريخ العطل"]}`
+        ],
+        pdf: item["تفاصيل"]?.pdf || "../files/report.pdf",
+        facility: item["نوع المرفق"]
+      }));
+
+      setupEventListeners();
+      filterTable(); // تطبيق الفلترة الافتراضية
+    })
+    .catch(err => {
+      console.error("فشل تحميل بيانات الأعطال:", err);
     });
-  });
 
-  // فلترة حسب نوع العطل ونوع المرفق
+  // إضافة أحداث النقر على الصفوف لعرض التفاصيل
+  function setupEventListeners() {
+    const rows = document.querySelectorAll("#logsTable tbody tr");
+
+    rows.forEach(row => {
+      row.addEventListener("click", () => {
+        const index = row.getAttribute("data-index");
+        const details = faultDetails[index];
+
+        actionContent.innerHTML = details.actions
+          .map(line => `<p>${line}</p>`)
+          .join("");
+
+        // تحديث روابط PDF داخل قسم التفاصيل
+        const pdfLinks = document.querySelectorAll("#detailsSection .pdf-link");
+        pdfLinks.forEach(link => {
+          link.href = details.pdf;
+        });
+
+        detailsSection.classList.remove("hidden");
+        detailsSection.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  }
+
+  // فلترة الجدول حسب نوع العطل ونوع المرفق
   function filterTable() {
     const selectedType = typeFilter.value;
     const selectedFacilityType = facilityTypeFilter.value;
 
-    rows.forEach((row) => {
+    const rows = document.querySelectorAll("#logsTable tbody tr");
+
+    rows.forEach(row => {
       const faultType = row.children[3].textContent.trim(); // نوع العطل
-      const facilityType = row.children[0].textContent.trim(); // نوع المرفق
+      const facilityType = row.children[1].textContent.trim(); // نوع المرفق
 
       const matchesType = selectedType === "all" || faultType === selectedType;
       const matchesFacility = selectedFacilityType === "all" || facilityType === selectedFacilityType;
@@ -108,25 +97,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     detailsSection.classList.add("hidden");
+    updatePrediction();
   }
 
-  typeFilter.addEventListener("change", () => {
-    filterTable();
-    updatePrediction();
-  });
+  typeFilter.addEventListener("change", filterTable);
+  facilityTypeFilter.addEventListener("change", filterTable);
 
-  facilityTypeFilter.addEventListener("change", () => {
-    filterTable();
-    updatePrediction();
-  });
-
-  // تنبؤ بالمرفق الأكثر تكرارًا
+  // تحديث التنبؤ الذكي: المرفق الأكثر تكرارًا بين الصفوف الظاهرة
   function updatePrediction() {
-    const visibleRows = Array.from(rows).filter((row) => row.style.display !== "none");
+    const rows = document.querySelectorAll("#logsTable tbody tr");
+    const visibleRows = Array.from(rows).filter(row => row.style.display !== "none");
     const facilityCount = {};
 
-    visibleRows.forEach((row) => {
-      const facility = row.children[0].textContent.trim();
+    visibleRows.forEach(row => {
+      const facility = row.children[1].textContent.trim(); // نوع المرفق
       facilityCount[facility] = (facilityCount[facility] || 0) + 1;
     });
 
@@ -138,9 +122,27 @@ document.addEventListener("DOMContentLoaded", function () {
       predictiveAlert.style.display = "block";
     } else {
       predictiveAlert.style.display = "none";
+      predictedFacilityEl.textContent = "";
     }
   }
 
-  // أول مرة عند تحميل الصفحة
-  updatePrediction();
+  // تحميل ملف التنبؤ والإحصائيات وعرضها في القسم المخصص
+  fetch('../backend/data/output.json')
+  .then(res => res.json())
+  .then(result => {
+    // تحديث ملخص التنبؤ فقط
+    document.getElementById('predictedFacilitySummary').textContent = result.prediction;
+
+    // تنسيق التنبيه الذكي
+    const alertText = `⚠️  نوصي بإجراء صيانة استباقية وقائية للمرفق ( ${result.prediction}.) تجنبا لحدوث عطل مشابه في المستقبل .`;
+    document.getElementById('predictiveAlert').textContent = alertText;
+    document.getElementById('predictiveAlert').style.display = 'block';
+
+    // تحديث قائمة متوسط مدة التوقف
+    const listEl = document.getElementById('downtimeSummaryList');
+    listEl.innerHTML = Object.entries(result.summary)
+      .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
+      .join('');
+  })
+
 });
