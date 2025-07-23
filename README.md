@@ -18,6 +18,7 @@ sabiq/
 │   │   ├── incidents.js
 │   │   ├── facilities.js
 │   │   └── notifications.js
+│   │   └── auth.js
 │   │
 │   ├── helpers/              # Utility/helper functions
 │   │   └── notifier.js

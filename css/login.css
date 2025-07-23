@@ -152,7 +152,32 @@ button:hover {
     font-size: 14px;
   }
 }
+   .message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.95rem;
+      display: none;
+    }
 
+    .success-message {
+      margin-top: 15px;
+      background-color: #d4edda9c;
+      font-weight: bold;
+      border-radius: 20px;
+      color: #155724;
+      display: block;
+    }
+
+    .error-message {
+      margin-top: 15px;
+      background-color: #f8d7daa1;
+      font-weight: bold;
+      border-radius: 20px;
+      color: #721c24;
+      display: block;
+    }
 @media (max-width: 480px) {
   .theme-toggle-switch {
     top: 12px;
