@@ -11,6 +11,20 @@ router.get("/", (req, res) => {
   res.json(JSON.parse(data));
 });
 
+// GET facility by ID
+router.get("/:id", (req, res) => {
+  const facilities = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+  const id = parseInt(req.params.id);
+  const facility = facilities.find(f => f.id === id);
+
+  if (!facility) {
+    return res.status(404).json({ error: "Facility not found" });
+  }
+
+  res.json(facility);
+});
+
+
 // PATCH facility status by name
 router.patch("/status", (req, res) => {
   const { name, status } = req.body;

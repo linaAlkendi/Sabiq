@@ -8,7 +8,9 @@
     "pressure": "60 Pa",
     "humidity": "25.3 %",
     "motor_load": "80 %",
-    "detailsPage": "sdetails.html"
+    "operationHours": 1740,
+    "currentUsage": 2950,
+    "maxUsage": 3000
   },
   {
     "id": 2,
@@ -19,7 +21,9 @@
     "pressure": "30 Pa",
     "humidity": "40 %",
     "motor_load": "50 %",
-    "detailsPage": "edetails.html"
+    "operationHours": 685,
+    "currentUsage": 1800,
+    "maxUsage": 3000
   },
   {
     "id": 3,
@@ -30,6 +34,8 @@
     "pressure": "45 Pa",
     "humidity": "35 %",
     "motor_load": "65 %",
-    "detailsPage": "details.html"
+    "operationHours": 364,
+    "currentUsage": 3200,
+    "maxUsage": 3000
   }
 ]

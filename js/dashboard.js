@@ -45,7 +45,7 @@ fetch('http://localhost:3000/facilities')
 
         <div class="card-actions">
           <span class="status ${facility.status}">${statusText}</span>
-          <a href="${facility.detailsPage}" class="btn">عرض التفاصيل</a>
+          <a href="details.html?id=${facility.id}" class="btn">عرض التفاصيل</a>
         </div>
       `;
 
