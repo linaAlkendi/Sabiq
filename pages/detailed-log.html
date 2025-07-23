@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/base.css" />
   <link rel="stylesheet" href="../css/detailed-log.css" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -81,36 +82,27 @@
       </div>
     </div>
 
-<div class="table-wrapper card-table">
-  <table class="logs-table" id="logsTable">
-    <thead>
-      <tr>
-        <th>اسم المرفق</th>
-        <th>نوع المرفق</th>
-        <th>تاريخ العطل</th>
-        <th>نوع العطل</th>
-        <th>مدة التوقف</th>
-        <th>درجة الخطورة</th>
-        <th>سبب المشكلة</th>
-        <th>الإجراء المتخذ</th>
-        <th>اسم الفني</th>
-      </tr>
-    </thead>
-    <tbody id="logsTableBody">
-      <!-- سيتم ملء الصفوف هنا ديناميكيًا -->
-    </tbody>
-  </table>
-</div>
-    <!-- تنبيه ذكي -->
-    <section id="predictiveAlert" style="display: none;">
-</section>
-<!-- إضافة هنا قسم لعرض ملخص التنبؤ -->
-<section id="predictionSummary" ">
-  <h3>📊 إحصائيات وتحليل التنبؤ</h3>
-  <p>المرفق المتوقع حدوث عطل فيه: <strong id="predictedFacilitySummary">...</strong></p>
-  <h4>متوسط مدة التوقف (بالدقائق) لكل نوع عطل:</h4>
-  <ul id="downtimeSummaryList"></ul>
-</section>
+    <div class="table-wrapper card-table">
+      <table class="logs-table" id="logsTable">
+        <thead>
+          <tr>
+            <th>اسم المرفق</th>
+            <th>نوع المرفق</th>
+            <th>تاريخ العطل</th>
+            <th>نوع العطل</th>
+            <th>مدة التوقف</th>
+            <th>درجة الخطورة</th>
+            <th>سبب المشكلة</th>
+            <th>الإجراء المتخذ</th>
+            <th>اسم الفني</th>
+          </tr>
+        </thead>
+        <tbody id="logsTableBody">
+          <!-- سيتم ملء الصفوف هنا ديناميكيًا -->
+        </tbody>
+      </table>
+    </div>
+
 
     <!-- التفاصيل -->
     <section id="detailsSection" class="hidden">
@@ -131,8 +123,22 @@
       </div>
     </section>
 
+      <!-- قسم التنبؤ والتحليل -->
+    <section id="predictionSection">
+      <h3> التنبؤ والتحليل الذكي</h3>
 
+      <p>المرفق المتوقع حدوث عطل فيه: <strong id="predictedFacilitySummary">...</strong></p>
 
+      <h4>الأسباب الأكثر شيوعًا للأعطال:</h4>
+      <ul id="commonCausesList"></ul>
+
+      <h4>ملخص متوسط مدة التوقف (بالدقائق) لكل نوع عطل:</h4>
+      <ul id="downtimeSummaryList"></ul>
+
+      <h4>نصائح وتحليلات:</h4>
+      <ul id="insightsList"></ul>
+    </section>
+    
   </main>
 
   <!-- JS -->

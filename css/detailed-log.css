@@ -366,7 +366,7 @@ body.dark .actions-section {
   color: #fff;
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
 }
-#predictionSummary {
+#predictionSection {
   margin-top: 30px;
   margin-bottom: 50px;
   padding: 20px 25px;
@@ -382,53 +382,67 @@ body.dark .actions-section {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.dark #predictionSummary {
+body.dark #predictionSection {
   background-color: #2a2a40;
   color: #aabbff;
   box-shadow: 0 8px 24px rgba(170, 187, 255, 0.3);
 }
 
-#predictionSummary h3 {
+#predictionSection h3 {
   margin-bottom: 15px;
   font-weight: 700;
   font-size: 1.5rem;
 }
 
-#predictionSummary p {
+#predictionSection p {
+  background-color: rgb(134, 137, 180);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+body.dark #predictionSection p {
+  background-color: rgb(124, 171, 155);
+  border-radius: 10px;
+  color: #000000;
   font-size: 1.2rem;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
-#predictionSummary h4 {
+#predictionSection h4 {
   font-weight: 600;
+color: #eef9ff;
+  background-color: #7f92da;
+  border-radius: 20px;
   margin-bottom: 12px;
 }
 
-#predictionSummary ul {
+body.dark 
+#predictionSection h4 {
+  font-weight: 600;
+  color: #2a2a40;
+  background-color: #949cb8;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+#predictionSection ul {
   list-style-type: none;
   padding: 0;
   font-size: 1.1rem;
 }
 
-#predictionSummary ul li {
+#predictionSection ul li {
   margin: 6px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   padding-bottom: 6px;
 }
 
-body.dark #predictionSummary ul li {
+body.dark #predictionSection ul li {
   border-color: rgba(255, 255, 255, 0.15);
 }
-#predictionSummary ul li strong {
+#predictionSection ul li strong {
   color: var(--primary-btn, #007bff);
 }       
-#predictiveAlert{
-  margin-bottom: 50px;
-  background-color: rgba(222, 184, 135, 0.66);
-  padding: 15px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  color: #333;
-  font-size: 16px;
-}
