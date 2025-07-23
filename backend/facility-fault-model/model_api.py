@@ -1,0 +1,31 @@
+from flask import Flask, request, jsonify
+import joblib
+import pandas as pd
+
+app = Flask(__name__)
+model = joblib.load("rf_model.pkl")
+
+@app.route('/predict', methods=['GET'])
+def predict():
+    # Retrieve parameters from the query string
+    try:
+        input_data = {
+            "temperature": float(request.args.get("temperature")),
+            "vibration": float(request.args.get("vibration")),
+            "pressure": float(request.args.get("pressure")),
+            "humidity": float(request.args.get("humidity")),
+            "motor_load": float(request.args.get("motor_load"))
+        }
+    except (TypeError, ValueError):
+        return jsonify({"error": "Missing or invalid input parameters"}), 400
+
+    df = pd.DataFrame([input_data])
+    prediction = model.predict(df)[0]
+
+    return jsonify({
+        "input_data": input_data,
+        "prediction": str(prediction)
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)
