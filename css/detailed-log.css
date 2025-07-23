@@ -76,7 +76,6 @@ body.dark .filter-box select {
 
 
 .card-table {
-  max-height: 420px; /* تقريبا 10 صفوف × 40-45 بكسل للصف */
   background-color:  #ffffff;
   border-radius: 20px;
   padding: 20px;

@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('predictedFacilitySummary').textContent = result.prediction;
 
     // تنسيق التنبيه الذكي
-    const alertText = `⚠️ نوصي بإجراء صيانة استباقية وقائية تجنبا لحدوث عطل مشابه في المستقبل`;
+    const alertText = `⚠️  نوصي بإجراء صيانة استباقية وقائية للمرفق ( ${result.prediction}.) تجنبا لحدوث عطل مشابه في المستقبل .`;
     document.getElementById('predictiveAlert').textContent = alertText;
     document.getElementById('predictiveAlert').style.display = 'block';
 
