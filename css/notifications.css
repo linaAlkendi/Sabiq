@@ -117,13 +117,13 @@ body.dark .search-filter-bar select {
 }
 
 .notification-card.L {
-  background-color: var(--alert-warning-bg);  /* اللون الجديد للخطورة المنخفضة */
-  color: var(--alert-warning-color);           /* اللون الجديد للخطورة المنخفضة */
+  background-color: var(--alert-warning-bg);  
+  color: var(--alert-warning-color);           
 }
 
 .notification-card.M {
-  background-color: var(--alert-med-bg);  /* اللون الجديد للخطورة المتوسطة */
-  color: var(--alert-med-color);           /* اللون الجديد للخطورة المتوسطة */
+  background-color: var(--alert-med-bg); 
+  color: var(--alert-med-color);          
 }
 
 .notification-card.H {
@@ -149,25 +149,6 @@ body.dark .search-filter-bar select {
   color: gray;
 }
 
-.notification-card .assign-task-btn {
-  background: var(--primary-btn);
-  color: white;
-  padding: 6px 14px;  
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 14px;      
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  min-width: 80px;   
-  margin-top: 10px;   
-  justify-content: center;
-  align-items: center;
-}
-
-.notification-card .assign-task-btn:hover {
-  background: var(--primary-btn-hover);
-}
 
 /* ✅ Responsive Tweaks */
 @media (max-width: 768px) {

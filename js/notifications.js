@@ -55,11 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>${notif.title}</h3>
         <p>${notif.description}</p>
         <span class="timestamp">🕒 ${notif.timestamp}</span>
-        ${
-          notif.status === "negative"
-            ? `<button class="assign-task-btn" onclick="assignTask('${notif.title}')">إسناد المهمة</button>`
-            : ""
-        }
       </div>
     `;
 
@@ -77,9 +72,3 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("فشل في تحميل التنبيهات:", err);
     });
 });
-
-function assignTask(taskTitle) {
-  window.location.href = `supervisor-dashboard.html?task=${encodeURIComponent(
-    taskTitle
-  )}`;
-}
