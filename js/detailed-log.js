@@ -128,21 +128,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // تحميل ملف التنبؤ والإحصائيات وعرضها في القسم المخصص
   fetch('../backend/data/output.json')
-    .then(res => res.json())
-    .then(result => {
-      // تحديث التنبؤ في التنبيه وملخص التنبؤ
-      predictedFacilityEl.textContent = result.prediction;
-      document.getElementById('predictedFacilitySummary').textContent = result.prediction;
-      predictiveAlert.style.display = 'block';
+  .then(res => res.json())
+  .then(result => {
+    // تحديث ملخص التنبؤ فقط
+    document.getElementById('predictedFacilitySummary').textContent = result.prediction;
 
-      // تحديث قائمة متوسط مدة التوقف لكل نوع عطل
-      const listEl = document.getElementById('downtimeSummaryList');
-      listEl.innerHTML = Object.entries(result.summary)
-        .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
-        .join('');
-    })
-    .catch(err => {
-      console.error('خطأ في جلب نتائج التنبؤ:', err);
-    });
+    // تنسيق التنبيه الذكي
+    const alertText = `⚠️ نوصي بإجراء صيانة استباقية وقائية تجنبا لحدوث عطل مشابه في المستقبل`;
+    document.getElementById('predictiveAlert').textContent = alertText;
+    document.getElementById('predictiveAlert').style.display = 'block';
+
+    // تحديث قائمة متوسط مدة التوقف
+    const listEl = document.getElementById('downtimeSummaryList');
+    listEl.innerHTML = Object.entries(result.summary)
+      .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
+      .join('');
+  })
 
 });
