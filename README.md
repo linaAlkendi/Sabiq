@@ -91,7 +91,7 @@ This project integrates a trained machine learning model to predict potential fa
 To run the prediction API, Python **3.10.x** must be installed. Other versions (like 3.11/3.12/3.13) are not compatible due to serialization limitations.
 
 1. **Install Python 3.10.x:**
-   - Download from: [https://www.python.org/downloads/release](https://www.python.org/downloads/release)
+   - Download from: [https://www.python.org/downloads/release/python-3100/](https://www.python.org/downloads/release/python-3100/)
    - During installation, make sure to **check "Add Python to PATH"**
 
 2. **Install required Python packages:**
