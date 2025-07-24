@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "username": "tech_user1",
+    "password": "$2b$12$AOxWofVHBwsSazCGNx4sqeL1416UMgKwA8RgsH/yEK2ULhkFxsA/m",
+    "role": "فني"
+  },
+  {
+    "id": 2,
+    "username": "supervisor1",
+    "password": "$2b$12$L2ktIh10f3m/DYJK01a5zuDtiJdBXHXxQd8iaHnPTI6M7aTeN8aTW",
+    "role": "مشرف صيانة"
+  },
+  {
+    "id": 3,
+    "username": "ops_manager",
+    "password": "$2b$12$VUnQbl.si0bVtfVVFpJH4O.m478unGEL3OeAOcov26CztHdVKhm26",
+    "role": "مدير عمليات"
+  }
+]
