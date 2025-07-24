@@ -9,10 +9,14 @@ This project is a prototype for reporting and visualizing technical safety incid
 ```
 sabiq/
 ├── backend/
+│   ├── ai-model/                  # JSON data files
+│   │   ├── analyze_incidents.py
+│   │
 │   ├── data/                      # JSON data files
 │   │   ├── incidents.json
 │   │   ├── facilities.json
 │   │   └── notifications.json
+│   │   └── incidentsData.json
 │   │
 │   ├── facility-fault-model/      # AI model integration
 │   │   ├── rf_model.pkl           # Pretrained model (Random Forest)
@@ -33,6 +37,7 @@ sabiq/
 ├── pages/                        # Frontend HTML pages
 ├── js/                           # Frontend JavaScript files
 ├── css/                          # Stylesheets
+├── main.py
 ├── .gitignore
 └── README.md
 ```

@@ -79,13 +79,12 @@ label {
   color: var(--label-color);
 }
 
-/* تعديل لتصغير خانات رمز التحقق */
+
 .input-otp {
-  width: 2.5rem;  /* عرض الخانة */
-  height: 2.5rem; /* ارتفاع الخانة */
+  width: 2.5rem;  
+  height: 2.5rem; 
   text-align: center;
-  font-size: 1.5rem;  /* حجم الخط داخل الخانة */
-  margin: 0 0.25rem; /* المسافة بين الخانات */
+  font-size: 1.5rem;  
   border-radius: 5px; 
   border: 1px solid #ccc;
   background-color: var(--input-bg);
@@ -93,60 +92,60 @@ label {
   transition: all 0.3s ease;
 }
 
-/* التأثير عند التركيز */
+
 .input-otp:focus {
-  border-color: #007BFF; /* تغيير اللون عند التركيز */
-  outline: none; /* إزالة الحدود الافتراضية عند التركيز */
-  background-color: #e9f3ff; /* خلفية فاتحة عند التركيز */
+  border-color: #007BFF; 
+  outline: none; 
+  background-color: #e9f3ff; 
 }
 
-/* ترتيب الخانات بشكل أفقي باستخدام Flexbox */
+
 .flex {
   display: flex;
-  justify-content: center; /* محاذاة الخانات في المنتصف */
-  gap: 0.5rem; /* المسافة بين الخانات */
-  align-items: center; /* محاذاة الخانات عموديًا في المنتصف */
+  justify-content: center; 
+  gap: 0.5rem; 
+  align-items: center; 
 }
 
 
-/* تنسيق زر تحقق */
+
 #check-btn {
   background: linear-gradient(to right, var(--button-bg), var(--button-gradient-end));
   border: none;
   color: white;
   font-weight: bold;
-  font-size: 14px; /* حجم الخط صغير */
-  padding: 10px 15px; /* تصغير الحجم العمودي والأفقي */
-  width: 30%; /* عرض الزر يتناسب مع النص */
-  border-radius: 12px; /* جعل الزر حواف دائرية */
+  font-size: 14px; 
+  padding: 10px 15px; 
+  width: 30%; 
+  border-radius: 12px; 
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
-   margin-top: 15px; /* إضافة المسافة بين الخانات والزر */
+   margin-top: 15px; 
 }
 
-/* تأثير عند التمرير فوق الزر */
+
 #check-btn:hover {
-  transform: scale(1.03); /* تكبير الزر قليلاً عند التمرير */
-  background-color: var(--button-hover); /* تغيير اللون عند التمرير */
+  transform: scale(1.03); 
+  background-color: var(--button-hover); 
 }
-/* نص إعادة إرسال رمز التحقق */
+
 
 #resend-text {
   font-weight: bold;
   cursor: pointer;
   margin-top: 15px;
-  display: none; /* مخفي في البداية */
-  color: #dc3545; /* اللون الأحمر */
+  display: none; 
+  color: #dc3545;
 }
 
 
 
-/* التنسيق لرسالة إعادة إرسال رمز التحقق */
+
 .message {
   margin-top: 15px;
   padding: 10px;
   border-radius: 8px;
   text-align: center;
   font-size: 0.95rem;
-  display: none; /* مخفي في البداية */
+  display: none; 
 }
