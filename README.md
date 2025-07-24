@@ -9,8 +9,8 @@ This project is a prototype for reporting and visualizing technical safety incid
 ```
 sabiq/
 ├── backend/
-│   ├── ai-model/                  # JSON data files
-│   │   ├── analyze_incidents.py
+│   ├── ai-model/                  # AI model for incident data
+│   │   └── analyze_incidents.py
 │   │
 │   ├── data/                      # JSON data files
 │   │   ├── incidents.json
