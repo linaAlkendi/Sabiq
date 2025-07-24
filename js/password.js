@@ -3,11 +3,11 @@ const confirmPasswordInput = document.getElementById('confirm-password');
 const currentPasswordInput = document.getElementById('current-password');
 const saveBtn = document.getElementById('saveBtn');
 const passwordCriteria = document.getElementById('password-criteria');
-const messageArea = document.getElementById('message-area'); // مكان عرض الرسالة
+const messageElement = document.getElementById('message');
 
 const defaultPassword = "Ahmed@123872";
 
-// معايير كلمة المرور
+
 passwordCriteria.innerHTML = `
   <ul>
     <li id="upperCase" class="criteria-item">يجب أن تحتوي على حروف كبيرة وصغيرة</li>
@@ -18,14 +18,13 @@ passwordCriteria.innerHTML = `
   </ul>
 `;
 
-// دالة التحقق من كلمة المرور
+
 function validatePassword() {
   const password = newPasswordInput.value;
   const confirmPassword = confirmPasswordInput.value;
   let validationMessage = '';
-  let allCriteriaMet = true;  // Flag للتحقق من استيفاء جميع الشروط
-
-  // تحقق من وجود الحروف الكبيرة والصغيرة
+  let allCriteriaMet = true;  
+ 
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
   if (hasUpperCase && hasLowerCase) {
@@ -38,7 +37,7 @@ function validatePassword() {
     allCriteriaMet = false;
   }
 
-  // تحقق من وجود الأرقام
+ 
   const hasNumbers = /\d/.test(password);
   if (hasNumbers) {
     document.getElementById('numbers').classList.add('valid');
@@ -50,7 +49,7 @@ function validatePassword() {
     allCriteriaMet = false;
   }
 
-  // تحقق من وجود الرموز الخاصة
+ 
   const hasSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(password);
   if (hasSymbols) {
     document.getElementById('symbols').classList.add('valid');
@@ -62,7 +61,7 @@ function validatePassword() {
     allCriteriaMet = false;
   }
 
-  // تحقق من طول كلمة المرور
+
   const isLongEnough = password.length >= 12;
   if (isLongEnough) {
     document.getElementById('length').classList.add('valid');
@@ -74,7 +73,7 @@ function validatePassword() {
     allCriteriaMet = false;
   }
 
-  // تحقق من أن كلمة المرور غير قابلة للفك
+
   const commonPasswords = /password|12345|qwerty|abc123|welcome|letmein|password123|123123|iloveyou|monkey/i;
   const isDecipherable = commonPasswords.test(password); 
   if (isDecipherable) {
@@ -87,36 +86,61 @@ function validatePassword() {
     document.getElementById('unDecipherable').classList.remove('invalid');
   }
 
-  // تحقق من تطابق كلمة المرور الجديدة مع كلمة المرور المؤكدة
-  if (newPasswordInput.value !== confirmPasswordInput.value) {
-    document.getElementById('confirmPassword').classList.add('invalid');
-    document.getElementById('confirmPassword').classList.remove('valid');
-    validationMessage += "كلمة المرور الجديدة لا تتطابق مع التأكيد.\n";
-    allCriteriaMet = false;
-  } else {
-    document.getElementById('confirmPassword').classList.add('valid');
-    document.getElementById('confirmPassword').classList.remove('invalid');
-  }
 
-  // عرض الرسائل أو إخفائها
+
+ 
   if (validationMessage) {
-    messageArea.style.display = 'block';
-    messageArea.textContent = validationMessage;
+    messageElement.style.display = 'block';
+    messageElement.textContent = validationMessage;
+     messageElement.style.display = 'none';
   } else {
-    messageArea.style.display = 'none'; // إخفاء الرسائل إذا كانت الشروط مستوفاة
+    messageElement.style.display = 'none'; 
   }
-
+ 
   return allCriteriaMet;
 }
 
 
+function saveChanges(event) {
+  event.preventDefault(); 
+
+  const currentPassword = currentPasswordInput.value;
+  const newPassword = newPasswordInput.value;
+  const confirmPassword = confirmPasswordInput.value;
 
 
+  if (currentPassword !== defaultPassword) {
+    messageElement.textContent = "كلمة المرور الحالية غير صحيحة";
+    messageElement.style.backgroundColor = "#f8d7daa1"; // اللون الأحمر
+    messageElement.style.color = "#721c24";
+    messageElement.style.display = 'block';
+    return;
+  }
+
+  
+  if (!validatePassword()) {
+    messageElement.style.display = 'none';  
+    return;
+  }
+
+ 
+ 
+  if (newPassword !== confirmPassword) {
+    messageElement.textContent = "تأكيد كلمة المرور غير مطابقه للمدخلات";
+    messageElement.style.backgroundColor = "#f8d7daa1"; 
+    messageElement.style.color = "#721c24";
+    messageElement.style.display = 'block';
+    return;
+  }
+
+ 
+  messageElement.textContent = "تم تحديث كلمة المرور بنجاح";
+  messageElement.style.backgroundColor = "#d4edda9c"; 
+  messageElement.style.color = "#155724";
+  messageElement.style.display = 'block';
+}
 
 
-
-
-// إضافة حدث للمستمع
 newPasswordInput.addEventListener('input', validatePassword);
 confirmPasswordInput.addEventListener('input', validatePassword);
 saveBtn.addEventListener('click', saveChanges);
