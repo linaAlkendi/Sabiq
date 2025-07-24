@@ -21,13 +21,29 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
 
       if (response.ok) {
-        // تخزين التوكن في localStorage
+        messageBox.textContent = "مرحبًا بكِ في سابِق";
+        messageBox.className = "success-message";
+
         localStorage.setItem("token", data.token);
 
-        // التوجيه إلى صفحة OTP مباشرة بعد التأكد من صحة كلمة المرور
-        window.location.href = "otp.html";  // إعادة التوجيه إلى صفحة OTP
+        setTimeout(() => {
+          switch (data.role) {
+            case "فني":
+              window.location.href = "technician-dashboard.html";
+              break;
+            case "مشرف صيانة":
+              window.location.href = "supervisor-dashboard.html";
+              break;
+            case "مدير عمليات":
+              window.location.href = "dashboard.html";
+              break;
+            default:
+              messageBox.textContent = " الدور غير معروف";
+              messageBox.className = "error-message";
+          }
+        }, 1500);
       } else {
-        messageBox.textContent = `${data.message}`;
+        messageBox.textContent = ` ${data.message}`;
         messageBox.className = "error-message";
       }
     } catch (error) {
