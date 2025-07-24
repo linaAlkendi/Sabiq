@@ -1,22 +1,4 @@
 
-
-
-body.dark .language-select label {
-  padding: 8px 16px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 1px solid #444;
-  background-color: #2a2a40 !important; 
-  color: #fff; 
-  transition: all 0.3s ease;
-  width: auto; 
-  max-width: 200px; 
-}
-
-
-
-
-
 body.dark .card ,body.dark .account-info-item input  {
    background-color: #1e1e2f;
   color: #f1f1f1;
@@ -30,8 +12,6 @@ body.dark .language-select {
   color: #f1f1f1;
   border-color: #444;
 }
-
-
 
 .settings-page {
   padding: 20px;
@@ -139,10 +119,6 @@ body.dark .language-select {
 }
 
 
-
-
-
-
 .edit-info-btn {
   padding: 8px 16px;
   background: var(--primary-btn);
@@ -162,7 +138,7 @@ body.dark .language-select {
   box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
 }
 
- /* Font size settings styling */
+
   .font-size {
     display: flex;
     justify-content: flex-start;
@@ -172,7 +148,6 @@ body.dark .language-select {
     font-size: 16px;
   }
 
-  /* Font size radio buttons */
   .font-size input[type="radio"] {
     display: none;
   }
@@ -185,7 +160,7 @@ body.dark .language-select {
     
   }
 
-  /* Circle effect for selected font size */
+
   .font-size label::before {
     content: "";
     position: absolute;
@@ -215,12 +190,11 @@ body.dark .language-select {
   background-color: #f7f7f7;
 }
 
-/* Hide the default checkbox */
+
   .checkbox-container input[type="checkbox"] {
     display: none;
   }
 
-  /* Style for custom checkbox */
   .checkbox-container {
     position: relative;
     display: inline-block;
@@ -388,9 +362,6 @@ body.dark .btn-confirm-no:hover {
   color: #e74c3c;
 }
 
-
-
-/* تنسيق الرسالة أسفل الزر */
 #errorMessage {
   margin-top: 10px;
   padding: 10px;
@@ -423,15 +394,6 @@ input.valid {
   background-color: #d4edda;
 }
 
-
-
-
-
-
-
-
-
-/* Media Queries for Responsive Design */
 @media (max-width: 768px) {
   .settings-page {
     padding: 10px;
@@ -444,27 +406,15 @@ input.valid {
 
   .account-info-item {
     flex-direction: column;
-    text-align: center;
+    text-align: right;
   }
 
-  .account-info-item input,
-  .language-setting select,
-  .font-size select,
-  .notifications-settings select {
-    width: 100%;
+  .account-info-item label {
+    text-align: right;
   }
 
-  .font-size {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .font-size label {
-    font-size: 14px;
-  }
-
-  .edit-info-btn {
-    width: 100%;
+  .account-info-item span {
+    text-align: right;
   }
 }
 
@@ -475,6 +425,7 @@ input.valid {
 
   .account-info-item {
     font-size: 14px;
+    text-align: right;
   }
 
   .font-size label {
@@ -484,5 +435,12 @@ input.valid {
   .edit-info-btn {
     padding: 10px 20px;
     font-size: 12px;
+    text-align: center;
+  }
+
+  .account-info-item input,
+  .account-info-item select {
+    text-align: right;
   }
 }
+
