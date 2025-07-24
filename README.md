@@ -87,6 +87,52 @@ Simply open any HTML file inside the `pages/` folder in your browser (e.g. `repo
 
 ---
 
+## 🧠 AI Model Information
+
+This project integrates a machine learning model to predict facility status based on sensor readings. The model is a pretrained **Random Forest Classifier** that uses 5 features:
+
+- **Temperature (°C)**
+- **Vibration (mm/s)**
+- **Pressure (Pa)**
+- **Humidity (%)**
+- **Motor Load (%)**
+
+### 🎯 Prediction Output
+
+The model classifies the facility into:
+
+- **0 = Working (Normal Operation)**
+- **1 = Broken (Needs Repair/Failure)**
+
+### 📊 Expected Feature Ranges per Class
+
+| Feature      | Class 0: Working       | Class 1: Broken         |
+|--------------|------------------------|--------------------------|
+| Temperature  | 35–45 °C               | 50–65 °C                 |
+| Vibration    | 1.5–4.5 mm/s           | 6–14 mm/s                |
+| Pressure     | 80–100 Pa              | 60–90 Pa                 |
+| Humidity     | 35–55 %                | 25–50 %                  |
+| Motor Load   | 50–70 %                | 70–100 %                 |
+
+These ranges are derived from a **Synthetic Elevator Sensor Dataset** used to train the model.
+
+### 🧪 Model API
+
+The model is served through a **Flask API** with a single endpoint:
+
+- `GET /predict`
+  - Query parameters: `temperature`, `vibration`, `pressure`, `humidity`, `motor_load`
+  - Example:  
+    ```
+    http://localhost:5000/predict?temperature=55&vibration=7.1&pressure=65&humidity=30&motor_load=85
+    ```
+
+  - Returns a JSON response with the prediction and input data.
+
+
+---
+
+
 ## 🧠 AI Fault Prediction Integration
 
 This project integrates a trained machine learning model to predict potential facility malfunctions based on telemetry data (temperature, pressure, etc.).
