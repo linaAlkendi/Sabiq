@@ -16,8 +16,9 @@ sabiq/
 │   ├── data/                      # JSON data files
 │   │   ├── incidents.json
 │   │   ├── facilities.json
-│   │   └── notifications.json
-│   │   └── incidentsData.json
+│   │   ├── notifications.json
+│   │   ├── incidentsData.json
+│   │   └── users.json
 │   │
 │   ├── facility-fault-model/      # AI model integration
 │   │   ├── rf_model.pkl           # Pretrained model (Random Forest)
