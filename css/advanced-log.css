@@ -1,0 +1,98 @@
+/* الحاوية الرئيسية */
+main.log-main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 30px;
+  color: var(--text-color);
+}
+
+
+
+/* صندوق الكارد للرسم البياني */
+.card {
+  background: var(--card-bg);
+  padding: 20px 25px;
+  border-radius: 24px; /* حواف شبه دائرية */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* ظل خفيف */
+  max-width: 900px;
+  margin: 50px auto 40px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* تعديل حجم الكانفس للرسم البياني */
+.card canvas {
+  max-height: 320px !important;
+  width: 100% !important;
+  display: block;
+  margin: 0 auto;
+}
+
+/* الوضع الليلي - افتراضاً تستخدم متغيرات */
+body.dark-theme main.log-main,
+body.dark-theme .card {
+  color: var(--text-color);
+  background: var(--card-bg);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.1);
+}
+
+/* تحجيم الخطوط داخل الكارد (اختياري) */
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: var(--section-title);
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+  main.log-main {
+    padding: 30px 20px;
+  }
+  .card {
+    padding: 15px 20px;
+    max-width: 100%;
+  }
+  .card canvas {
+    max-height: 260px !important;
+  }
+}
+
+/* تحسين تدرج الألوان (  في الرسوم) */
+.chartjs-render-monitor {
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.05));
+}
+
+#topMonthsCard {
+  background: rgba(112, 166, 200, 0.15); /* لون فاتح شبه شفاف */
+  color: var(--text-color);
+  font-weight: 400;
+  text-align: center;
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 20px auto 50px;
+  max-width: 600px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  direction: rtl;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* الوضع الليلي */
+body.dark-theme #topMonthsCard {
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.301);
+}
+  #faultTypeChart {
+    margin-top: 30px;
+    text-align: center;
+  }
+  #faultTypeChart canvas {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .chart-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }

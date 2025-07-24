@@ -78,7 +78,51 @@
 
         <input type="search" id="searchInput" placeholder="ابحث بالاسم أو المرفق..." />
 
-        <button id="assignBtn">+ إسناد مهمة</button>
+        <button onclick="openAssignmentModal()">+ إسناد مهمة</button>
+
+        <div id="assignmentModalOverlay" class="assignment-popup-overlay" style="display: none;">
+          <div class="assignment-popup">
+            <div class="assignment-message">إسناد العطل</div>
+
+    <form id="assignmentForm">
+      <label for="facilitySelect">اسم المرفق:</label>
+      <select id="facilitySelect" class="assignment-select">
+        <option>سلم كهربائي 1</option>
+        <option>بوابة 5</option>
+        <option>مصعد 2</option>
+      </select>
+<br>
+      
+<p id="statusText" class="assignment-text"><label for="statusText">الحالة: </label>شغال</p>
+
+      <label for="technicianSelect">اسم الفني:</label>
+      <select id="technicianSelect" class="assignment-select">
+        <option>فني أحمد</option>
+        <option>فني محمد</option>
+        <option>فني خالد</option>
+      </select>
+<br><br>
+      <label for="severitySelect">الخطورة:</label>
+      <select id="severitySelect" class="assignment-select">
+        <option>عالية</option>
+        <option>متوسطة</option>
+        <option>منخفضة</option>
+      </select>
+<br><br>
+      <label for="faultTypeSelect">نوع العطل:</label>
+      <select id="faultTypeSelect" class="assignment-select">
+        <option>كهربائي</option>
+        <option>ميكانيكي</option>
+      </select>
+<br><br>
+      <div class="assignment-buttons">
+        <button type="submit" class="btn-assign-confirm">إسناد</button>
+        <button type="button" class="btn-assign-cancel" onclick="closeAssignmentModal()">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>
+
       </div>
 
       <div id="taskTableWrapper"></div>
@@ -92,11 +136,6 @@
   </main>
 
 
-    
-      <div class="modal-actions">
-        <button id="submitAssignment">إسناد</button>
-        <button id="cancelAssignment">إلغاء</button>
-      </div>
     </div>
   </div>
 

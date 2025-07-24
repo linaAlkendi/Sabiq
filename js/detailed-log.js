@@ -4,23 +4,47 @@ document.addEventListener("DOMContentLoaded", function () {
   const actionContent = document.getElementById("actionContent");
   const typeFilter = document.getElementById("typeFilter");
   const facilityTypeFilter = document.getElementById("facilityTypeFilter");
+  const sortOrderSelect = document.getElementById("sortOrder");
 
-  // عناصر عرض التنبؤ والتحليل
   const predictedFacilityEl = document.getElementById("predictedFacilitySummary");
   const commonCausesList = document.getElementById("commonCausesList");
   const downtimeSummaryList = document.getElementById("downtimeSummaryList");
   const insightsList = document.getElementById("insightsList");
 
-  let faultDetails = []; // بيانات الإجراءات لكل سجل
+  let faultDetails = [];
+  let tableData = [];
 
-  // تحميل بيانات الأعطال من JSON
   fetch("../backend/data/incidentData.json")
     .then(response => response.json())
     .then(data => {
-      // بناء الجدول
-      data.forEach((item, index) => {
+      tableData = data;
+      renderTable();
+    })
+    .catch(err => {
+      console.error("فشل تحميل بيانات الأعطال:", err);
+    });
+
+  function renderTable() {
+    // ترتيب البيانات حسب الاختيار
+    const sortOrder = sortOrderSelect.value;
+    const sortedData = [...tableData].sort((a, b) => {
+      const dateA = new Date(a["تاريخ العطل"]);
+      const dateB = new Date(b["تاريخ العطل"]);
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    });
+
+    logsTableBody.innerHTML = "";
+    faultDetails = [];
+
+    sortedData.forEach((item, index) => {
+      const matchesType =
+        typeFilter.value === "all" || item["نوع العطل"] === typeFilter.value;
+      const matchesFacility =
+        facilityTypeFilter.value === "all" || item["نوع المرفق"] === facilityTypeFilter.value;
+
+      if (matchesType && matchesFacility) {
         const tr = document.createElement("tr");
-        tr.setAttribute("data-index", index);
+        tr.setAttribute("data-index", faultDetails.length);
 
         tr.innerHTML = `
           <td>${item["اسم المرفق"] || "-"}</td>
@@ -35,26 +59,23 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
         logsTableBody.appendChild(tr);
-      });
 
-      // تجهيز بيانات الإجراءات والروابط لكل سجل
-      faultDetails = data.map(item => ({
-        actions: item["تفاصيل"]?.actions || [
-          `الإجراء: ${item["الإجراء المتخذ"] || "غير متوفر"}`,
-          `تاريخ العطل: ${item["تاريخ العطل"] || "غير معروف"}`
-        ],
-        pdf: item["تفاصيل"]?.pdf || "../assets/report.pdf",
-        facility: item["نوع المرفق"] || "غير معروف"
-      }));
-
-      setupEventListeners();
-      filterTable(); // تطبيق الفلترة الافتراضية
-    })
-    .catch(err => {
-      console.error("فشل تحميل بيانات الأعطال:", err);
+        faultDetails.push({
+          actions: item["تفاصيل"]?.actions || [
+            `الإجراء: ${item["الإجراء المتخذ"] || "غير متوفر"}`,
+            `تاريخ العطل: ${item["تاريخ العطل"] || "غير معروف"}`
+          ],
+          pdf: item["تفاصيل"]?.pdf || "../assets/report.pdf",
+          facility: item["نوع المرفق"] || "غير معروف"
+        });
+      }
     });
 
-  // إضافة أحداث النقر على الصفوف لعرض التفاصيل
+    setupEventListeners();
+    detailsSection.classList.add("hidden");
+    updatePrediction();
+  }
+
   function setupEventListeners() {
     const rows = document.querySelectorAll("#logsTable tbody tr");
 
@@ -67,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
           .map(line => `<p>${line}</p>`)
           .join("");
 
-        // تحديث روابط PDF داخل قسم التفاصيل
         const pdfLinks = document.querySelectorAll("#detailsSection .pdf-link");
         pdfLinks.forEach(link => {
           link.href = details.pdf;
@@ -79,57 +99,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // فلترة الجدول حسب نوع العطل ونوع المرفق
-  function filterTable() {
-    const selectedType = typeFilter.value;
-    const selectedFacilityType = facilityTypeFilter.value;
+  typeFilter.addEventListener("change", renderTable);
+  facilityTypeFilter.addEventListener("change", renderTable);
+  sortOrderSelect.addEventListener("change", renderTable);
 
-    const rows = document.querySelectorAll("#logsTable tbody tr");
-
-    rows.forEach(row => {
-      const faultType = row.children[3].textContent.trim(); // نوع العطل
-      const facilityType = row.children[1].textContent.trim(); // نوع المرفق
-
-      const matchesType = selectedType === "all" || faultType === selectedType;
-      const matchesFacility = selectedFacilityType === "all" || facilityType === selectedFacilityType;
-
-      if (matchesType && matchesFacility) {
-        row.style.display = "";
-      } else {
-        row.style.display = "none";
-      }
-    });
-
-    detailsSection.classList.add("hidden");
-    updatePrediction();
-  }
-
-  typeFilter.addEventListener("change", filterTable);
-  facilityTypeFilter.addEventListener("change", filterTable);
-
-  // تحديث التنبؤ الذكي من بيانات الصفوف المرئية (يمكن التعديل لاحقاً)
   function updatePrediction() {
-    // هنا يمكن ربط تحديث التنبؤ مع الفلاتر أو الاكتفاء ببيانات output.json
+    // سيتم تحديثه لاحقًا عند الحاجة
   }
 
-  // تحميل ملف التنبؤ والإحصائيات وعرضها في القسم المخصص
-  fetch('../backend/data/output.json')
+  fetch("../backend/data/output.json")
     .then(res => res.json())
     .then(result => {
-      // تحديث المرفق المتوقع
       predictedFacilityEl.textContent = result.prediction || 'غير معروف';
 
-      // تحديث قائمة الأسباب الشائعة
       commonCausesList.innerHTML = Object.entries(result.common_causes || {})
         .map(([cause, count]) => `<li>${cause} (${count} حالة)</li>`)
         .join('') || "<li>لا توجد بيانات</li>";
 
-      // تحديث ملخص متوسط مدة التوقف
       downtimeSummaryList.innerHTML = Object.entries(result.summary || {})
         .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
         .join('') || "<li>لا توجد بيانات</li>";
 
-      // تحديث النصائح والتحليلات
       insightsList.innerHTML = (result.insights || [])
         .map(insight => `<li>${insight}</li>`)
         .join('') || "<li>لا توجد بيانات</li>";

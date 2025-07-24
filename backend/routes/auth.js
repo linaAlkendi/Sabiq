@@ -3,40 +3,23 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
-
-// مفتاح التشفير الخاص بـ JWT 
 const JWT_SECRET = "سري_جدا_لا_تشارك_مع_أحد";
 
 // قاعدة بيانات وهمية للمستخدمين
 const users = [
-  {
-    id: 1,
-    username: "tech_user1",
-    password: "", // سيتم التشفير لاحقًا
-    role: "فني",
-  },
-  {
-    id: 2,
-    username: "supervisor1",
-    password: "",
-    role: "مشرف صيانة",
-  },
-  {
-    id: 3,
-    username: "ops_manager",
-    password: "",
-    role: "مدير عمليات",
-  },
+  { id: 1, username: "tech_user1", password: "", role: "فني" },
+  { id: 2, username: "supervisor1", password: "", role: "مشرف صيانة" },
+  { id: 3, username: "ops_manager", password: "", role: "مدير عمليات" },
 ];
 
-// كلمات المرور الأصلية لكل مستخدم
+// كلمات المرور الأصلية
 const plainPasswords = {
   tech_user1: "Tech@123",
-  supervisor1: "no",
+  supervisor1: "sup@456",
   ops_manager: "Ops@789",
 };
 
-// دالة تشفير كلمات المرور عند بداية تشغيل السيرفر
+// دالة لتشفير كلمات المرور عند تشغيل السيرفر
 async function hashPasswords() {
   for (let user of users) {
     const plainPassword = plainPasswords[user.username];
@@ -46,47 +29,97 @@ async function hashPasswords() {
     }
   }
 }
-
-// استدعاء دالة التشفير مباشرة عند التشغيل
 hashPasswords();
+
+// رمز OTP ثابت
+const FIXED_OTP = "1234";
+
+// تخزين OTP مؤقت 
+const userOtpMap = new Map();
 
 // تسجيل الدخول
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // البحث عن المستخدم
     const user = users.find((u) => u.username === username);
     if (!user) {
       return res.status(401).json({ message: "اسم المستخدم غير موجود" });
     }
 
-    // التحقق من كلمة المرور
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
       return res.status(401).json({ message: "كلمة المرور غير صحيحة" });
     }
 
+    // استخدام رمز OTP ثابت
+    const otp = FIXED_OTP;
+
+    // حفظ OTP مؤقتًا
+    userOtpMap.set(user.username, otp);
+
+    console.log(`رمز التحقق للمستخدم ${username} هو: ${otp}`); // فقط للعرض في الكونسول
+
     // إنشاء توكن JWT
     const token = jwt.sign(
-      {
-        id: user.id,
-        username: user.username,
-        role: user.role,
-      },
+      { id: user.id, username: user.username, role: user.role },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    // الرد بالتوكن والدور
     res.json({
-      message: "تم تسجيل الدخول بنجاح",
+      message: "تم تسجيل الدخول بنجاح. يرجى إدخال رمز التحقق.",
       token,
       role: user.role,
     });
-
   } catch (err) {
     console.error("خطأ أثناء تسجيل الدخول:", err);
+    res.status(500).json({ message: "حدث خطأ في الخادم" });
+  }
+});
+
+// التحقق من OTP
+router.post("/verify-otp", (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ message: "مفقود توكن التفويض" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ message: "مفقود توكن التفويض" });
+    }
+
+    let decoded;
+    try {
+      decoded = jwt.verify(token, JWT_SECRET);
+    } catch {
+      return res.status(401).json({ message: "توكن غير صالح أو منتهي" });
+    }
+
+    const { username } = decoded;
+    const sentOtp = req.body.otp;
+
+    if (!sentOtp) {
+      return res.status(400).json({ message: "يرجى إرسال رمز التحقق" });
+    }
+
+    const savedOtp = userOtpMap.get(username);
+
+    if (!savedOtp) {
+      return res.status(400).json({ message: "رمز التحقق غير موجود أو منتهي" });
+    }
+
+    if (sentOtp !== savedOtp) {
+      return res.status(401).json({ message: "رمز التحقق غير صحيح" });
+    }
+
+    userOtpMap.delete(username);
+
+    res.json({ message: "تم التحقق من رمز التحقق بنجاح" });
+  } catch (err) {
+    console.error("خطأ أثناء التحقق من OTP:", err);
     res.status(500).json({ message: "حدث خطأ في الخادم" });
   }
 });

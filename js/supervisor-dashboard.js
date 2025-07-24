@@ -1,3 +1,10 @@
+function openAssignmentModal() {
+  document.getElementById("assignmentModalOverlay").style.display = "flex";
+}
+
+function closeAssignmentModal() {
+  document.getElementById("assignmentModalOverlay").style.display = "none";
+}
 document.addEventListener("DOMContentLoaded", () => {
   let tasks = [
     { technician: "أحمد القحطاني", facility: "سلم كهربائي 2", fault: "كهربائي", status: "قيد التنفيذ", severity: "وسط", action: "استبدال الأسلاك", assignedDate: "2025-07-10" },
@@ -33,10 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const searchInput = document.getElementById("searchInput");
 
-  const assignModal = document.getElementById("assignModal");
-  const assignBtn = document.getElementById("assignBtn");
-  const submitAssignment = document.getElementById("submitAssignment");
-  const cancelAssignment = document.getElementById("cancelAssignment");
 
   // زر تأكيد المهام المنجزة
   const confirmCompletedWrapper = document.createElement("div");
@@ -145,37 +148,14 @@ document.addEventListener("DOMContentLoaded", () => {
   severityFilter.addEventListener("change", filterTasks);
   searchInput.addEventListener("input", filterTasks);
 
-  assignBtn.addEventListener("click", () => {
-    assignModal.style.display = "flex";
-  });
 
-  cancelAssignment.addEventListener("click", () => {
-    assignModal.style.display = "none";
-  });
+document.getElementById("assignmentForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  //    المعالجة  ( إرسال البيانات للسيرفر)
+  closeAssignmentModal();
+  alert("تم إسناد العطل بنجاح!");
+});
 
-  submitAssignment.addEventListener("click", () => {
-    const technician = document.getElementById("technicianInput").value.trim();
-    const facility = document.getElementById("facilityInput").value.trim();
-    const fault = document.getElementById("faultTypeInput").value;
-    const action = document.getElementById("actionInput").value.trim();
-
-    if (!technician || !facility || !action) return alert("جميع الحقول مطلوبة");
-
-    const newTask = {
-      technician,
-      facility,
-      fault,
-      severity: "وسط",
-      status: "قيد التنفيذ",
-      action,
-      assignedDate: new Date().toISOString().slice(0, 10)
-    };
-
-    tasks.unshift(newTask);
-    assignModal.style.display = "none";
-    showSuccessToast();
-    filterTasks();
-  });
 
   // نافذة التنبيه (في حال لم يتم اختيار أي مهمة)
   function showAlertMessage(msg) {
@@ -226,16 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmPopup.style.display = "none";
   });
 
-  function showSuccessToast() {
-    const toast = document.getElementById("successToast");
-    toast.style.opacity = "1";
-    toast.style.transform = "translateY(0)";
-    
-    setTimeout(() => {
-      toast.style.opacity = "0";
-      toast.style.transform = "translateY(20px)";
-    }, 3000);
-  }
+
 
   filterTasks();
 });

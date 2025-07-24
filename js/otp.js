@@ -1,117 +1,82 @@
-// رقم التحقق الافتراضي
-const correctOtp = "1234"; // تأكد من أن الرقم الافتراضي هو "1234"
+document.addEventListener("DOMContentLoaded", function () {
+  const inputs = document.querySelectorAll(".input-otp");
+  const checkBtn = document.getElementById("check-btn");
+  const messageBox = document.getElementById("message");
+  const resendText = document.getElementById("resend-text");
 
-// الحصول على العناصر
-const checkBtn = document.getElementById('check-btn');
-const resendText = document.getElementById('resend-text');
-const messageElement = document.getElementById('message');
-const otpInputs = document.querySelectorAll('.input-otp');
-
-// الدالة التي تتحقق من رمز التحقق
-checkBtn.addEventListener('click', async () => {
-  const enteredOtp = Array.from(otpInputs).map(input => input.value).join(''); // جمع القيم المدخلة في الخانات
-
-  // إذا كان رمز التحقق صحيحًا
-  if (enteredOtp === correctOtp) {
-    messageElement.textContent = "مرحبًا بك في سابِق";
-    messageElement.style.backgroundColor = "#d4edda9c"; // اللون الأخضر
-    messageElement.style.color = "#155724";
-    messageElement.style.display = 'block'; // عرض الرسالة
-
-    // التحقق من التوكن والدور بعد التحقق من رمز OTP
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      try {
-        // إرسال طلب التحقق من الدور إلى السيرفر
-        const response = await fetch("http://localhost:3000/auth/role", {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-
-             if (enteredOtp === correctOtp) {
-    messageElement.textContent = "مرحبًا بك في سابِق";
-    messageElement.style.backgroundColor = "#d4edda9c"; // اللون الأخضر
-    messageElement.style.color = "#155724";
-    messageElement.style.display = 'block'; // عرض الرسالة
-             }
-          // إعادة التوجيه حسب الدور
-          setTimeout(() => {
-            switch (data.role) {
-              case "فني":
-                window.location.href = "technician-dashboard.html"; // التوجيه إلى صفحة الفني
-                break;
-              case "مشرف صيانة":
-                window.location.href = "supervisor-dashboard.html"; // التوجيه إلى صفحة مشرف الصيانة
-                break;
-              case "مدير عمليات":
-                window.location.href = "dashboard.html"; // التوجيه إلى صفحة مدير العمليات
-                break;
-              default:
-                messageElement.textContent = "الدور غير معروف";
-                messageElement.className = "error-message";
-                messageElement.style.display = 'block'; // عرض رسالة الخطأ
-            }
-          }, 1500); // تأخير 1.5 ثانية قبل التوجيه
-        } else {
-          messageElement.textContent = `${data.message}`;
-          messageElement.className = "error-message";
-          messageElement.style.display = 'block'; // عرض رسالة الخطأ
-        }
-      } catch (error) {
-        console.error("خطأ في الاتصال بالسيرفر:", error);
-        messageElement.textContent = "حدث خطأ في الاتصال بالخادم. حاول لاحقًا.";
-        messageElement.className = "error-message";
-        messageElement.style.display = 'block'; // عرض رسالة الخطأ
+  // التنقل تلقائياً بين حقول رمز التحقق
+  inputs.forEach((input, idx) => {
+    input.addEventListener("input", () => {
+      if (input.value.length === 1 && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
       }
+    });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && input.value === "" && idx > 0) {
+        inputs[idx - 1].focus();
+      }
+    });
+  });
+
+  // إعادة إرسال رمز التحقق (يمكن تعديلها لاحقاً)
+  resendText.addEventListener("click", () => {
+    messageBox.textContent = "تم إرسال رمز تحقق جديد إلى جوالك.";
+    messageBox.className = "success-message";
+    // هنا يمكن إضافة منطق لإعادة إرسال الرمز (اختياري)
+  });
+
+  checkBtn.addEventListener("click", async () => {
+    const otp = Array.from(inputs).map(input => input.value).join("");
+
+    if (otp.length < inputs.length) {
+      messageBox.textContent = "يرجى إدخال كامل رمز التحقق.";
+      messageBox.className = "error-message";
+      return;
     }
-  } else {
-    messageElement.textContent = "رمز التحقق غير صحيح";
-    messageElement.style.backgroundColor = "#f8d7daa1"; // اللون الأحمر
-    messageElement.style.color = "#721c24";
-    messageElement.style.display = 'block'; // عرض الرسالة
-  }
+
+    messageBox.textContent = "";
+    messageBox.className = "";
+
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ otp }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        messageBox.textContent = "تم التحقق بنجاح. جاري التوجيه...";
+        messageBox.className = "success-message";
+
+        setTimeout(() => {
+          if (role === "فني") {
+            window.location.href = "technician-dashboard.html";
+          } else if (role === "مشرف صيانة") {
+            window.location.href = "supervisor-dashboard.html";
+          } else if (role === "مدير عمليات") {
+            window.location.href = "dashboard.html";
+          } else {
+            messageBox.textContent = "الدور غير معروف.";
+            messageBox.className = "error-message";
+          }
+        }, 1500);
+
+      } else {
+        messageBox.textContent = data.message || "رمز التحقق غير صحيح.";
+        messageBox.className = "error-message";
+      }
+    } catch (error) {
+      console.error("خطأ في الاتصال بالسيرفر:", error);
+      messageBox.textContent = "حدث خطأ في الاتصال بالخادم. حاول لاحقًا.";
+      messageBox.className = "error-message";
+    }
+  });
 });
-
-// وظيفة لإظهار "إعادة إرسال رمز التحقق" بعد 60 ثانية
-let countdown = 60;
-let resendTimeout;
-
-function enableResendButton() {
-  resendText.style.display = 'block';
-  resendText.addEventListener('click', resendOtp);
-}
-
-function resendOtp() {
-  // إخفاء زر إعادة الإرسال بعد النقر عليه
-  resendText.style.display = 'none';
-  messageElement.textContent = "تم إرسال رمز التحقق مرة أخرى";
-  messageElement.style.backgroundColor = "#d4edda9c"; // اللون الأخضر
-  messageElement.style.color = "#155724";
-  messageElement.style.display = 'block';
-
-  // إلغاء العداد القديم وبدء العد من جديد
-  clearInterval(resendTimeout);
-  countdown = 60;
-  startCountdown();
-}
-
-function startCountdown() {
-  resendTimeout = setInterval(() => {
-    countdown--;
-    if (countdown <= 0) {
-      clearInterval(resendTimeout);
-      enableResendButton();
-    }
-  }, 1000);
-}
-
-// بدء العد التنازلي فور تحميل الصفحة
-startCountdown();

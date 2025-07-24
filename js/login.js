@@ -21,18 +21,25 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
 
       if (response.ok) {
-        // تخزين التوكن في localStorage
-        localStorage.setItem("token", data.token);
+        messageBox.textContent = "مرحبا بك في سابِق (SABIQ)";
+        messageBox.className = "success-message";
 
-        // التوجيه إلى صفحة OTP مباشرة بعد التأكد من صحة كلمة المرور
-        window.location.href = "otp.html";  // إعادة التوجيه إلى صفحة OTP
+        // تخزين التوكن والدور في localStorage لاستخدامها في otp.js
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
+
+        // التوجيه إلى صفحة otp.html بعد ثانية ونصف
+        setTimeout(() => {
+          window.location.href = "otp.html";
+        }, 1500);
+
       } else {
-        messageBox.textContent = `${data.message}`;
+        messageBox.textContent = data.message || "فشل تسجيل الدخول";
         messageBox.className = "error-message";
       }
     } catch (error) {
       console.error("خطأ في الاتصال بالسيرفر:", error);
-      messageBox.textContent = " حدث خطأ في الاتصال بالخادم. حاول لاحقًا.";
+      messageBox.textContent = "حدث خطأ في الاتصال بالخادم. حاول لاحقًا.";
       messageBox.className = "error-message";
     }
   });
