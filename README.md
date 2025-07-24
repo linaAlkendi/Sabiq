@@ -94,7 +94,7 @@ To run the prediction API, Python **3.10.x** must be installed. Other versions (
    - Download from: [https://www.python.org/downloads/release/python-3100/](https://www.python.org/downloads/release/python-3100/)
    - During installation, make sure to **check "Add Python to PATH"**
 
-2. **Install required Python packages:**
+2. **Install required Python packages (with specific versions):**
    ```bash
    pip install flask==2.3.3
    pip install joblib==1.2.0

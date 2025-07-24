@@ -132,6 +132,12 @@
   color: var(--primary-btn);
 }
 
+.facility-stats .prediction {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #0a7f54;
+}
+
 
 @media (max-width: 768px) {
   .dashboard {

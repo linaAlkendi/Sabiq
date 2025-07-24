@@ -17,6 +17,15 @@ fetch('http://localhost:3000/facilities')
         statusText = facility.status;
       }
 
+      let predictionText = '';
+      if (facility.model_prediction === '1') {
+        predictionText = '🔧 العطل متوقع (تنبؤ النموذج)';
+      } else if (facility.model_prediction === '0') {
+        predictionText = '✅ لا يوجد عطل (تنبؤ النموذج)';
+      } else {
+        predictionText = '❓ التنبؤ غير متوفر';
+      }
+
       card.innerHTML = `
         <h3>${facility.name}</h3>
         
@@ -40,6 +49,10 @@ fetch('http://localhost:3000/facilities')
           <div class="stat">
             <span class="stat-label">حمل الموتور</span>
             <span class="stat-value">${facility.motor_load}</span>
+          </div>
+          <div class="stat prediction">
+            <span class="stat-label">تنبؤ النموذج</span>
+            <span class="stat-value">${predictionText}</span>
           </div>
         </div>
 

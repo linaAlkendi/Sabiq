@@ -2,13 +2,50 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const router = express.Router();
+const axios = require("axios");
 
 const DATA_FILE = path.join(__dirname, "../data/facilities.json");
 
-// GET all facilities
-router.get("/", (req, res) => {
-  const data = fs.readFileSync(DATA_FILE, "utf-8");
-  res.json(JSON.parse(data));
+// GET all facilities with AI model prediction
+router.get("/", async (req, res) => {
+  try {
+    const rawData = fs.readFileSync(DATA_FILE, "utf-8");
+    const facilities = JSON.parse(rawData);
+
+    const enrichedFacilities = await Promise.all(
+      facilities.map(async (facility) => {
+        try {
+          const inputData = {
+            temperature: parseFloat(facility.temperature),
+            vibration: parseFloat(facility.vibration),
+            pressure: parseFloat(facility.pressure),
+            humidity: parseFloat(facility.humidity),
+            motor_load: parseFloat(facility.motor_load)
+          };
+
+          const response = await axios.get("http://127.0.0.1:5000/predict", {
+            params: inputData
+          });
+
+          return {
+            ...facility,
+            model_prediction: response.data.prediction
+          };
+        } catch (err) {
+          console.error(`Prediction failed for facility ID ${facility.id}:`, err.message);
+          return {
+            ...facility,
+            model_prediction: "Unavailable"
+          };
+        }
+      })
+    );
+
+    res.json(enrichedFacilities);
+  } catch (error) {
+    console.error("Error reading facilities data:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // GET facility by ID
