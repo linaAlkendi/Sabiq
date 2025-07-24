@@ -1,3 +1,4 @@
+
 # 🛫 Sabiq – Aviation Safety Prototype
 
 This project is a prototype for reporting and visualizing technical safety incidents in an aviation environment. It consists of a frontend interface (HTML, CSS, JavaScript) and a backend API built with Express.js to manage incident data via a local JSON file.
@@ -50,6 +51,7 @@ sabiq/
 - **Lina** – Designed and developed the UI, tracked workflow and task coordination
 - **Shroog** – Designed and developed the UI
 - **Rami** – Integrated database and backend systems with frontend
+
 ---
 
 ## 🚀 Getting Started (Backend)
@@ -84,27 +86,43 @@ http://localhost:3000
 
 Simply open any HTML file inside the `pages/` folder in your browser (e.g. `reports.html`, `new-report.html`, `dashboard.html`). The pages will communicate with the backend via API calls to `http://localhost:3000`.
 
+---
+
+# Facility Monitoring Dashboard
+
+This project is a web-based dashboard for monitoring the real-time status of various facilities (e.g., elevators, escalators, gates). It integrates predictive maintenance capabilities using an AI model to assess equipment health.
 
 ---
 
-## 🧠 AI Model Information
+## 📊 Features
 
-This project integrates a machine learning model to predict facility status based on sensor readings. The model is a pretrained **Random Forest Classifier** that uses 5 features:
+- Interactive dashboard displaying facility sensor data
+- Status indicators: ✅ Good, ⚠️ Warning, 🔴 Fault
+- Detailed view per facility
+- AI-powered fault prediction (integrated backend)
 
-- **Temperature (°C)**
-- **Vibration (mm/s)**
-- **Pressure (Pa)**
-- **Humidity (%)**
-- **Motor Load (%)**
+---
 
-### 🎯 Prediction Output
+## 🧠 AI Fault Prediction
 
-The model classifies the facility into:
+This project includes a trained **Random Forest Classifier** model that predicts whether a facility is working normally or requires maintenance based on real-time sensor data.
 
-- **0 = Working (Normal Operation)**
-- **1 = Broken (Needs Repair/Failure)**
+### 🎯 Model Details
 
-### 📊 Expected Feature Ranges per Class
+- **Model Type**: Random Forest Classifier  
+- **Training Data**: Synthetic Elevator Sensor Dataset  
+- **Input Features**:
+  - Temperature (°C)
+  - Vibration (mm/s)
+  - Pressure (Pa)
+  - Humidity (%)
+  - Motor Load (%)
+
+- **Prediction Classes**:
+  - `0` → ✅ Working (Normal Operation)
+  - `1` → 🔴 Broken (Needs Repair)
+
+### 📊 Feature Ranges (Typical Values)
 
 | Feature      | Class 0: Working       | Class 1: Broken         |
 |--------------|------------------------|--------------------------|
@@ -114,38 +132,22 @@ The model classifies the facility into:
 | Humidity     | 35–55 %                | 25–50 %                  |
 | Motor Load   | 50–70 %                | 70–100 %                 |
 
-These ranges are derived from a **Synthetic Elevator Sensor Dataset** used to train the model.
-
-### 🧪 Model API
-
-The model is served through a **Flask API** with a single endpoint:
-
-- `GET /predict`
-  - Query parameters: `temperature`, `vibration`, `pressure`, `humidity`, `motor_load`
-  - Example:  
-    ```
-    http://localhost:5000/predict?temperature=55&vibration=7.1&pressure=65&humidity=30&motor_load=85
-    ```
-
-  - Returns a JSON response with the prediction and input data.
-
+> These are not hard thresholds but commonly observed ranges in the training data.
 
 ---
 
+### 🧪 Flask API for Real-Time Inference
 
-## 🧠 AI Fault Prediction Integration
+The model is deployed through a lightweight Flask server.
 
-This project integrates a trained machine learning model to predict potential facility malfunctions based on telemetry data (temperature, pressure, etc.).
+#### ▶️ Run the API Locally
 
-### 🧪 Python Environment Setup
+> Python version **3.10.x is required** due to joblib compatibility.
 
-To run the prediction API, Python **3.10.x** must be installed. Other versions (like 3.11/3.12/3.13) are not compatible due to serialization limitations.
+1. **Install Python 3.10.x**  
+   Download from [python.org](https://www.python.org/downloads/release/python-3100/) and ensure you check **"Add to PATH"** during installation.
 
-1. **Install Python 3.10.x:**
-   - Download from: [https://www.python.org/downloads/release/python-3100/](https://www.python.org/downloads/release/python-3100/)
-   - During installation, make sure to **check "Add Python to PATH"**
-
-2. **Install required Python packages (with specific versions):**
+2. **Install dependencies**:
    ```bash
    pip install flask==2.3.3
    pip install joblib==1.2.0
@@ -154,20 +156,49 @@ To run the prediction API, Python **3.10.x** must be installed. Other versions (
    pip install numpy==1.23.5
    ```
 
-### ▶️ Running the Flask Model API
+3. **Start the server**:
+   ```bash
+   cd backend/facility-fault-model
+   python model_api.py
+   ```
 
-To serve predictions locally:
+---
 
-```bash
-cd backend/facility-fault-model
-python model_api.py
+### 🌐 API Usage
+
+- **Endpoint**: `GET /predict`
+- **Query Parameters**:
+  - `temperature`
+  - `vibration`
+  - `pressure`
+  - `humidity`
+  - `motor_load`
+
+**Example Request**:
+```
+http://localhost:5000/predict?temperature=55&vibration=7.1&pressure=65&humidity=30&motor_load=85
 ```
 
-Test the API by visiting in your browser:
-```
-http://localhost:5000/predict?temperature=35.5&vibration=0.8&pressure=92.0&humidity=46.0&motor_load=60.0
+**Sample Response**:
+```json
+{
+  "input_data": {
+    "temperature": 55.0,
+    "vibration": 7.1,
+    "pressure": 65.0,
+    "humidity": 30.0,
+    "motor_load": 85.0
+  },
+  "prediction": "1"
+}
 ```
 
-- The model returns a `"prediction"` value of `"0"` (normal) or `"1"` (malfunction).
-- Your backend system can integrate this endpoint to check for real-time status.
+---
 
+### 🖼️ Sample Prediction Output
+
+Below is a sample AI prediction screenshot from the dashboard.
+
+![Prediction Screenshot](assets/prediction.PNG)
+
+> Use the model predictions in your dashboard to visualize alerts and maintenance status in real-time.
