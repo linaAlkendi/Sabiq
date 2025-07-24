@@ -2,14 +2,27 @@ let originalValues = {};
 
 function enableField(field) {
   const inputField = document.getElementById(field);
+  const isDarkMode = document.body.classList.contains("dark"); // Check if dark mode is enabled
+  
   if (inputField) {
     originalValues[field] = inputField.textContent;
     inputField.contentEditable = true;
-    inputField.style.backgroundColor = "#fff";
-    inputField.style.textAlign = "center";
+    inputField.style.textAlign = "center"; // Center text inside input
     inputField.focus();
+
+    // Apply styles based on dark mode
+    if (isDarkMode) {
+      inputField.style.backgroundColor = "#2a2a40"; // Dark background for dark mode
+      inputField.style.color = "#ffffffff"; // Blue text color for dark mode
+      inputField.style.border = "1px solid #747677ff"; // Blue border for dark mode
+    } else {
+      inputField.style.backgroundColor = "#fff"; // White background for light mode
+      inputField.style.color = "#333"; // Dark text color for light mode
+      inputField.style.border = "1px solid #ccc"; // Light border for light mode
+    }
   }
 }
+
 
 function validateInputs() {
   const email = document.getElementById('email').textContent;
