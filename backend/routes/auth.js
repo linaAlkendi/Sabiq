@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 const express = require("express");
 
 const bcrypt = require("bcryptjs");
@@ -12,6 +12,9 @@ const USERS_FILE = path.join(__dirname, "../data/users.json");
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
+
+
+
 
 function getAllUsers() {
   const data = fs.readFileSync(USERS_FILE, "utf-8");
