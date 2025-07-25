@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require("express");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
@@ -8,8 +10,8 @@ const router = express.Router();
 
 const USERS_FILE = path.join(__dirname, "../data/users.json");
 
-// مفتاح التشفير الخاص بـ JWT 
-const JWT_SECRET = "سري_جدا_لا_تشارك_مع_أحد";
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function getAllUsers() {
   const data = fs.readFileSync(USERS_FILE, "utf-8");

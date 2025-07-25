@@ -32,3 +32,5 @@ pnpm-lock.yaml
 # Ignore uploads or cache folders (if added later)
 uploads/
 .cache/
+
+.env
