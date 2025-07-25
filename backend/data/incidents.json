@@ -1,16 +1,19 @@
 [
   {
-    "facility": "سلم متحرك 1",
+    "facility": "بوابة 5",
     "issueType": "كهربائية",
-    "description": "test",
+    "description": "test report",
     "reportedBy": "مستخدم النظام",
-    "reportedAt": "2025-07-21 23:50:31",
+    "reportedAt": "2025-07-25 16:19:56",
     "status": "open",
     "id": 1,
-    "temperature": 48,
-    "vibration": "متوسط",
-    "currentUsage": 2950,
+    "temperature": "40 C",
+    "pressure": "30 Pa",
+    "humidity": "40 %",
+    "vibration": "2.5 mm/s",
+    "motor_load": "50 %",
+    "currentUsage": 3200,
     "maxUsage": 3000,
-    "operatingHours": 1350
+    "operationHours": 364
   }
 ]

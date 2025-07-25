@@ -29,10 +29,13 @@ router.post("/", (req, res) => {
 
   if (matchedFacility) {
     newIncident.temperature = matchedFacility.temperature;
+    newIncident.pressure = matchedFacility.pressure;
+    newIncident.humidity = matchedFacility.humidity;
     newIncident.vibration = matchedFacility.vibration;
+    newIncident.motor_load = matchedFacility.motor_load;
     newIncident.currentUsage = matchedFacility.currentUsage;
     newIncident.maxUsage = matchedFacility.maxUsage;
-    newIncident.operatingHours = matchedFacility.operatingHours;
+    newIncident.operationHours = matchedFacility.operationHours;
   }
 
   incidents.push(newIncident);
@@ -69,10 +72,13 @@ router.patch("/:id/status", (req, res) => {
 
     const description = `
       نوع العطل: ${incident.issueType}
-      🌡️ درجة الحرارة: ${incident.temperature ?? '—'}°C
+      🌡️ درجة الحرارة: ${incident.temperature ?? '—'}
       📉 مستوى الاهتزاز: ${incident.vibration ?? '—'}
       ⚙️ الاستخدام: ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}
-      ⏱️ ساعات التشغيل: ${incident.operatingHours ?? '—'}
+      ⏱️ ساعات التشغيل: ${incident.operationHours ?? '—'}
+      💨 الضغط: ${incident.pressure ?? '—'} 
+      💧 الرطوبة: ${incident.humidity ?? '—'}
+      🔌 حمل الموتور: ${incident.motor_load ?? '—'}
     `.trim();
 
     notifier.createNotification({
