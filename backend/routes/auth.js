@@ -28,7 +28,7 @@ function saveAllUsers(users) {
 // Original plain passwords
 const plainPasswords = {
   tech_user1: "Tech@123",
-  supervisor1: "sup@456", //  الغريب انها محفوظة ك no !!
+  supervisor1: "sup@456", 
   ops_manager: "Ops@789",
 };
 

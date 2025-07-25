@@ -96,9 +96,9 @@ JWT_SECRET= "SOME_KEY"
 
 | Username    | Password | Role        |
 |-------------|----------|-------------|
-| tech_user1  | admin123 | فني         |
-| supervisor1 | user123  | مشرف صيانة  | 
-| ops_manager | tech123  | مدير عمليات |
+| tech_user1  | Tech@123 | فني         |
+| supervisor1 | sup@456  | مشرف صيانة  | 
+| ops_manager | Ops@789  | مدير عمليات |
 
 You can modify these accounts in `backend/data/users.json`.
 Passwords are hashed then stored in the backend.
