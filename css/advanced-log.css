@@ -96,3 +96,26 @@ body.dark-theme #topMonthsCard {
     margin-bottom: 15px;
     font-weight: bold;
   }
+
+  #topFailureCard {
+  background: rgba(112, 166, 200, 0.15); /* لون فاتح شبه شفاف */
+  color: var(--text-color);
+  font-weight: 400;
+  text-align: center;
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 20px auto 50px;
+  max-width: 600px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  direction: rtl;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* الوضع الليلي */
+body.dark-theme #topFailureCard {
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.301);
+}

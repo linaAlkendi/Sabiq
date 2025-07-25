@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       for (const item of data) {
         const date = new Date(item["تاريخ العطل"]);
-        if (date.getFullYear() !== 2024) continue;
 
         // 📊 الرسم البياني الشريطي:
         const month = date.toLocaleString("ar-EG", { month: "long" });
@@ -123,6 +122,17 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       });
+      // 🧠 تحليل نوع الاعطال
+      if (typeCounts["ميكانيكي"] >typeCounts["كهربائي"]){
+        document.getElementById("topFailureCard").textContent =
+          "حسب التحليل، الأعطال الميكانيكية هي الأكثر شيوعاً، مما يشير إلى ضرورة التركيز على صيانة الأجزاء الميكانيكية.";
+      } else if (typeCounts["كهربائي"] > typeCounts["ميكانيكي"]) {
+        document.getElementById("topFailureCard").textContent =
+          "حسب التحليل، الأعطال الكهربائية هي الأكثر شيوعاً، مما يشير إلى ضرورة التركيز على صيانة الدوائر الكهربائية.";
+      } else { 
+        document.getElementById("topFailureCard").textContent =
+          "حسب التحليل، الأعطال الأخرى هي الأكثر شيوعاً، مما يشير إلى ضرورة مراجعة الإجراءات الحالية.";
+      }
 
       // 🧠 تحليل الأشهر
       const monthlyTotals = {};

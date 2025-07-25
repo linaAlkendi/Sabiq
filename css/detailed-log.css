@@ -446,3 +446,19 @@ body.dark #predictionSection ul li {
 #predictionSection ul li strong {
   color: var(--primary-btn, #007bff);
 }       
+#detailedDataBtn {
+  margin-bottom: 50px;
+  background: var(--primary-btn);
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 12px 26px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#detailedDataBtn:hover {
+  background: var(--primary-btn-hover);
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.6);
+}

@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
   facilityTypeFilter.addEventListener("change", renderTable);
   sortOrderSelect.addEventListener("change", renderTable);
 
+  
   function updatePrediction() {
     // سيتم تحديثه لاحقًا عند الحاجة
   }

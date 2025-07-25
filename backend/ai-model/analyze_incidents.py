@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report
 import json
 import datetime
+from scipy.stats import linregress
 
 # 1. قراءة البيانات
 df = pd.read_json("./backend/data/incidentData.json", encoding='utf-8')
@@ -112,9 +113,59 @@ facility_rate = monthly_fault_rates.get(predicted_facility, 0)
 # تحويل المعدل إلى احتمال تقريبي (يمكن تعديل المعامل 0.25 حسب الحاجة)
 estimated_probability = min(facility_rate * 0.25, 1)
 
-insights.append(f"احتمالية حدوث عطل في {predicted_facility} خلال الشهر القادم: {estimated_probability*100:.1f}%")
+# 12. حساب MTBF وتوقع تاريخ العطل القادم
+facility_faults_dates = df[df['نوع المرفق'] == predicted_facility]['تاريخ العطل'].sort_values()
 
-# 12. تحضير نتيجة شاملة للحفظ في ملف JSON
+intervals = facility_faults_dates.diff().dt.days.dropna()
+
+mtbf_days = intervals.mean()
+
+last_fault_date = facility_faults_dates.max()
+
+if pd.notna(mtbf_days):
+    predicted_next_fault_date = last_fault_date + pd.Timedelta(days=mtbf_days)
+else:
+    predicted_next_fault_date = None
+
+# 13. عد الأعطال شهريًا لكل مرفق وتحليل الاتجاه
+monthly_counts = df.groupby([pd.Grouper(key='تاريخ العطل', freq='M'), 'نوع المرفق']).size().unstack().fillna(0)
+
+facility_series = monthly_counts[predicted_facility]
+x = range(len(facility_series))
+slope, intercept, r_value, p_value, std_err = linregress(x, facility_series)
+
+mean_faults = facility_series.mean()
+
+if mean_faults > 0:
+    percent_change = (slope / mean_faults) * 100
+else:
+    percent_change = 0
+
+if slope > 0:
+    insights.append(
+        f"عدد الأعطال في {predicted_facility} في ارتفاع مستمر بمعدل زيادة شهري يبلغ {percent_change:.1f}% من المتوسط."
+    )
+elif slope < 0:
+    insights.append(
+        f"عدد الأعطال في {predicted_facility} في انخفاض مستمر بمعدل نقصان شهري يبلغ {abs(percent_change):.1f}% من المتوسط."
+    )
+else:
+    insights.append(f"عدد الأعطال في {predicted_facility} مستقر خلال الأشهر الماضية.")
+
+# 14. إضافة التوقع الزمني واحتمالية حدوث العطل إلى التحليلات
+if predicted_next_fault_date is not None:
+    date_str = predicted_next_fault_date.strftime("%Y-%m-%d")
+    insights.append(
+        f"من المتوقع أن يحدث العطل القادم في {predicted_facility} حوالي يوم {date_str} "
+        f"بمعدل احتمالية {estimated_probability*100:.1f}% بناءً على البيانات التاريخية."
+    )
+else:
+    insights.append(
+        f"لا توجد بيانات كافية لتوقع موعد العطل القادم في {predicted_facility}، "
+        f"لكن احتمالية حدوث عطل هي {estimated_probability*100:.1f}%."
+    )
+
+# 15. تحضير نتيجة شاملة للحفظ في ملف JSON
 result = {
     "prediction": predicted_facility,
     "probability": f"{estimated_probability*100:.1f}%",

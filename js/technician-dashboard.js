@@ -109,12 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ` : "";
 
     contentWrapper.innerHTML = `
-      ${priorityBadge}
+      
       <div class="task-title">${task.title}</div>
       <div class="task-info">النوع: ${task.type}</div>
       <div class="task-info">تاريخ الإسناد: ${task.date}</div>
       ${facilityStatus}
       ${timingMessage}
+      ${priorityBadge}
       <div class="status-badge status-${statusKey}">
         ${iconSVG}
         <span>${task.status}</span>
