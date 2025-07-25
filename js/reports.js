@@ -72,12 +72,12 @@ function renderIncidents(list) {
       <div><span class="label"><span class="material-icons">build</span> نوع المشكلة:</span> <span class="value">${incident.issueType}</span></div>
       <div><span class="label"><span class="material-icons">description</span> وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
 <div class="facility-characteristics">
-  <p>🌡️ <strong>درجة الحرارة:</strong> ${incident.temperature ?? '—'}°C</p>
-  <p>💧 <strong>الرطوبة:</strong> ${incident.humidity ?? '—'}%</p>
+  <p>🌡️ <strong>درجة الحرارة:</strong> ${incident.temperature ?? '—'}</p>
+  <p>💧 <strong>الرطوبة:</strong> ${incident.humidity ?? '—'}</p>
   <p>📈 <strong>مستوى الاهتزاز:</strong> ${incident.vibration ?? '—'}</p>
   <p>⚙️ <strong>الاستخدام:</strong> ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}</p>
   <p>⏱️ <strong>ساعات التشغيل:</strong> ${incident.operationHours ?? '—'}</p>
-  <p>🧭 <strong>الضغط:</strong> ${incident.pressure ?? '—'} بار</p>
+  <p>🧭 <strong>الضغط:</strong> ${incident.pressure ?? '—'} </p>
   <p>⚡ <strong>حمل الموتور:</strong> ${incident.motor_load ?? '—'}</p>
 </div>
 

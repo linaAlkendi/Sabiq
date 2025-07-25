@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 facility: facilitySelect.value,
                 issueType: issueType.value,
                 description: description.value,
-                reportedBy: "مستخدم النظام",
+                reportedBy: "مدير العمليات",
                 reportedAt: new Date().toISOString().replace("T", " ").slice(0, 19),
                 status: "open"
             };
