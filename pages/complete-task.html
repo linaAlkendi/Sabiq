@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/header.css">
   <link rel="stylesheet" href="../css/complete-task.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+   
 
 </head>
 <body>
@@ -33,9 +34,11 @@
     <aside class="side-menu" id="sideMenu">
       <br><br><br>
       <nav class="menu-nav">
-        <ul id="menu" class="main-menu"></ul>
+        <ul id="menu" class="main-menu" ></ul>
+          
 
       </nav>
+        
       <div class="menu-footer">
         <a href="index.html" class="logout-link">تسجيل الخروج</a>
       </div>
@@ -137,11 +140,21 @@
     </div>
   </div>
 </div>
-
+ 
   <script src="../js/theme.js"></script>
   <script src="../js/header.js"></script>
-  <script src="../js/menu.js" defer></script>
+  <script>
+    const sideMenu = document.getElementById("sideMenu");
+const menuToggle = document.getElementById("menuToggle");
+
+menuToggle.addEventListener("click", function() {
+  sideMenu.classList.toggle("active");  
+});
+  </script>
+
+   <script src="../js/menu.js" defer></script>
   <script src="../js/complete-task.js"></script>
+  
   <footer>&copy; 2025 SABIQ. جميع الحقوق محفوظة.</footer>
 
 </body>
