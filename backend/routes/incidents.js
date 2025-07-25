@@ -72,13 +72,13 @@ router.patch("/:id/status", (req, res) => {
 
     const description = `
       نوع العطل: ${incident.issueType}
-      🌡️ درجة الحرارة: ${incident.temperature ?? '—'}°C
+      🌡️ درجة الحرارة: ${incident.temperature ?? '—'}
       📉 مستوى الاهتزاز: ${incident.vibration ?? '—'}
       ⚙️ الاستخدام: ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}
-      ⏱️ ساعات التشغيل: ${incident.operatingHours ?? '—'}
-      💨 الضغط: ${incident.pressure ?? '—'} Pa
-      💧 الرطوبة: ${incident.humidity ?? '—'}%
-      🔌 حمل الموتور: ${incident.motorLoad ?? '—'}%
+      ⏱️ ساعات التشغيل: ${incident.operationHours ?? '—'}
+      💨 الضغط: ${incident.pressure ?? '—'} 
+      💧 الرطوبة: ${incident.humidity ?? '—'}
+      🔌 حمل الموتور: ${incident.motor_load ?? '—'}
     `.trim();
 
     notifier.createNotification({
