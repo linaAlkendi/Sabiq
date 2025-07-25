@@ -83,6 +83,35 @@ http://localhost:3000
 
 ---
 
+## 🔐 Environment Setup & Security
+
+### 👤 Authentication Info (Dummy Data for Testing)
+
+Create a `.env` file under the `backend` folder with the following key:
+```
+JWT_SECRET= "SOME_KEY"
+```
+
+### 👤 Authentication Info (Dummy Data for Testing)
+
+| Username    | Password | Role        |
+|-------------|----------|-------------|
+| tech_user1  | admin123 | فني         |
+| supervisor1 | user123  | مشرف صيانة  | 
+| ops_manager | tech123  | مدير عمليات |
+
+You can modify these accounts in `backend/data/users.json`.
+Passwords are hashed then stored in the backend.
+
+### 📲 OTP Simulation
+
+This project uses a dummy OTP verification process for demo purposes.  
+In production, it should be integrated with an SMS/email provider.
+
+For testing, please enter **1234**.
+
+---
+
 ## 🌐 Frontend
 
 Simply open any HTML file inside the `pages/` folder in your browser (e.g. `reports.html`, `new-report.html`, `dashboard.html`). The pages will communicate with the backend via API calls to `http://localhost:3000`.
