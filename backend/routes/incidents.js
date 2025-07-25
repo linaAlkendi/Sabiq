@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
     newIncident.motor_load = matchedFacility.motor_load;
     newIncident.currentUsage = matchedFacility.currentUsage;
     newIncident.maxUsage = matchedFacility.maxUsage;
-    newIncident.operationHours = matchedFacility.operatingHours;
+    newIncident.operationHours = matchedFacility.operationHours;
   }
 
   incidents.push(newIncident);

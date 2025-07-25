@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else if (role === "مدير عمليات") {
     items = [
       { name: "لوحة التحكم", link: "dashboard.html" },
-      { name: "البلاغات", link: "reports.html.html" },
+      { name: "البلاغات", link: "reports.html" },
       { name: "سجل الأعطال", link: "detailed-log.html" },
       { name: "التنبيهات", link: "notifications.html" },
       { name: "الإعدادات", link: "settings.html" }

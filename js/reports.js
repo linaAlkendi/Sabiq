@@ -76,9 +76,9 @@ function renderIncidents(list) {
   <p>💧 <strong>الرطوبة:</strong> ${incident.humidity ?? '—'}%</p>
   <p>📈 <strong>مستوى الاهتزاز:</strong> ${incident.vibration ?? '—'}</p>
   <p>⚙️ <strong>الاستخدام:</strong> ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}</p>
-  <p>⏱️ <strong>ساعات التشغيل:</strong> ${incident.operatingHours ?? '—'}</p>
+  <p>⏱️ <strong>ساعات التشغيل:</strong> ${incident.operationHours ?? '—'}</p>
   <p>🧭 <strong>الضغط:</strong> ${incident.pressure ?? '—'} بار</p>
-  <p>⚡ <strong>حمل الموتور:</strong> ${incident.motorLoad ?? '—'}%</p>
+  <p>⚡ <strong>حمل الموتور:</strong> ${incident.motor_load ?? '—'}</p>
 </div>
 
 
