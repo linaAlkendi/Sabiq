@@ -29,10 +29,13 @@ router.post("/", (req, res) => {
 
   if (matchedFacility) {
     newIncident.temperature = matchedFacility.temperature;
+    newIncident.pressure = matchedFacility.pressure;
+    newIncident.humidity = matchedFacility.humidity;
     newIncident.vibration = matchedFacility.vibration;
+    newIncident.motor_load = matchedFacility.motor_load;
     newIncident.currentUsage = matchedFacility.currentUsage;
     newIncident.maxUsage = matchedFacility.maxUsage;
-    newIncident.operatingHours = matchedFacility.operatingHours;
+    newIncident.operationHours = matchedFacility.operatingHours;
   }
 
   incidents.push(newIncident);
@@ -73,6 +76,9 @@ router.patch("/:id/status", (req, res) => {
       📉 مستوى الاهتزاز: ${incident.vibration ?? '—'}
       ⚙️ الاستخدام: ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}
       ⏱️ ساعات التشغيل: ${incident.operatingHours ?? '—'}
+      💨 الضغط: ${incident.pressure ?? '—'} Pa
+      💧 الرطوبة: ${incident.humidity ?? '—'}%
+      🔌 حمل الموتور: ${incident.motorLoad ?? '—'}%
     `.trim();
 
     notifier.createNotification({

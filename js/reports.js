@@ -71,12 +71,17 @@ function renderIncidents(list) {
       <div><span class="label"><span class="material-icons">location_on</span> اسم المرفق:</span> <span class="value">${incident.facility}</span></div>
       <div><span class="label"><span class="material-icons">build</span> نوع المشكلة:</span> <span class="value">${incident.issueType}</span></div>
       <div><span class="label"><span class="material-icons">description</span> وصف المشكلة:</span> <span class="value">${incident.description}</span></div>
-      <div class="facility-characteristics">
-        <p>🌡️ <strong>درجة الحرارة:</strong> ${incident.temperature ?? '—'}°C</p>
-        <p>📈 <strong>مستوى الاهتزاز:</strong> ${incident.vibration ?? '—'}</p>
-        <p>⚙️ <strong>الاستخدام:</strong> ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}</p>
-        <p>⏱️ <strong>ساعات التشغيل:</strong> ${incident.operatingHours ?? '—'}</p>
-      </div>
+<div class="facility-characteristics">
+  <p>🌡️ <strong>درجة الحرارة:</strong> ${incident.temperature ?? '—'}°C</p>
+  <p>💧 <strong>الرطوبة:</strong> ${incident.humidity ?? '—'}%</p>
+  <p>📈 <strong>مستوى الاهتزاز:</strong> ${incident.vibration ?? '—'}</p>
+  <p>⚙️ <strong>الاستخدام:</strong> ${incident.currentUsage ?? '—'} / ${incident.maxUsage ?? '—'}</p>
+  <p>⏱️ <strong>ساعات التشغيل:</strong> ${incident.operatingHours ?? '—'}</p>
+  <p>🧭 <strong>الضغط:</strong> ${incident.pressure ?? '—'} بار</p>
+  <p>⚡ <strong>حمل الموتور:</strong> ${incident.motorLoad ?? '—'}%</p>
+</div>
+
+
 
       <div><span class="label"><span class="material-icons">person</span> المُبلّغ:</span> <span class="value">${incident.reportedBy}</span></div>
       <div><span class="label"><span class="material-icons">schedule</span> وقت البلاغ:</span> <span class="value">${formatDateTime(incident.reportedAt)}</span></div>
