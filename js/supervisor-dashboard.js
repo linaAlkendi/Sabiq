@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // زر تأكيد المهام المنجزة
   const confirmCompletedWrapper = document.createElement("div");
-  confirmCompletedWrapper.style.marginTop = "12px";
+  confirmCompletedWrapper.style.marginTop = "2px";
   confirmCompletedWrapper.style.textAlign = "center";
   confirmCompletedWrapper.style.display = "none";
   confirmCompletedWrapper.innerHTML = `<button id="confirmCompletedBtn" style="
