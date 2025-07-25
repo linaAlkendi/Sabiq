@@ -1,5 +1,3 @@
-/* technician-dashboard.css */
-
 main.technician-main {
   max-width: 1200px;
   margin: auto;
@@ -32,18 +30,65 @@ main.technician-main {
   padding: 24px;
   border-radius: 18px;
   box-shadow: 0 4px 16px var(--card-shadow);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-right: 6px solid var(--primary-btn);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  overflow: hidden;
 }
 
 .task-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
+/* تغليف المحتوى لتطبيق الضبابية فقط على الكروت التي تسمح بالتوثيق */
+.task-card:hover .card-content {
+  filter: none;
+  user-select: auto;
+  pointer-events: auto;
+}
+
+.task-card.has-overlay:hover .card-content {
+  filter: blur(3px);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* زر توثيق إنهاء المهمة */
+.complete-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(64, 102, 189, 0.9); /* لون قريب من var(--primary-btn) مع شفافية */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 18px 30px;
+  border-radius: 30px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  width: 80%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+body.dark .complete-overlay {
+  background-color: rgba(48, 233, 233, 0.8);
+}
+
+.task-card.has-overlay:hover .complete-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* عنوان المهمة */
 .task-title {
   font-size: 20px;
   font-weight: 700;
@@ -51,6 +96,7 @@ main.technician-main {
   color: var(--primary-btn);
 }
 
+/* معلومات المهمة */
 .task-info {
   font-size: 15px;
   margin-bottom: 8px;
@@ -58,33 +104,79 @@ main.technician-main {
   line-height: 1.6;
 }
 
-/* الحالة */
-.status {
-  align-self: flex-start;
+/* الحالة مع الأيقونة */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 13px;
   font-weight: 600;
-  color: #fff;
-  background-color: #4066bdaf;
-}
-body.dark .status{
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* حالات مختلفة */
-.status.تم-الإنجاز {
-  background-color: #28a745;
+  font-size: 13px;
+  color: white;
+  margin-top: 10px;
+  width: fit-content;
+  user-select: none;
 }
 
-.status.قيد-التنفيذ {
-  background-color: #ffc107;
+/* أيقونات SVG داخل الشارة */
+.status-badge svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+/* ألوان الحالات */
+.status-قيد-التنفيذ {
+  background-color: #e8d288; /* أصفر */
   color: #111;
 }
 
-.status.بانتظار-القطع {
-  background-color: #dc3545;
+.status-بانتظار-التنفيذ  {
+  background-color: #b06e74;
+}
+
+
+.status-بانتظار-الموافقة {
+  background-color: #4066bd; /* أزرق var(--primary-btn) */
+}
+
+.status-تم-الإنجاز {
+  background-color: #75a981; /* أخضر */
+}
+
+/* شريط التقدم ثابت (ظاهر دائماً) */
+.progress-container {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 14px;
+  opacity: 1; /* دائمًا ظاهر */
+  transition: opacity 0.3s ease;
+}
+
+/* لون شريط التقدم حسب الحالة */
+.status-قيد-التنفيذ ~ .progress-container .progress-bar {
+  background-color: #c2ae6f;
+}
+
+.status-بانتظار-التنفيذ ~ .progress-container .progress-bar {
+  background-color: #b06e74;
+}
+
+.status-بانتظار-الموافقة ~ .progress-container .progress-bar {
+  background-color: #6074a3;
+}
+
+.status-تم-الإنجاز ~ .progress-container .progress-bar {
+  background-color: #69a778;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
 }
 
 /* الفوتر */
