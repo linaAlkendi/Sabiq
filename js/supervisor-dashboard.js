@@ -6,17 +6,21 @@ function closeAssignmentModal() {
   document.getElementById("assignmentModalOverlay").style.display = "none";
 }
 document.addEventListener("DOMContentLoaded", () => {
-  let tasks = [
-    { technician: "أحمد القحطاني", facility: "سلم كهربائي 2", fault: "كهربائي", status: "قيد التنفيذ", severity: "متوسطة", action: "استبدال الأسلاك", assignedDate: "2025-07-10" },
-    { technician: "سارة الزهراني", facility: "بوابة إلكترونية", fault: "كهربائي", status: "تم الإنجاز", severity: "عالية", action: "إعادة تشغيل", assignedDate: "2025-07-11" },
-    { technician: "خالد العنزي", facility: "مصعد 3", fault: "ميكانيكي", status: "تم الإنجاز", severity: "منخفضة", action: "غطاء مكشوف", assignedDate: "2025-07-12" },
-    { technician: "محمد العلي", facility: "بوابة إلكترونية 1", fault: "كهربائي", status: "قيد التنفيذ", severity: "متوسطة", action: "فحص التوصيلات الكهربائية", assignedDate: "2025-07-11" },
-    { technician: "ليلى الشمري", facility: "مصعد 5", fault: "ميكانيكي", status: "تم الإنجاز", severity: "عالية", action: "تبديل المحرك", assignedDate: "2025-07-09" },
-    { technician: "ريم العتيبي", facility: "مصعد 1", fault: "ميكانيكي", status: "قيد التنفيذ", severity: "عالية", action: "ضبط المحرك", assignedDate: "2025-07-14" },
-    { technician: "ناصر الحربي", facility: "سلم كهربائي 5", fault: "كهربائي", status: "تم الإنجاز", severity: "منخفضة", action: "فحص النظام", assignedDate: "2025-07-10" },
-    { technician: "هالة البلوشي", facility: "مصعد 2", fault: "ميكانيكي", status: "قيد التنفيذ", severity: "متوسطة", action: "طلب قطع غيار", assignedDate: "2025-07-15" },
-    { technician: "سلمان الزهراني", facility: "بوابة إلكترونية 2", fault: "كهربائي", status: "قيد التنفيذ", severity: "متوسطة", action: "فحص الكابلات", assignedDate: "2025-07-14" }
-  ];
+  let tasks = [];
+
+  fetch("http://localhost:3000/api/tasks")
+    .then((response) => {
+      if (!response.ok) throw new Error("HTTP error " + response.status);
+      return response.json();
+    })
+    .then((data) => {
+      tasks = data;
+      filterTasks(); // render the initial view after loading
+    })
+    .catch((error) => {
+      console.error("Failed to load tasks:", error);
+      taskTableWrapper.innerHTML = `<div class="no-tasks-message">فشل في تحميل المهام.</div>`;
+    });
 
   const now = new Date();
   const taskTableWrapper = document.getElementById("taskTableWrapper");
@@ -149,12 +153,12 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", filterTasks);
 
 
-document.getElementById("assignmentForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  //    المعالجة  ( إرسال البيانات للسيرفر)
-  closeAssignmentModal();
-  alert("تم إسناد العطل بنجاح!");
-});
+  document.getElementById("assignmentForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    //    المعالجة  ( إرسال البيانات للسيرفر)
+    closeAssignmentModal();
+    alert("تم إسناد العطل بنجاح!");
+  });
 
 
   // نافذة التنبيه (في حال لم يتم اختيار أي مهمة)
