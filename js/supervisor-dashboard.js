@@ -210,6 +210,42 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmPopup.style.display = "none";
   });
 
+  // Populate technicians
+  fetch("http://localhost:3000/auth/by-role/فني")
+    .then(response => response.json())
+    .then(data => {
+      const technicianSelect = document.getElementById("technicianSelect");
+      technicianSelect.innerHTML = `<option value="">اختر الفني</option>`; // Default option
+
+      data.forEach(tech => {
+        const option = document.createElement("option");
+        option.value = tech.fullName || tech.username || tech.name; // use correct key based on your schema
+        option.textContent = tech.fullName || tech.username || tech.name;
+        technicianSelect.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.error("Failed to load technicians:", error);
+    });
+
+  // Populate facilities
+  fetch("http://localhost:3000/facilities")
+    .then(response => response.json())
+    .then(data => {
+      const facilitySelect = document.getElementById("facilitySelect");
+      facilitySelect.innerHTML = `<option value="">اختر المرفق</option>`; // Default option
+
+      data.forEach(facility => {
+        const option = document.createElement("option");
+        option.value = facility.name;
+        option.textContent = facility.name;
+        facilitySelect.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.error("Failed to load facilities:", error);
+    });
+
 
 
   filterTasks();
