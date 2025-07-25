@@ -107,17 +107,23 @@
               </select>
               <br><br>
 
+              <label for="actionInput">الإجراء المطلوب:</label>
+              <textarea id="actionInput" class="assignment-select" rows="3" required
+                placeholder="أدخل الإجراء المطلوب"></textarea>
+              <br><br>
+
               <div class="assignment-buttons">
                 <button type="submit" class="btn-assign-confirm">إسناد</button>
                 <button type="button" class="btn-assign-cancel" onclick="closeAssignmentModal()">إلغاء</button>
               </div>
             </form>
+
           </div>
         </div>
       </div>
       <div id="taskTableWrapper"></div>
       <div id="confirmCompletedWrapper" style="display:none; text-align:center; margin-top:15px;">
-        <button id="confirmCompletedBtn" >
+        <button id="confirmCompletedBtn">
           تأكيد المهام المحددة
         </button>
       </div>

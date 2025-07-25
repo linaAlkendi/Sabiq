@@ -153,14 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", filterTasks);
 
 
-  document.getElementById("assignmentForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    //    المعالجة  ( إرسال البيانات للسيرفر)
-    closeAssignmentModal();
-    alert("تم إسناد العطل بنجاح!");
-  });
-
-
   // نافذة التنبيه (في حال لم يتم اختيار أي مهمة)
   function showAlertMessage(msg) {
     confirmMessage.textContent = msg;
@@ -245,6 +237,52 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(error => {
       console.error("Failed to load facilities:", error);
     });
+
+  document.getElementById("assignmentForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const technician = document.getElementById("technicianSelect").value;
+    const facility = document.getElementById("facilitySelect").value;
+    const fault = document.getElementById("faultTypeSelect").value;
+    const severity = document.getElementById("severitySelect").value;
+    const action = document.getElementById("actionInput").value.trim();
+
+    // Basic client-side validation
+    if (!technician || !facility || !fault || !severity || !action) {
+      alert("يرجى تعبئة جميع الحقول قبل الإرسال.");
+      return;
+    }
+
+    const payload = {
+      technician,
+      facility,
+      fault,
+      severity,
+      action
+    };
+
+    fetch("http://localhost:3000/api/tasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        return response.json();
+      })
+      .then((result) => {
+        alert("✅ تم إسناد المهمة بنجاح!");
+        closeAssignmentModal();
+        // Optionally refresh the page or reload tasks
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Failed to assign task:", error);
+        alert("حدث خطأ أثناء إرسال المهمة. حاول مرة أخرى.");
+      });
+  });
 
 
 
