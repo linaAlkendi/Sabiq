@@ -10,7 +10,7 @@ const facilityRoutes = require("./routes/facilities");
 const notificationsRoutes = require("./routes/notifications");
 const predictRoute = require("./routes/predict");
 const authRoutes = require("./routes/auth");
-const dataRoutes = require("./routes/data"); 
+const dataRoutes = require("./routes/detailed-log"); 
 const tasksRouter = require("./routes/tasks");
 
 app.use(cors());
@@ -22,7 +22,7 @@ app.use("/facilities", facilityRoutes);
 app.use("/notifications", notificationsRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/predict", predictRoute);
-app.use("/api/data", dataRoutes); 
+app.use("/api/detailed-log", dataRoutes); 
 app.use("/api/tasks", tasksRouter);
 
 app.listen(PORT, () => {
