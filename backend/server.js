@@ -10,6 +10,7 @@ const facilityRoutes = require("./routes/facilities");
 const notificationsRoutes = require("./routes/notifications");
 const predictRoute = require("./routes/predict");
 const authRoutes = require("./routes/auth");
+const dataRoutes = require("./routes/data"); 
 
 app.use(cors());
 app.use(express.json());
@@ -20,7 +21,7 @@ app.use("/facilities", facilityRoutes);
 app.use("/notifications", notificationsRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/predict", predictRoute);
-
+app.use("/api/data", dataRoutes); 
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
