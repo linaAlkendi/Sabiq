@@ -7,7 +7,6 @@ const router = express.Router();
 
 const INCIDENTS_PATH = path.join(__dirname, "../data/incidentData.json");
 const OUTPUT_PATH = path.join(__dirname, "../data/output.json");
-const PYTHON_SCRIPT = path.join(__dirname, "../analyze_incidents.py");
 
 // Route: GET /data/incidents
 router.get("/incidents", (req, res) => {
@@ -22,7 +21,7 @@ router.get("/incidents", (req, res) => {
 // Route: GET /data/output 
 router.get("/output", (req, res) => {
   try {
-    const data = fs.readFileSync(INCIDENTS_PATH, "utf-8");
+    const data = fs.readFileSync(OUTPUT_PATH, "utf-8");
     res.json(JSON.parse(data));
   } catch (error) {
     res.status(500).json({ error: "فشل في قراءة ملف الأعطال" });

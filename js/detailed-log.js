@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let faultDetails = [];
   let tableData = [];
 
-  fetch("../backend/data/incidentData.json")
+  fetch("http://localhost:3000/api/data/incidents")
     .then(response => response.json())
     .then(data => {
       tableData = data;
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // سيتم تحديثه لاحقًا عند الحاجة
   }
 
-  fetch("../backend/data/output.json")
+  fetch("http://localhost:3000/api/data/output")
     .then(res => res.json())
     .then(result => {
       predictedFacilityEl.textContent = result.prediction || 'غير معروف';
