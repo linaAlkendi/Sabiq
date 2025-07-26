@@ -88,5 +88,15 @@
     "action": "فحص الكابلات",
     "assignedDate": "2025-07-14",
     "id": 9
+  },
+  {
+    "id": 10,
+    "technician": "tech_user1",
+    "facility": "سلم متحرك 1",
+    "fault": "ميكانيكي",
+    "severity": "عالية",
+    "action": "استبدال المحرك",
+    "status": "قيد التنفيذ",
+    "assignedDate": "2025-07-26"
   }
 ]

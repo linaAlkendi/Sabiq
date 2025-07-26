@@ -5,6 +5,7 @@ function openAssignmentModal() {
 function closeAssignmentModal() {
   document.getElementById("assignmentModalOverlay").style.display = "none";
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   let tasks = [];
 
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const statusFilter = document.getElementById("statusFilter");
   const faultFilter = document.getElementById("faultFilter");
+  const dateFilter = document.getElementById("dateFilter");
 
   const severityFilter = document.createElement("select");
   severityFilter.id = "severityFilter";
@@ -40,10 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     <option value="بسيط">بسيط</option>
   `;
   const filtersWrapper = document.querySelector(".filters-wrapper");
-  filtersWrapper.insertBefore(severityFilter, filtersWrapper.children[2]); // ضع فلتر الخطورة قبل حقل البحث
+  filtersWrapper.insertBefore(severityFilter, filtersWrapper.children[2]);
 
   const searchInput = document.getElementById("searchInput");
-
 
   // زر تأكيد المهام المنجزة
   const confirmCompletedWrapper = document.createElement("div");
@@ -124,36 +125,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const faultVal = faultFilter.value;
     const severityVal = severityFilter.value;
     const searchVal = searchInput.value.toLowerCase().trim();
+    const dateFilterVal = dateFilter.value;
 
     let filtered = tasks.filter(task => {
       const isLate = statusVal === "late" && isTaskLate(task.assignedDate);
       const matchesStatus = statusVal === "all" || task.status === statusVal || isLate;
       const matchesFault = faultVal === "all" || task.fault === faultVal;
       const matchesSeverity = severityVal === "all" || task.severity === severityVal;
-      const matchesSearch = task.technician.toLowerCase().includes(searchVal) || task.facility.toLowerCase().includes(searchVal);
+      const matchesSearch = task.technician.toLowerCase().includes(searchVal) || 
+                           task.facility.toLowerCase().includes(searchVal);
       return matchesStatus && matchesFault && matchesSeverity && matchesSearch;
     });
+
+    // تطبيق فلتر التاريخ
+    if (dateFilterVal !== "all") {
+      filtered.sort((a, b) => {
+        const dateA = new Date(a.assignedDate);
+        const dateB = new Date(b.assignedDate);
+        return dateFilterVal === "من الأحدث للأقدم" ? 
+               dateB - dateA : // من الأحدث للأقدم
+               dateA - dateB;  // من الأقدم للأحدث
+      });
+    }
 
     renderTasks(filtered);
     updateStats(filtered);
   }
 
   function isTaskLate(dateStr) {
-    const assigned = new Date(dateStr);
-    const diffHours = (now - assigned) / 36e5;
-    return diffHours > 24;
+    try {
+      const assigned = new Date(dateStr);
+      if (isNaN(assigned)) return false;
+      
+      const diffHours = (now - assigned) / 36e5;
+      return diffHours > 24;
+    } catch (e) {
+      console.error("Error parsing date:", dateStr, e);
+      return false;
+    }
   }
 
-  statusFilter.addEventListener("change", () => {
-    filterTasks();
-  });
-
+  // إضافة مستمعات الأحداث للفلاتر
+  statusFilter.addEventListener("change", filterTasks);
   faultFilter.addEventListener("change", filterTasks);
   severityFilter.addEventListener("change", filterTasks);
+  dateFilter.addEventListener("change", filterTasks);
   searchInput.addEventListener("input", filterTasks);
 
-
-  // نافذة التنبيه (في حال لم يتم اختيار أي مهمة)
+  // نافذة التنبيه
   function showAlertMessage(msg) {
     confirmMessage.textContent = msg;
     confirmYes.style.display = "none";
@@ -189,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     confirmPopup.style.display = "none";
     showAlertMessage("تم التأكيد");
-
     filterTasks();
 
     if (tasks.filter(t => t.status === "تم الإنجاز").length === 0) {
@@ -207,11 +225,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
       const technicianSelect = document.getElementById("technicianSelect");
-      technicianSelect.innerHTML = `<option value="">اختر الفني</option>`; // Default option
+      technicianSelect.innerHTML = `<option value="">اختر الفني</option>`;
 
       data.forEach(tech => {
         const option = document.createElement("option");
-        option.value = tech.fullName || tech.username || tech.name; // use correct key based on your schema
+        option.value = tech.fullName || tech.username || tech.name;
         option.textContent = tech.fullName || tech.username || tech.name;
         technicianSelect.appendChild(option);
       });
@@ -225,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
       const facilitySelect = document.getElementById("facilitySelect");
-      facilitySelect.innerHTML = `<option value="">اختر المرفق</option>`; // Default option
+      facilitySelect.innerHTML = `<option value="">اختر المرفق</option>`;
 
       data.forEach(facility => {
         const option = document.createElement("option");
@@ -247,7 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const severity = document.getElementById("severitySelect").value;
     const action = document.getElementById("actionInput").value.trim();
 
-    // Basic client-side validation
     if (!technician || !facility || !fault || !severity || !action) {
       alert("يرجى تعبئة جميع الحقول قبل الإرسال.");
       return;
@@ -275,7 +292,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((result) => {
         alert("✅ تم إسناد المهمة بنجاح!");
         closeAssignmentModal();
-        // Optionally refresh the page or reload tasks
         location.reload();
       })
       .catch((error) => {
@@ -283,8 +299,4 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("حدث خطأ أثناء إرسال المهمة. حاول مرة أخرى.");
       });
   });
-
-
-
-  filterTasks();
 });
