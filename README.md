@@ -98,11 +98,11 @@ JWT_SECRET= "SOME_KEY"
 
 ### 👤 Authentication Info (Dummy Data for Testing)
 
-| Username    | Password | Role        |
-|-------------|----------|-------------|
-| tech_user1  | Tech@123 | فني         |
-| supervisor1 | sup@456  | مشرف صيانة  | 
-| ops_manager | Ops@789  | مدير عمليات |
+| Username    | Password         | Role             |
+|-------------|------------------|------------------|
+| tech_user1  | T3ch@8Lxvr99@123 | فني              |
+| supervisor1 | sup@S#p3rV330rB8 | مشرف صيانة      | 
+| ops_manager | Ops@O220ps@MN789 | مدير عمليات     |
 
 You can modify these accounts in `backend/data/users.json`.
 Passwords are hashed then stored in the backend.
@@ -236,3 +236,6 @@ Below is a sample AI prediction screenshot from the dashboard.
 ![Prediction Screenshot](assets/prediction.PNG)
 
 > Use the model predictions in your dashboard to visualize alerts and maintenance status in real-time.
+
+
+
