@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const res = await fetch(`http://localhost:3000/facilities/${facilityId}`);
+    const res = await fetch(`https://sabiq-node-backend.onrender.com/facilities/${facilityId}`);
     if (!res.ok) throw new Error("حدث خطأ أثناء جلب البيانات");
     const usageData = await res.json();
 

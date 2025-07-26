@@ -14,7 +14,7 @@ function formatDateTime(dateString) {
   });
 }
 
-fetch("http://localhost:3000/incidents")
+fetch("https://sabiq-node-backend.onrender.com/incidents")
   .then((res) => res.json())
   .then((incidents) => {
     renderIncidents(incidents);
@@ -193,7 +193,7 @@ function showErrorPopup(message) {
 // تحديث حالة البلاغ
 async function updateIncidentStatus(id, status) {
   try {
-    const res = await fetch(`http://localhost:3000/incidents/${id}/status`, {
+    const res = await fetch(`https://sabiq-node-backend.onrender.com/incidents/${id}/status`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -204,7 +204,7 @@ async function updateIncidentStatus(id, status) {
     const data = await res.json();
 
     // Re-fetch and re-render updated list
-    const refreshed = await fetch("http://localhost:3000/incidents");
+    const refreshed = await fetch("https://sabiq-node-backend.onrender.com/incidents");
     const updatedIncidents = await refreshed.json();
     renderIncidents(updatedIncidents);
 
@@ -220,7 +220,7 @@ async function updateIncidentStatus(id, status) {
 // تحديث حالة المرفق
 async function updateFacilityStatusByName(facilityName, status) {
   try {
-    const res = await fetch(`http://localhost:3000/facilities/status`, {
+    const res = await fetch(`https://sabiq-node-backend.onrender.com/facilities/status`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: facilityName, status }),

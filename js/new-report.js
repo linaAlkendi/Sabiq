@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorBox = document.getElementById("error-box");
 
     // Populate facility dropdown from backend
-    fetch("http://localhost:3000/facilities")
+    fetch("https://sabiq-node-backend.onrender.com/facilities")
         .then((res) => res.json())
         .then((data) => {
             data.forEach((facility) => {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 status: "open"
             };
 
-            fetch("http://localhost:3000/incidents", {
+            fetch("https://sabiq-node-backend.onrender.com/incidents", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)

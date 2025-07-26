@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch(`http://localhost:3000/api/tasks/user/${username}`)
+  fetch(`https://sabiq-node-backend.onrender.com/api/tasks/user/${username}`)
     .then(response => response.json())
     .then(tasks => {
 
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (task.id < 0) return alert("هذه مهمة تجريبية ولا يمكن تعديلها."); // Skip demo tasks update
 
-            fetch(`http://localhost:3000/api/tasks/complete/${task.id}`, {
+            fetch(`https://sabiq-node-backend.onrender.com/api/tasks/complete/${task.id}`, {
               method: "PUT"
             })
               .then(response => response.json())

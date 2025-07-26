@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const role = localStorage.getItem("role");
 
     try {
-      const response = await fetch("http://localhost:3000/auth/verify-otp", {
+      const response = await fetch("https://sabiq-node-backend.onrender.com/auth/verify-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -9,7 +9,7 @@ function closeAssignmentModal() {
 document.addEventListener("DOMContentLoaded", () => {
   let tasks = [];
 
-  fetch("http://localhost:3000/api/tasks")
+  fetch("https://sabiq-node-backend.onrender.com/api/tasks")
     .then((response) => {
       if (!response.ok) throw new Error("HTTP error " + response.status);
       return response.json();
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Populate technicians
-  fetch("http://localhost:3000/auth/by-role/فني")
+  fetch("https://sabiq-node-backend.onrender.com/auth/by-role/فني")
     .then(response => response.json())
     .then(data => {
       const technicianSelect = document.getElementById("technicianSelect");
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   // Populate facilities
-  fetch("http://localhost:3000/facilities")
+  fetch("https://sabiq-node-backend.onrender.com/facilities")
     .then(response => response.json())
     .then(data => {
       const facilitySelect = document.getElementById("facilitySelect");
@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
       action
     };
 
-    fetch("http://localhost:3000/api/tasks", {
+    fetch("https://sabiq-node-backend.onrender.com/api/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

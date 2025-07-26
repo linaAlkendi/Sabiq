@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterStatus = document.getElementById("filterStatus");
   const searchInput = document.getElementById("searchInput");
 
-  fetch("http://localhost:3000/notifications")
+  fetch("https://sabiq-node-backend.onrender.com/notifications")
     .then((res) => res.json())
     .then((notifications) => {
       function filterNotifications() {

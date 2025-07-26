@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/facilities')
+fetch('https://sabiq-node-backend.onrender.com/facilities')
   .then(response => response.json())
   .then(data => {
     const grid = document.getElementById('facilityGrid');
