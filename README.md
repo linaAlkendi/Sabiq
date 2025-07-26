@@ -112,7 +112,7 @@ Passwords are hashed then stored in the backend.
 This project uses a dummy OTP verification process for demo purposes.  
 In production, it should be integrated with an SMS/email provider.
 
-For testing, please enter **1234**.
+For testing, please enter **1290**.
 
 ---
 
