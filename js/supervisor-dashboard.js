@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   severityFilter.innerHTML = `
     <option value="all">كل درجات الخطورة</option>
-    <option value="خطير">خطير</option>
-    <option value="وسط">وسط</option>
-    <option value="بسيط">بسيط</option>
+    <option value="عالية">عالية</option>
+    <option value="متوسطة">متوسطة</option>
+    <option value="منخفضة">منخفضة</option>
   `;
   const filtersWrapper = document.querySelector(".filters-wrapper");
   filtersWrapper.insertBefore(severityFilter, filtersWrapper.children[2]);
