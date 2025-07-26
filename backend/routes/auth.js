@@ -27,9 +27,9 @@ function saveAllUsers(users) {
 
 // Original plain passwords
 const plainPasswords = {
-  tech_user1: "Tech@123",
-  supervisor1: "sup@456", 
-  ops_manager: "Ops@789",
+  tech_user1: "T3ch@8Lxvr99@123",
+  supervisor1: "sup@S#p3rV330rB8", 
+  ops_manager: "Ops@O220ps@MN789",
 };
 
 // دالة لتشفير كلمات المرور عند تشغيل السيرفر
