@@ -10,6 +10,65 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(`http://localhost:3000/api/tasks/user/${username}`)
     .then(response => response.json())
     .then(tasks => {
+
+      // Demo tasks for UI showcasing
+      const demoTasks = [
+        {
+          id: -1,
+          action: "فحص مصعد A",
+          fault: "ميكانيكي",
+          facility: "المبنى الرئيسي",
+          status: "قيد التنفيذ",
+          priority: "متوسطة",
+          facilityStatusAtAssign: "شغال",
+          assignedDate: "2025-07-12"
+        },
+        {
+          id: -2,
+          action: "إصلاح السلم الكهربائي 3",
+          fault: "كهربائي",
+          facility: "الساحة الشمالية",
+          status: "قيد التنفيذ",
+          priority: "عالية",
+          facilityStatusAtAssign: "معطل",
+          assignedDate: "2025-07-11"
+        },
+        {
+          id: -3,
+          action: "فحص بوابة 5",
+          fault: "كهربائي",
+          facility: "بوابة 5",
+          status: "بانتظار التنفيذ",
+          priority: "منخفضة",
+          facilityStatusAtAssign: "شغال",
+          assignedDate: "2025-07-10"
+        },
+        {
+          id: -4,
+          action: "استبدال مصباح الإنارة",
+          fault: "كهربائي",
+          facility: "ممر الإدارة",
+          status: "بانتظار الموافقة",
+          priority: "متوسطة",
+          facilityStatusAtAssign: "شغال",
+          assignedDate: "2025-07-09"
+        },
+        {
+          id: -5,
+          action: "إصلاح نظام التكييف",
+          fault: "ميكانيكي",
+          facility: "المبنى A",
+          status: "تم الإنجاز",
+          priority: "عالية",
+          facilityStatusAtAssign: "معطل",
+          assignedDate: "2025-07-05"
+        }
+      ];
+
+      // Merge fetched tasks with demo tasks
+      tasks = [...tasks, ...demoTasks];
+
+
       const progressMap = {
         "قيد التنفيذ": 50,
         "بانتظار التنفيذ": 0,

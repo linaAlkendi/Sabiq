@@ -2,19 +2,19 @@
   {
     "id": 1,
     "username": "tech_user1",
-    "password": "$2b$12$tAAVzuXe6CENtW/kSyTjD.Oiz3aJvmmlGLkADqFDK2hiKuZedP.da",
+    "password": "$2b$12$o1dXm.qi4wszKW08Fitzu.nvvxMRaPhgdebtlK01csJ6tBhMZJLiC",
     "role": "فني"
   },
   {
     "id": 2,
     "username": "supervisor1",
-    "password": "$2b$12$L.g7oG9ut.NA5dBikeHWlOSfs5FW6qmMmLzFg6Fj5RSqiUaifKlvi",
+    "password": "$2b$12$3XR64xrDfIkXSNQVZegQV.wib3yBIiHFqchbYs6dRH8Hl7JBaVYtq",
     "role": "مشرف صيانة"
   },
   {
     "id": 3,
     "username": "ops_manager",
-    "password": "$2b$12$SlamJZe0a13Jtn5JqJ6fQ./kDXSqqr.F10Fuxd2v/ODkxVqg/T2pC",
+    "password": "$2b$12$ou75aOgtqcIwv3Yqc34Mfe/5aUfDDhGQhYN.9a2GxAjaFG84o08sW",
     "role": "مدير عمليات"
   }
 ]
