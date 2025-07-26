@@ -5,6 +5,20 @@ This project is a prototype for reporting and visualizing technical safety incid
 
 ---
 
+## 🚀 Live Demo
+
+The entire SABIQ system is now deployed and available as a live interactive demo!
+
+👉 **Access it here:** [https://linaalkendi.github.io/Sabiq](https://linaalkendi.github.io/Sabiq)
+
+This demo showcases:
+- Real-time notification rendering
+- Fault prediction via the Flask ML model
+- Dynamic dashboards and facility statuses
+- Seamless integration between GitHub Pages (frontend), Node.js (backend), and Flask (ML API)
+
+---
+
 ## 📁 Project Structure
 
 ```
