@@ -61,7 +61,7 @@ fetch('http://localhost:3000/facilities')
 	<path d="M 77.827 25.588 c 0.553 0 1 -0.448 1 -1 s -0.447 -1 -1 -1 h -5.674 c -0.553 0 -1 0.448 -1 1 s 0.447 1 1 1 h 1.837 v 11.838 h -1.837 c -0.553 0 -1 0.448 -1 1 s 0.447 1 1 1 h 5.674 c 0.553 0 1 -0.448 1 -1 s -0.447 -1 -1 -1 H 75.99 V 25.588 H 77.827 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
 </g>
 </svg>
-              تنبؤ النظام:
+              تنبؤ الحاله:
             </span>
             <span class="stat-value" style="color:${predictionColor}">${predictionText}</span>
           </div>
