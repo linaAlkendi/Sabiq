@@ -160,6 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
           completeBtn.addEventListener("click", e => {
             e.stopPropagation();
 
+            if (task.id < 0) return alert("هذه مهمة تجريبية ولا يمكن تعديلها."); // Skip demo tasks update
+
             fetch(`http://localhost:3000/api/tasks/complete/${task.id}`, {
               method: "PUT"
             })
