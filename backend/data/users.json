@@ -2,19 +2,31 @@
   {
     "id": 1,
     "username": "tech_user1",
+<<<<<<< HEAD
     "password": "$2b$12$IgJYeWxBAYy00DOSxoQkYub/21tkayMn7iI7tDxJCxcDCW5P3Wn0W",
+=======
+    "password": "$2b$12$QIwMfksh.rnDoR70vnNjCOcv/346vAHB0ERrYSzxAGYd9yJs07X2i",
+>>>>>>> 6d679a74e649db32c160e730d6c4bd8156c44c1f
     "role": "فني"
   },
   {
     "id": 2,
     "username": "supervisor1",
+<<<<<<< HEAD
     "password": "$2b$12$vTr.t5mGWYMdBVONhMhB1OwoOXT1Yk6XPFFpGYqruoLTaUf3kkS3O",
+=======
+    "password": "$2b$12$sMVdWe9KbMLjUaUZZWjum./O7brapDuWoDqQfMpuIaf/3U7AzMp7a",
+>>>>>>> 6d679a74e649db32c160e730d6c4bd8156c44c1f
     "role": "مشرف صيانة"
   },
   {
     "id": 3,
     "username": "ops_manager",
+<<<<<<< HEAD
     "password": "$2b$12$Iet4ASOZ7wMV4mVjEYUPqO3dC6JzhqkN.BS5NmqkiyEezgvoczXey",
+=======
+    "password": "$2b$12$MzlfoQx34pNzzyt9mkg8gu9Btu1VpZONsP8PfNiPOs/.9QQ3oKmpC",
+>>>>>>> 6d679a74e649db32c160e730d6c4bd8156c44c1f
     "role": "مدير عمليات"
   }
 ]
