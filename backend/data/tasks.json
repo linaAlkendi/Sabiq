@@ -96,7 +96,17 @@
     "fault": "ميكانيكي",
     "severity": "عالية",
     "action": "استبدال المحرك",
-    "status": "قيد التنفيذ",
+    "status": "تم الإنجاز",
+    "assignedDate": "2025-07-26"
+  },
+  {
+    "id": 11,
+    "technician": "tech_user1",
+    "facility": "بوابة 5",
+    "fault": "ميكانيكي",
+    "severity": "منخفضة",
+    "action": "فحص البوابة",
+    "status": "تم الإنجاز",
     "assignedDate": "2025-07-26"
   }
 ]

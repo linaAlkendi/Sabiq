@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const severityFilter = document.createElement("select");
   severityFilter.id = "severityFilter";
+  
   severityFilter.innerHTML = `
     <option value="all">كل درجات الخطورة</option>
     <option value="خطير">خطير</option>
