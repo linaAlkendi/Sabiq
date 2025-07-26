@@ -138,6 +138,33 @@
   color: #0a7f54;
 }
 
+/* AI Brain Icon Styling */
+.ai-icon {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(91%) saturate(1033%) hue-rotate(213deg) brightness(97%) contrast(91%);
+
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 5px;
+  transition: all 0.3s ease;
+}
+
+.stat.prediction .stat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Animation for AI prediction */
+@keyframes ai-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.stat.prediction .ai-icon {
+  animation: ai-pulse 3s infinite;
+}
 
 @media (max-width: 768px) {
   .dashboard {

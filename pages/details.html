@@ -23,14 +23,18 @@
 
   <!-- الهيدر -->
   <header class="top-bar">
+      <!-- زر الوضع الليلي  -->
     <label class="theme-toggle-switch">
-      <input type="checkbox" id="theme-toggle-switch" />
+      <input type="checkbox" id="theme-toggle-switch">
       <span class="slider">
-        <svg class="icon sun-icon" viewBox="0 0 24 24">
-          <path d="..." />
+        <!-- شمس SVG -->
+        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z" />
         </svg>
-        <svg class="icon moon-icon" viewBox="0 0 24 24">
-          <path d="..." />
+        <!-- هلال SVG -->
+        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
         </svg>
       </span>
     </label>
@@ -59,9 +63,6 @@
       <canvas id="usageChart"></canvas>
     </section>
 
-    <section id="alertMessageBox">
-      <span id="alertMessage"></span>
-    </section>
 
     <!-- ✅ كارد الاستخدام الحالي -->
     <section class="card">
@@ -81,7 +82,7 @@
         <div class="stat"><span class="stat-label">الضغط</span><span class="stat-value" id="pressureVal">--</span></div>
         <div class="stat"><span class="stat-label">الرطوبة</span><span class="stat-value" id="humidityVal">--</span>
         </div>
-        <div class="stat"><span class="stat-label">تحميل المحرك</span><span class="stat-value"
+        <div class="stat"><span class="stat-label">حمل المحرك</span><span class="stat-value"
             id="motorLoadVal">--</span></div>
       </div>
 
@@ -91,11 +92,11 @@
     <section class="maintenance-card card">
       <h3>آخر صيانة</h3>
       <p id="maintenanceDate">—</p>
-    </section>
-
+    </section>      <span id="alertMessage"></span>
+  
     <!-- ✅ زر العودة إلى لوحة التحكم -->
-    <section class="card back-button-container">
-      <a href="dashboard.html" class="btn back-btn">⬅ العودة إلى لوحة التحكم</a>
+    <section class=" back-button-container">
+      <a href="dashboard.html" class="btn back-btn">العودة إلى لوحة التحكم</a>
     </section>
 
   </main>

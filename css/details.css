@@ -80,43 +80,271 @@ canvas#usageChart {
   font-weight: bold;
 }
 
-/* تنسيق الرسائل التنبيهية */
+/* Alert Message Box - Modern Design */
 #alertMessageBox {
-  display: flex;
-  background-color: var(--status-danger-bg);
-  /* خلفية حمراء */
-  color: var(--status-danger-text);
-  /* خط أحمر */
-  padding: 18px 24px;
+  background-color: var(--card-bg);
+  padding: 20px;
   border-radius: 16px;
-  font-weight: 600;
-  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
-  /* ظل خفيف */
-  justify-content: center;
+  text-align: center;
+  border-left: 6px solid transparent;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease-out;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Alert Message Content */
+#alertMessage {
+  font-size: 16px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Alert Status Indicators */
+.status {
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  transition: all 0.3s ease;
 }
 
-/* رسائل التنبيه بناءً على الحالة */
 .status.good {
-  background-color: var(--status-good-bg);
-  color: var(--status-good-text);
+  background-color: var(--card-bg);
+  color: #2a8650;
+  border-left-color: #346b4b;
 }
-
-.status.warning {
-  background-color: var(--status-warning-bg);
-  color: var(--status-warning-text);
+body.dark .status.good {
+  background-color: ar(--card-bg);
+  color: #74b58f;
+  border-left-color: #496d58;
 }
-
 .status.danger {
-  background-color: var(--status-danger-bg);
-  color: var(--status-danger-text);
-
+  background-color: var(--card-bg);
+  color: #be7a72;
+  border-left-color: #e74c3c;
+}
+body.dark .status.danger {
+  background-color: var(--card-bg);
+  color: #facec9;
+  border-left-color: #e74c3c;
 }
 
+/* Alert Icons */
+.alert-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.status.good .alert-icon {
+  color: #f4fcf7;
+}
+
+.status.danger .alert-icon {
+  color: #7d332b;
+}
+body.dark .status.danger .alert-icon {
+  color: #ad4337;
+}
+/* Alert Items */
+.alert-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 6px 0;
+  animation: slideIn 0.3s ease-out;
+  text-align: right;
+  direction: rtl;
+}
+
+.alert-item span {
+  flex-grow: 1;
+}
+
+.alert-item {
+  background-color: rgba(222, 127, 116, 0.1);
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.status-badge.danger {
+  font-size: 18px;
+  background-color: rgba(158, 170, 179, 0.1);
+  color: #101010;
+}
+body.dark .status-badge.danger {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: hsl(0, 0%, 100%);
+  font-size: 18px;
+}
+.status-badge.good {
+    font-size: 18px;
+
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #52926d;
+}
+body.dark .status-badge.good {
+  font-size: 18px;
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #6da885;
+}
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Pulsing effect for critical alerts */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(212, 115, 104, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(42, 4, 0, 0); }
+}
+
+.alert-item {
+  animation: pulse 1.5s infinite;
+}
+.critical {
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #alertMessageBox {
+    padding: 16px;
+  }
+  
+  .status {
+    padding: 12px;
+  }
+  
+  .alert-item {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .alert-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+  }
+}
+
+/* Original CSS Below - Remain Unchanged */
+.dashboard {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+}
+
+.section-title {
+  font-size: 22px;
+  color: var(--section-title);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+canvas#usageChart {
+  width: 100% !important;
+  max-height: 400px;
+}
+
+.stats-section h3 {
+  font-size: 20px;
+  color: var(--section-title);
+  margin-bottom: 20px;
+}
+
+.facility-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  background: rgba(0, 191, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--section-title);
+}
+
+.stat-value {
+  font-weight: bold;
+  color: var(--primary-btn);
+}
+
+#usageValue {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary-btn);
+  margin-top: 10px;
+}
+
+.maintenance-card h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--section-title);
+}
+
+.maintenance-card p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.back-button-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: var(--primary-dark);
+}
 .back-button-container {
   text-align: center;
   margin-top: 1.5rem;

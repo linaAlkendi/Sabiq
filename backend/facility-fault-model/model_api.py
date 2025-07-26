@@ -3,7 +3,7 @@ import joblib
 import pandas as pd
 
 app = Flask(__name__)
-model = joblib.load("rf_model.pkl")
+model = joblib.load("./backend/facility-fault-model/rf_model.pkl")
 
 @app.route('/predict', methods=['GET'])
 def predict():
