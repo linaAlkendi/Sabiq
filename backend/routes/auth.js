@@ -55,7 +55,7 @@ async function hashPasswords() {
 hashPasswords();
 
 // رمز OTP ثابت
-const FIXED_OTP = "1234";
+const FIXED_OTP = "1290";
 
 // تخزين OTP مؤقت 
 const userOtpMap = new Map();

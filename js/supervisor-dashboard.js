@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <td>${task.facility}</td>
               <td>${task.fault}</td>
               <td>${task.severity}</td>
-              <td><span class="status ${task.status.replace(/\s+/g, "-")}">${task.status}</span></td>
+              <td><span class="status-badge status-capsule status-${task.status.replace(/\s+/g, "-")}">${task.status}</span></td>
               <td>${task.assignedDate}</td>
               <td>${task.action}</td>
             </tr>
