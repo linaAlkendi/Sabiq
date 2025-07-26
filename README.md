@@ -13,33 +13,37 @@ sabiq/
 │   ├── ai-model/                  # AI model for incident data
 │   │   └── analyze_incidents.py
 │   │
-│   ├── data/                      # JSON data files
-│   │   ├── incidents.json
-│   │   ├── facilities.json
-│   │   ├── notifications.json
-│   │   ├── incidentsData.json
-│   │   └── users.json
+│   ├── data/
+│   │   ├── facilities.json                   # Facility list
+│   │   ├── incidents.json                    # Reported incidents
+│   │   ├── incidentData.json                 # Labeled training data
+│   │   ├── notifications.json                # System notifications
+│   │   ├── output.json                       # Model prediction outputs
+│   │   ├── tasks.json                        # Assigned tasks for technicians
+│   │   └── users.json                        # User credentials and roles
 │   │
-│   ├── facility-fault-model/      # AI model integration
-│   │   ├── rf_model.pkl           # Pretrained model (Random Forest)
-│   │   └── model_api.py           # Flask API for inference
+│   ├── facility-fault-model/      
+│   │   ├── rf_model.pkl                      # Pretrained model (Random Forest)
+│   │   └── model_api.py                      # Flask API for inference
 │   │
-│   ├── helpers/                   # Utility/helper functions
-│   │   └── notifier.js
+│   ├── helpers/                   
+│   │   └── notifier.js                       # Notification system wrapper
 │   │
-│   ├── routes/                    # Route logic (modularized)
-│   │   ├── incidents.js
-│   │   ├── facilities.js
-│   │   ├── notifications.js
-│   │   └── auth.js
+│   ├── routes/
+│   │   ├── auth.js                           # Login and role-based auth
+│   │   ├── facilities.js                     # Facility monitoring endpoints
+│   │   ├── incidents.js                      # Incident reporting and retrieval
+│   │   ├── notifications.js                  # Create/read notifications
+│   │   ├── tasks.js                          # Technician task management
+│   │   ├── predict.js                        # ML integration for predictions
+│   │   └── detailed-log.js                   # Route to retrieve full incident logs
 │   │
-│   ├── server.js                  # Express server entry point
-│   └── package.json               # Node dependencies
+│   ├── server.js                             # Express server entry point
+│   └── package.json                          # Node dependencies
 │
-├── pages/                        # Frontend HTML pages
-├── js/                           # Frontend JavaScript files
-├── css/                          # Stylesheets
-├── main.py
+├── pages/                                    # Frontend HTML pages
+├── js/                                       # Frontend JavaScript 
+├── css/                                      # Stylesheets
 ├── .gitignore
 └── README.md
 ```
