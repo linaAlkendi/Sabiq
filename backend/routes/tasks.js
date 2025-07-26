@@ -75,7 +75,7 @@ router.post("/", (req, res) => {
             fault,
             severity,
             action,
-            status: "قيد التنفيذ",
+            status: "بانتظار التنفيذ",
             assignedDate: new Date().toISOString().split("T")[0]
         };
 
