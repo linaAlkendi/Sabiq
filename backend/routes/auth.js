@@ -10,7 +10,7 @@ const router = express.Router();
 
 const USERS_FILE = path.join(__dirname, "../data/users.json");
 
-
+require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 

@@ -136,14 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       completeBtn.addEventListener("click", e => {
         e.stopPropagation();
-        alert(`توثيق إنهاء المهمة: ${task.title}`);
+        window.location.href = "complete-task.html";
       });
 
       card.appendChild(completeBtn);
 
-      card.addEventListener("click", () => {
-        window.location.href = "complete-task.html";
-      });
     }
 
     taskContainer.appendChild(card);
