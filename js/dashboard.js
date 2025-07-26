@@ -8,7 +8,7 @@ fetch('http://localhost:3000/facilities')
 
       let statusText = '';
       if (facility.status === 'danger') {
-        statusText = '🔴 عطل مؤكد';
+        statusText = '🔴 مُعطل';
       } else if (facility.status === 'good') {
         statusText = '✅ شغال';
       } else {
