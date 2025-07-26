@@ -10,8 +10,8 @@ This project is a prototype for reporting and visualizing technical safety incid
 ```
 sabiq/
 ├── backend/
-│   ├── ai-model/                  # AI model for incident data
-│   │   └── analyze_incidents.py
+│   ├── ai-model/                
+│   │   └── analyze_incidents.py              # AI logic for analyzing incidents
 │   │
 │   ├── data/
 │   │   ├── facilities.json                   # Facility list
@@ -89,7 +89,7 @@ http://localhost:3000
 
 ## 🔐 Environment Setup & Security
 
-### 👤 Environment Varabiles
+### Environment Varabiles
 
 Create a `.env` file under the `backend` folder with the following key:
 ```
