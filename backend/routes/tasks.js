@@ -27,6 +27,19 @@ router.get("/", (req, res) => {
     }
 });
 
+// GET /api/user/:username → returns all tasks for the specified user
+router.get('/user/:username', (req, res) => {
+  const username = req.params.username;
+
+  fs.readFile(TASKS_FILE, 'utf8', (err, data) => {
+    if (err) return res.status(500).json({ message: 'Failed to load tasks.' });
+
+    const tasks = JSON.parse(data);
+    const userTasks = tasks.filter(task => task.technician === username);
+    res.json(userTasks);
+  });
+});
+
 // POST /api/tasks → add a new task
 router.post("/", (req, res) => {
     try {

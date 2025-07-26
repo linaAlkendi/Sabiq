@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // تخزين التوكن والدور في localStorage لاستخدامها في otp.js
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
+        localStorage.setItem("username", data.username);
 
         // التوجيه إلى صفحة otp.html بعد ثانية ونصف
         setTimeout(() => {

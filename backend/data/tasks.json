@@ -79,14 +79,5 @@
     "severity": "متوسطة",
     "action": "فحص الكابلات",
     "assignedDate": "2025-07-14"
-  },
-  {
-    "technician": "tech_user1",
-    "facility": "سلم متحرك 1",
-    "fault": "كهربائي",
-    "severity": "متوسطة",
-    "action": "hjkhkjhkjhkjh",
-    "status": "قيد التنفيذ",
-    "assignedDate": "2025-07-25"
   }
 ]

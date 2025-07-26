@@ -96,6 +96,7 @@ router.post("/login", async (req, res) => {
       message: "تم تسجيل الدخول بنجاح. يرجى إدخال رمز التحقق.",
       token,
       role: user.role,
+      username: user.username
     });
   } catch (err) {
     console.error("خطأ أثناء تسجيل الدخول:", err);
