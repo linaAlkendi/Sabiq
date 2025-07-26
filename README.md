@@ -10,36 +10,40 @@ This project is a prototype for reporting and visualizing technical safety incid
 ```
 sabiq/
 ├── backend/
-│   ├── ai-model/                  # AI model for incident data
-│   │   └── analyze_incidents.py
+│   ├── ai-model/                
+│   │   └── analyze_incidents.py              # AI logic for analyzing incidents
 │   │
-│   ├── data/                      # JSON data files
-│   │   ├── incidents.json
-│   │   ├── facilities.json
-│   │   ├── notifications.json
-│   │   ├── incidentsData.json
-│   │   └── users.json
+│   ├── data/
+│   │   ├── facilities.json                   # Facility list
+│   │   ├── incidents.json                    # Reported incidents
+│   │   ├── incidentData.json                 # Labeled training data
+│   │   ├── notifications.json                # System notifications
+│   │   ├── output.json                       # Model prediction outputs
+│   │   ├── tasks.json                        # Assigned tasks for technicians
+│   │   └── users.json                        # User credentials and roles
 │   │
-│   ├── facility-fault-model/      # AI model integration
-│   │   ├── rf_model.pkl           # Pretrained model (Random Forest)
-│   │   └── model_api.py           # Flask API for inference
+│   ├── facility-fault-model/      
+│   │   ├── rf_model.pkl                      # Pretrained model (Random Forest)
+│   │   └── model_api.py                      # Flask API for inference
 │   │
-│   ├── helpers/                   # Utility/helper functions
-│   │   └── notifier.js
+│   ├── helpers/                   
+│   │   └── notifier.js                       # Notification system wrapper
 │   │
-│   ├── routes/                    # Route logic (modularized)
-│   │   ├── incidents.js
-│   │   ├── facilities.js
-│   │   ├── notifications.js
-│   │   └── auth.js
+│   ├── routes/
+│   │   ├── auth.js                           # Login and role-based auth
+│   │   ├── facilities.js                     # Facility monitoring endpoints
+│   │   ├── incidents.js                      # Incident reporting and retrieval
+│   │   ├── notifications.js                  # Create/read notifications
+│   │   ├── tasks.js                          # Technician task management
+│   │   ├── predict.js                        # ML integration for predictions
+│   │   └── detailed-log.js                   # Route to retrieve full incident logs
 │   │
-│   ├── server.js                  # Express server entry point
-│   └── package.json               # Node dependencies
+│   ├── server.js                             # Express server entry point
+│   └── package.json                          # Node dependencies
 │
-├── pages/                        # Frontend HTML pages
-├── js/                           # Frontend JavaScript files
-├── css/                          # Stylesheets
-├── main.py
+├── pages/                                    # Frontend HTML pages
+├── js/                                       # Frontend JavaScript 
+├── css/                                      # Stylesheets
 ├── .gitignore
 └── README.md
 ```
@@ -80,6 +84,35 @@ The server will be available at:
 ```
 http://localhost:3000
 ```
+
+---
+
+## 🔐 Environment Setup & Security
+
+### Environment Varabiles
+
+Create a `.env` file under the `backend` folder with the following key:
+```
+JWT_SECRET= "SOME_KEY"
+```
+
+### 👤 Authentication Info (Dummy Data for Testing)
+
+| Username    | Password | Role        |
+|-------------|----------|-------------|
+| tech_user1  | Tech@123 | فني         |
+| supervisor1 | sup@456  | مشرف صيانة  | 
+| ops_manager | Ops@789  | مدير عمليات |
+
+You can modify these accounts in `backend/data/users.json`.
+Passwords are hashed then stored in the backend.
+
+### 📲 OTP Simulation
+
+This project uses a dummy OTP verification process for demo purposes.  
+In production, it should be integrated with an SMS/email provider.
+
+For testing, please enter **1234**.
 
 ---
 

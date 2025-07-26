@@ -28,7 +28,7 @@ function saveAllUsers(users) {
 // Original plain passwords
 const plainPasswords = {
   tech_user1: "Tech@123",
-  supervisor1: "sup@456", //  الغريب انها محفوظة ك no !!
+  supervisor1: "sup@456", 
   ops_manager: "Ops@789",
 };
 
@@ -96,6 +96,7 @@ router.post("/login", async (req, res) => {
       message: "تم تسجيل الدخول بنجاح. يرجى إدخال رمز التحقق.",
       token,
       role: user.role,
+      username: user.username
     });
   } catch (err) {
     console.error("خطأ أثناء تسجيل الدخول:", err);

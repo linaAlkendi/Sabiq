@@ -6,7 +6,8 @@
     "status": "قيد التنفيذ",
     "severity": "متوسطة",
     "action": "استبدال الأسلاك",
-    "assignedDate": "2025-07-10"
+    "assignedDate": "2025-07-10",
+    "id": 1
   },
   {
     "technician": "سارة الزهراني",
@@ -15,7 +16,8 @@
     "status": "تم الإنجاز",
     "severity": "عالية",
     "action": "إعادة تشغيل",
-    "assignedDate": "2025-07-11"
+    "assignedDate": "2025-07-11",
+    "id": 2
   },
   {
     "technician": "خالد العنزي",
@@ -24,7 +26,8 @@
     "status": "تم الإنجاز",
     "severity": "منخفضة",
     "action": "غطاء مكشوف",
-    "assignedDate": "2025-07-12"
+    "assignedDate": "2025-07-12",
+    "id": 3
   },
   {
     "technician": "محمد العلي",
@@ -33,7 +36,8 @@
     "status": "قيد التنفيذ",
     "severity": "متوسطة",
     "action": "فحص التوصيلات الكهربائية",
-    "assignedDate": "2025-07-11"
+    "assignedDate": "2025-07-11",
+    "id": 4
   },
   {
     "technician": "ليلى الشمري",
@@ -42,7 +46,8 @@
     "status": "تم الإنجاز",
     "severity": "عالية",
     "action": "تبديل المحرك",
-    "assignedDate": "2025-07-09"
+    "assignedDate": "2025-07-09",
+    "id": 5
   },
   {
     "technician": "ريم العتيبي",
@@ -51,7 +56,8 @@
     "status": "قيد التنفيذ",
     "severity": "عالية",
     "action": "ضبط المحرك",
-    "assignedDate": "2025-07-14"
+    "assignedDate": "2025-07-14",
+    "id": 6
   },
   {
     "technician": "ناصر الحربي",
@@ -60,7 +66,8 @@
     "status": "تم الإنجاز",
     "severity": "منخفضة",
     "action": "فحص النظام",
-    "assignedDate": "2025-07-10"
+    "assignedDate": "2025-07-10",
+    "id": 7
   },
   {
     "technician": "هالة البلوشي",
@@ -69,7 +76,8 @@
     "status": "قيد التنفيذ",
     "severity": "متوسطة",
     "action": "طلب قطع غيار",
-    "assignedDate": "2025-07-15"
+    "assignedDate": "2025-07-15",
+    "id": 8
   },
   {
     "technician": "سلمان الزهراني",
@@ -78,15 +86,7 @@
     "status": "قيد التنفيذ",
     "severity": "متوسطة",
     "action": "فحص الكابلات",
-    "assignedDate": "2025-07-14"
-  },
-  {
-    "technician": "tech_user1",
-    "facility": "سلم متحرك 1",
-    "fault": "كهربائي",
-    "severity": "متوسطة",
-    "action": "hjkhkjhkjhkjh",
-    "status": "قيد التنفيذ",
-    "assignedDate": "2025-07-25"
+    "assignedDate": "2025-07-14",
+    "id": 9
   }
 ]
