@@ -85,7 +85,7 @@ http://localhost:3000
 
 ## 🔐 Environment Setup & Security
 
-### 👤 Authentication Info (Dummy Data for Testing)
+### 👤 Environment Varabiles
 
 Create a `.env` file under the `backend` folder with the following key:
 ```
