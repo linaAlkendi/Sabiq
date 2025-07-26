@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
+import os
 
 app = Flask(__name__)
-model = joblib.load("./backend/facility-fault-model/rf_model.pkl")
+
+model_path = os.path.join(os.path.dirname(__file__), "rf_model.pkl")
+model = joblib.load(model_path)
 
 @app.route('/predict', methods=['GET'])
 def predict():

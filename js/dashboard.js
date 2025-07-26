@@ -16,12 +16,16 @@ fetch('http://localhost:3000/facilities')
       }
 
       let predictionText = '';
+      let predictionColor = '';
       if (facility.model_prediction === '1' && facility.status !== 'danger') {
         predictionText = 'يتوقع حدوث عطل قريب';
+        predictionColor = 'orange';
       } else if (facility.model_prediction === '0' && facility.status !== 'danger') {
         predictionText = 'لا يتوقع حدوث عطل قريب';
+        predictionColor = 'green';
       } else {
         predictionText = 'التنبؤ غير متوفر';
+        predictionColor = 'yellow';
       }
 
       card.innerHTML = `
@@ -59,7 +63,7 @@ fetch('http://localhost:3000/facilities')
 </svg>
               تنبؤ النظام:
             </span>
-            <span class="stat-value">${predictionText}</span>
+            <span class="stat-value" style="color:${predictionColor}">${predictionText}</span>
           </div>
         </div>
 
