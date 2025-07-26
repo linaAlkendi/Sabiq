@@ -94,6 +94,7 @@ http://localhost:3000
 Create a `.env` file under the `backend` folder with the following key:
 ```
 JWT_SECRET= "SOME_KEY"
+FLASK_HOST_NAME= "http://127.0.0.1:5000"
 ```
 
 ### 👤 Authentication Info (Dummy Data for Testing)

@@ -4,6 +4,9 @@ const path = require("path");
 const router = express.Router();
 const axios = require("axios");
 
+require("dotenv").config();
+const FLASK_HOST_NAME = process.env.FLASK_HOST_NAME;
+
 const DATA_FILE = path.join(__dirname, "../data/facilities.json");
 
 // GET all facilities with AI model prediction
@@ -23,7 +26,7 @@ router.get("/", async (req, res) => {
             motor_load: parseFloat(facility.motor_load)
           };
 
-          const response = await axios.get("http://127.0.0.1:5000/predict", {
+          const response = await axios.get(`${FLASK_HOST_NAME}/predict`, {
             params: inputData
           });
 
