@@ -29,16 +29,30 @@ router.get("/", (req, res) => {
 
 // GET /api/user/:username → returns all tasks for the specified user
 router.get('/user/:username', (req, res) => {
-  const username = req.params.username;
+    const username = req.params.username;
 
-  fs.readFile(TASKS_FILE, 'utf8', (err, data) => {
-    if (err) return res.status(500).json({ message: 'Failed to load tasks.' });
+    fs.readFile(TASKS_FILE, 'utf8', (err, data) => {
+        if (err) return res.status(500).json({ message: 'Failed to load tasks.' });
 
-    const tasks = JSON.parse(data);
-    const userTasks = tasks.filter(task => task.technician === username);
-    res.json(userTasks);
-  });
+        const tasks = JSON.parse(data);
+        const userTasks = tasks.filter(task => task.technician === username);
+        res.json(userTasks);
+    });
 });
+
+// PATCH /api/tasks/complete/:id → Mark a task as complete
+router.put('/complete/:id', (req, res) => {
+    const tasks = getAllTasks();
+    const taskId = req.params.id;
+
+    const taskIndex = tasks.findIndex((t) => t.id?.toString() === taskId);
+    if (taskIndex === -1) return res.status(404).json({ error: 'Task not found' });
+
+    tasks[taskIndex].status = "تم الإنجاز";
+    saveAllTasks(tasks);
+    res.json({ success: true, task: tasks[taskIndex] });
+});
+
 
 // POST /api/tasks → add a new task
 router.post("/", (req, res) => {
@@ -52,15 +66,19 @@ router.post("/", (req, res) => {
 
         const tasks = getAllTasks();
 
+        const maxId = tasks.reduce((max, t) => t.id > max ? t.id : max, 0);
+
         const newTask = {
+            id: maxId + 1,
             technician,
             facility,
             fault,
             severity,
             action,
             status: "قيد التنفيذ",
-            assignedDate: new Date().toISOString().split("T")[0] // Format: YYYY-MM-DD
+            assignedDate: new Date().toISOString().split("T")[0]
         };
+
 
         tasks.push(newTask);
         saveAllTasks(tasks);

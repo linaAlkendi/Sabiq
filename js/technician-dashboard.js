@@ -100,8 +100,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
           completeBtn.addEventListener("click", e => {
             e.stopPropagation();
-            alert(`توثيق إنهاء المهمة: ${task.title || task.facility}`);
+
+            fetch(`http://localhost:3000/api/tasks/complete/${task.id}`, {
+              method: "PUT"
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  // Option 1: Refresh entire list
+                  window.location.reload();
+
+                  // Option 2 (optional): update DOM manually (not used here)
+                } else {
+                  alert("حدث خطأ أثناء تحديث المهمة.");
+                }
+              })
+              .catch(err => {
+                console.error("خطأ في تحديث المهمة:", err);
+                alert("تعذر توثيق المهمة.");
+              });
           });
+
 
           card.appendChild(completeBtn);
 
