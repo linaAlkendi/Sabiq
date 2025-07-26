@@ -5,7 +5,7 @@ This project is a prototype for reporting and visualizing technical safety incid
 
 ---
 
-## 🚀 Live Demo
+## 🎉 Live Demo
 
 The entire SABIQ system is now deployed and available as a live interactive demo!
 
@@ -16,6 +16,15 @@ This demo showcases:
 - Fault prediction via the Flask ML model
 - Dynamic dashboards and facility statuses
 - Seamless integration between GitHub Pages (frontend), Node.js (backend), and Flask (ML API)
+
+---
+
+## 👥 Team
+
+- **Mona** – Operational analysis, connecting system idea to airport operations and international regulations
+- **Lina** – Designed and developed the UI, tracked workflow and task coordination
+- **Shroog** – Designed and developed the UI
+- **Rami** – Integrated database and backend systems with frontend
 
 ---
 
@@ -61,15 +70,6 @@ sabiq/
 ├── .gitignore
 └── README.md
 ```
-
----
-
-## 👥 Team
-
-- **Mona** – Operational analysis, connecting system idea to airport operations and international regulations
-- **Lina** – Designed and developed the UI, tracked workflow and task coordination
-- **Shroog** – Designed and developed the UI
-- **Rami** – Integrated database and backend systems with frontend
 
 ---
 
