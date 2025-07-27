@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // هنا يمكن إضافة منطق لإعادة إرسال الرمز (اختياري)
   });
 
+  // التحقق من الرمز
   checkBtn.addEventListener("click", async () => {
     const otp = Array.from(inputs).map(input => input.value).join("");
 
@@ -36,6 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     messageBox.textContent = "";
     messageBox.className = "";
+
+    // 🔒 Disable the button and show loading
+    checkBtn.disabled = true;
+    checkBtn.innerText = "جاري التحقق...";
 
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -72,11 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         messageBox.textContent = data.message || "رمز التحقق غير صحيح.";
         messageBox.className = "error-message";
+        checkBtn.disabled = false;
+        checkBtn.innerText = "تحقق";
       }
     } catch (error) {
       console.error("خطأ في الاتصال بالسيرفر:", error);
       messageBox.textContent = "حدث خطأ في الاتصال بالخادم. حاول لاحقًا.";
       messageBox.className = "error-message";
+      checkBtn.disabled = false;
+      checkBtn.innerText = "تحقق";
     }
   });
 });

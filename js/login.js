@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
   const messageBox = document.getElementById("message-box");
+  const loginBtn = document.getElementById("login-btn"); // Add this line
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -10,6 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     messageBox.textContent = "";
     messageBox.className = "";
+
+    // 🔒 Disable button and show loading
+    loginBtn.disabled = true;
+    loginBtn.innerText = "جاري التحقق...";
 
     try {
       const response = await fetch("https://sabiq-node-backend.onrender.com/auth/login", {
@@ -37,11 +42,15 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         messageBox.textContent = data.message || "فشل تسجيل الدخول";
         messageBox.className = "error-message";
+        loginBtn.disabled = false;
+        loginBtn.innerText = "دخول"; // Restore button text
       }
     } catch (error) {
       console.error("خطأ في الاتصال بالسيرفر:", error);
       messageBox.textContent = "حدث خطأ في الاتصال بالخادم. حاول لاحقًا.";
       messageBox.className = "error-message";
+      loginBtn.disabled = false;
+      loginBtn.innerText = "دخول"; // Restore on error
     }
   });
 });

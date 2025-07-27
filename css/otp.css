@@ -26,6 +26,13 @@ body.dark {
   box-sizing: border-box;
 }
 
+.logo {
+  width: 240px;
+  height: auto;
+  margin: -30px auto 10px;
+  display: block;
+}
+
 body {
   margin: 0;
   padding: 0;
