@@ -219,8 +219,8 @@ body.dark .language-select {
 
   /* Checked state for the custom checkbox */
   .checkbox-container input[type="checkbox"]:checked + .checkbox-custom {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
   }
 
   .checkbox-container input[type="checkbox"]:checked + .checkbox-custom::after {
