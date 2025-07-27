@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("../backend/data/incidentData.json")
+  fetch("http://localhost:3000/api/detailed-log/incidents")
     .then(res => res.json())
     .then(data => {
       const months = [
