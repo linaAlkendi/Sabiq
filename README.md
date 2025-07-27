@@ -28,6 +28,12 @@ This demo showcases:
 
 ---
 
+## 🎥 Watch Our Pitch
+
+[![SABIQ Pitch Video](assets/video.png)](https://youtu.be/knjPmnNStsE)
+
+---
+
 ## 📁 Project Structure
 
 ```
