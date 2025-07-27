@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("../backend/data/incidentData.json")
+  fetch("https://sabiq-node-backend.onrender.com/api/detailed-log/incidents")
     .then(res => res.json())
     .then(data => {
       const months = [
