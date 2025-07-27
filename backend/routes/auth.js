@@ -12,9 +12,12 @@ const USERS_FILE = path.join(__dirname, "../data/users.json");
 
 require("dotenv").config();
 const JWT_SECRET = process.env.JWT_SECRET;
+const FLASK_HOST_NAME = process.env.FLASK_HOST_NAME;
 
-
-
+// Wake up the Flask API silently
+fetch(`${FLASK_HOST_NAME}/ping`)
+  .then(res => console.log("Flask server warmed up."))
+  .catch(err => console.warn("Flask wake-up failed", err));
 
 function getAllUsers() {
   const data = fs.readFileSync(USERS_FILE, "utf-8");

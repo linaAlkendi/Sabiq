@@ -8,6 +8,11 @@ app = Flask(__name__)
 model_path = os.path.join(os.path.dirname(__file__), "rf_model.pkl")
 model = joblib.load(model_path)
 
+@app.route("/ping")
+def ping():
+    return "OK", 200
+
+
 @app.route('/predict', methods=['GET'])
 def predict():
     # Retrieve parameters from the query string
