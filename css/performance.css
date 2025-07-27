@@ -168,3 +168,88 @@ table tbody td {
   max-height: 300px;
   margin-top: 10px;
 }
+
+/* General layout for small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Sidebar adjustments */
+  .side-menu {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: all 0.3s ease;
+  }
+
+  .side-menu.open {
+    left: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Summary card adjustments */
+  .summary-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the cards */
+    gap: 20px; /* Space between cards */
+  }
+
+  .summary-card {
+    width: 90%;  /* Adjust card width */
+    margin-bottom: 20px;  /* Space between cards */
+    text-align: center;
+  }
+
+  .summary-card p {
+    font-size: 1.5rem; /* Adjust font size for better readability */
+  }
+
+  /* Technician card adjustments */
+  .technician-cards {
+    gap: 10px;
+  }
+
+  .tech-card {
+    width: 100%; /* Full width on small screens */
+  }
+}
+
+/* Extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Header size adjustments */
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  /* Table adjustments for better readability */
+  table thead th,
+  table tbody td {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+  /* Card padding adjustments */
+  .card {
+    padding: 15px;
+  }
+
+  /* Summary card adjustments */
+  .summary-card p {
+    font-size: 1rem; /* Adjust text size for smaller screens */
+  }
+
+  /* Technician card padding */
+  .technician-card {
+    padding: 15px;
+  }
+
+  /* Menu toggle position on very small screens */
+  .menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+  }
+}
