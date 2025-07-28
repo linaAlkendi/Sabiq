@@ -158,28 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
           completeBtn.textContent = "توثيق إنهاء المهمة";
 
           completeBtn.addEventListener("click", e => {
-            e.stopPropagation();
-
-            if (task.id < 0) return alert("هذه مهمة تجريبية ولا يمكن تعديلها."); // Skip demo tasks update
-
-            fetch(`http://localhost:3000/api/tasks/complete/${task.id}`, {
-              method: "PUT"
-            })
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  // Option 1: Refresh entire list
-                  window.location.reload();
-
-                  // Option 2 (optional): update DOM manually (not used here)
-                } else {
-                  alert("حدث خطأ أثناء تحديث المهمة.");
-                }
-              })
-              .catch(err => {
-                console.error("خطأ في تحديث المهمة:", err);
-                alert("تعذر توثيق المهمة.");
-              });
+          
+              window.location.href = "complete-task.html";
           });
 
 
