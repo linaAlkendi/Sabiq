@@ -34,6 +34,14 @@ This demo showcases:
 
 ---
 
+## 📄 Project Pitch
+
+You can view and download the full project pitch presentation (PDF) from the link below:
+
+[📥 Download Project Pitch (pitch.pdf)](assets/pitch.pdf)
+
+---
+
 ## 📁 Project Structure
 
 ```
