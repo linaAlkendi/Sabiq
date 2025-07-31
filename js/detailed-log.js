@@ -6,11 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const facilityTypeFilter = document.getElementById("facilityTypeFilter");
   const sortOrderSelect = document.getElementById("sortOrder");
 
-  const predictedFacilityEl = document.getElementById("predictedFacilitySummary");
-  const commonCausesList = document.getElementById("commonCausesList");
-  const downtimeSummaryList = document.getElementById("downtimeSummaryList");
-  const insightsList = document.getElementById("insightsList");
-
   let faultDetails = [];
   let tableData = [];
 
@@ -25,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   function renderTable() {
-    // ترتيب البيانات حسب الاختيار
     const sortOrder = sortOrderSelect.value;
     const sortedData = [...tableData].sort((a, b) => {
       const dateA = new Date(a["تاريخ العطل"]);
@@ -66,6 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
             `تاريخ العطل: ${item["تاريخ العطل"] || "غير معروف"}`
           ],
           pdf: item["تفاصيل"]?.pdf || "../assets/report.pdf",
+          imageAfter: item["تفاصيل"]?.after || "../assets/imageAfter.jpg",
+          imageBefore: item["تفاصيل"]?.before || "../assets/imageBefore.jpg",
           facility: item["نوع المرفق"] || "غير معروف"
         });
       }
@@ -73,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setupEventListeners();
     detailsSection.classList.add("hidden");
-    updatePrediction();
   }
 
   function setupEventListeners() {
@@ -84,15 +79,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const index = row.getAttribute("data-index");
         const details = faultDetails[index];
 
+        // عرض الإجراءات
         actionContent.innerHTML = details.actions
           .map(line => `<p>${line}</p>`)
           .join("");
 
-        const pdfLinks = document.querySelectorAll("#detailsSection .pdf-link");
-        pdfLinks.forEach(link => {
-          link.href = details.pdf;
-        });
+        // تحديث روابط المرفقات
+        const attachmentsDiv = document.querySelector("#detailsSection .attachments");
+        attachmentsDiv.innerHTML = `
+          <div class="attachment"><a href="${details.imageBefore}" target="_blank" class="pdf-link">📸 صورة قبل الإصلاح</a></div>
+          <div class="attachment"><a href="${details.imageAfter}" target="_blank" class="pdf-link">📸 صورة بعد الإصلاح</a></div>
+          <div class="attachment"><a href="${details.pdf}" target="_blank" class="pdf-link">📄 تقرير صيانة PDF</a></div>
+        `;
 
+        // عرض القسم والتمرير إليه
         detailsSection.classList.remove("hidden");
         detailsSection.scrollIntoView({ behavior: "smooth" });
       });
@@ -103,30 +103,97 @@ document.addEventListener("DOMContentLoaded", function () {
   facilityTypeFilter.addEventListener("change", renderTable);
   sortOrderSelect.addEventListener("change", renderTable);
 
-  
-  function updatePrediction() {
-    // سيتم تحديثه لاحقًا عند الحاجة
+  // عرض بيانات التحليل والتنبؤ
+  function displayPredictions(data) {
+    if (!data.predictions || data.predictions.length === 0) return;
+
+    const topPred = data.top_prediction;
+    document.getElementById('predictedFacility').textContent = topPred.facility || 'غير معروف';
+    document.getElementById('predictedProbability').textContent = topPred.probability || '0.0%';
+    document.getElementById('predictedDate').textContent = topPred.next_predicted_date || 'غير محدد';
+
+    const facilityAnalysis = data.facility_analysis?.[topPred.facility] || {};
+
+    const causesList = document.getElementById('commonCausesList');
+    causesList.innerHTML = Object.entries(facilityAnalysis.common_causes || {})
+      .map(([cause, count]) => `<li>${cause} (${count} مرات)</li>`)
+      .join('') || "<li>لا توجد بيانات</li>";
+
+    const downtimeList = document.getElementById('downtimeSummaryList');
+    downtimeList.innerHTML = Object.entries(data.fault_type_analysis || {})
+      .map(([type, stats]) => `<li>${type}: ${stats.avg_downtime.toFixed(1)} دقيقة</li>`)
+      .join('') || "<li>لا توجد بيانات</li>";
+
+    const insightsList = document.getElementById('insightsList');
+    insightsList.innerHTML = (facilityAnalysis.insights || data.overall_insights || [])
+      .map(insight => `<li>${insight}</li>`)
+      .join('') || "<li>لا توجد بيانات</li>";
+
+    if (data.trend_analysis) {
+      document.getElementById('trendText').textContent =
+        `اتجاه الأعطال: ${data.trend_analysis.trend} (${(data.trend_analysis.slope.toFixed(2))*100}%)`;
+      renderTrendChart(data.trend_analysis);
+    }
   }
 
+  function renderTrendChart(trendData) {
+    if (!trendData || !window.Chart) return;
+
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    const isDarkMode = document.body.classList.contains("dark");
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['مايو', 'يونيو', 'يوليو'],
+        datasets: [{
+          label: 'عدد الأعطال',
+          data: trendData.last_3_months,
+          borderColor: isDarkMode ? 'rgb(75, 192, 192)' : 'rgba(75, 139, 192, 1)',
+          backgroundColor: isDarkMode ? 'rgba(75, 192, 192, 0.2)' : 'rgba(75, 143, 192, 0.2)',
+          tension: 0.4,
+          pointRadius: 5,
+          pointBackgroundColor: isDarkMode ? 'rgba(111, 247, 247, 1)' : 'rgba(75, 98, 192, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'اتجاه عدد الأعطال خلال آخر ٣ أشهر',
+            font: {
+              size: 14
+            }
+          },
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'عدد الأعطال'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'الشهر'
+            }
+          }
+        }
+      }
+    });
+
+  }
+
+  // تحميل بيانات التنبؤ والتحليل
   fetch("http://localhost:3000/api/detailed-log/output")
     .then(res => res.json())
-    .then(result => {
-      predictedFacilityEl.textContent = result.prediction || 'غير معروف';
-
-      commonCausesList.innerHTML = Object.entries(result.common_causes || {})
-        .map(([cause, count]) => `<li>${cause} (${count} حالة)</li>`)
-        .join('') || "<li>لا توجد بيانات</li>";
-
-      downtimeSummaryList.innerHTML = Object.entries(result.summary || {})
-        .map(([faultType, avg]) => `<li>${faultType}: ${avg} دقيقة</li>`)
-        .join('') || "<li>لا توجد بيانات</li>";
-
-      insightsList.innerHTML = (result.insights || [])
-        .map(insight => `<li>${insight}</li>`)
-        .join('') || "<li>لا توجد بيانات</li>";
-    })
+    .then(displayPredictions)
     .catch(err => {
       console.error("فشل تحميل بيانات التنبؤ:", err);
-      predictedFacilityEl.textContent = "خطأ في تحميل التنبؤ";
+      document.getElementById('predictedFacility').textContent = "خطأ في تحميل التنبؤ";
     });
 });

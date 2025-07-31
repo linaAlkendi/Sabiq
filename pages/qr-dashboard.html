@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مسح المرفق - SABIQ</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/qr-dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <button class="close-btn" id="close-btn">×</button>
+  
+  <div class="ar-header">
+    <h2>مسح المرفق بالواقع المعزز</h2>
+    <p>وجه الكاميرا نحو باركود المرفق</p>
+  </div>
+  
+  <div id="ar-container">
+    <video id="ar-video" autoplay playsinline></video>
+    <div id="scanner-frame">
+      <div class="scanner-guide"></div>
+      <div class="scanner-text">منطقة المسح</div>
+    </div>
+  </div>
+  
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">جاري تحميل بيانات المرفق...</div>
+  </div>
+  
+  <!-- النافذة المنبثقة المحسنة -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="facility-modal">
+      <div class="modal-header">
+        <h3 id="facility-name">--</h3>
+        <span class="modal-close" id="modal-close">&times;</span>
+      </div>
+      
+      <div class="status-badge" id="facility-status">
+        <span id="status-text">--</span>
+        <i id="status-icon"></i>
+      </div>
+      
+      <div class="modal-body">
+        <div class="info-row">
+          <i class="fas fa-calendar-check"></i>
+          <div>
+            <span class="info-label">آخر صيانة:</span>
+            <span class="info-value" id="last-maintenance">--</span>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <i class="fas fa-chart-line"></i>
+          <div>
+            <span class="info-label">عدد مرات الاستخدام اليوم:</span>
+            <span class="info-value" id="usage-count">--</span>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div>
+            <span class="info-label">التنبؤ القادم:</span>
+            <span class="info-value" id="next-prediction">--</span>
+          </div>
+        </div>
+        
+        <div class="advice-section">
+          <div class="section-header">
+            <i class="fas fa-tools"></i>
+            <h4>نصائح الصيانة</h4>
+          </div>
+          <div class="advice-content" id="maintenance-advice">
+            سيتم عرض النصائح بعد التعرف على المرفق
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn secondary-btn" id="details-btn">
+          <i class="fas fa-info-circle"></i> عرض التفاصيل الكاملة
+        </button>
+        <button class="btn primary-btn" id="action-btn">
+          <i class="fas fa-wrench"></i> بدء الصيانة
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/qr-dashboard.js"></script>
+  <footer>
+    &copy; 2025 SABIQ. جميع الحقوق محفوظة.
+  </footer>
+</body>
+</html>

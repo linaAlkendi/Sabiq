@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const taskContainer = document.getElementById("taskContainer");
+  const qrButton = document.getElementById('qrButton');
+
   const username = localStorage.getItem("username");
 
   if (!username || !taskContainer) {
@@ -15,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const demoTasks = [
         {
           id: -1,
-          action: "فحص مصعد A",
+          action: "فحص المصعد",
           fault: "ميكانيكي",
-          facility: "المبنى الرئيسي",
+          facility: "مصعد A"  ,
           status: "قيد التنفيذ",
           priority: "متوسطة",
           facilityStatusAtAssign: "شغال",
@@ -25,9 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
           id: -2,
-          action: "إصلاح السلم الكهربائي 3",
+          action: "إصلاح السلم الكهربائي",
           fault: "كهربائي",
-          facility: "الساحة الشمالية",
+          facility: "سلم كهربائي 3" ,
           status: "قيد التنفيذ",
           priority: "عالية",
           facilityStatusAtAssign: "معطل",
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
           id: -3,
-          action: "فحص بوابة 5",
+          action: "فحص البوابة",
           fault: "كهربائي",
           facility: "بوابة 5",
           status: "بانتظار التنفيذ",
@@ -47,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
           id: -4,
           action: "استبدال مصباح الإنارة",
           fault: "كهربائي",
-          facility: "ممر الإدارة",
-          status: "بانتظار الموافقة",
+          facility: "3 مصباح الإنارة",
+          status: "بانتظار قطع الغيار",
           priority: "متوسطة",
           facilityStatusAtAssign: "شغال",
           assignedDate: "2025-07-09"
@@ -57,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
           id: -5,
           action: "إصلاح نظام التكييف",
           fault: "ميكانيكي",
-          facility: "المبنى A",
+          facility: "جهاز التكييف A",
           status: "تم الإنجاز",
           priority: "عالية",
           facilityStatusAtAssign: "معطل",
@@ -72,16 +74,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const progressMap = {
         "قيد التنفيذ": 50,
         "بانتظار التنفيذ": 0,
-        "بانتظار الموافقة": 20,
+        "بانتظار قطع الغيار": 20,
         "تم الإنجاز": 100,
       };
 
       const statusIcons = {
-        "قيد التنفيذ": `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`,
-        "بانتظار التنفيذ": `<svg viewBox="0 0 24 24"><path d="M3 12l18 0" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`,
-        "بانتظار الموافقة": `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M8 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`,
-        "تم الإنجاز": `<svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2" fill="none"/></svg>`,
-      };
+      "قيد التنفيذ": `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`,
+      "بانتظار التنفيذ": `<svg viewBox="0 0 24 24"><path d="M3 12l18 0" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>`,
+  "بانتظار قطع الغيار": `
+    <svg viewBox="0 0 24 24" width="24" height="24">
+      <!-- رمز مفتاح البراغي -->
+      <path d="M12 2L15 5L12 8L15 11L12 14L9 17L6 14L3 11L6 8L9 5L12 2Z" 
+            stroke="white" stroke-width="1.5" fill="none"/>
+      <!-- رمز الضبط (مفتاح إنجليزي) -->
+      <path d="M18 8L22 4M18 16L22 20M6 8L2 4M6 16L2 20" 
+            stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- نقطة تمثل القطع -->
+      <circle cx="12" cy="11" r="1.5" fill="white"/>
+    </svg>`,
+      "تم الإنجاز": `<svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2" fill="none"/></svg>`,
+    };
 
       const priorityIcons = {
         "عالية": `
@@ -150,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.appendChild(contentWrapper);
 
-        if (["قيد التنفيذ", "بانتظار الموافقة"].includes(task.status)) {
+        if (["قيد التنفيذ", "بانتظار قطع الغيار"].includes(task.status)) {
           card.classList.add("has-overlay");
 
           const completeBtn = document.createElement("div");
@@ -172,9 +184,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         taskContainer.appendChild(card);
       });
+      updateStats(tasks)
     })
     .catch(error => {
       console.error("خطأ في جلب المهام:", error);
       taskContainer.innerHTML = `<p class="error-msg">تعذر تحميل المهام، حاول مرة أخرى لاحقًا.</p>`;
     });
+function updateStats(tasks) {
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(t => t.status === "تم الإنجاز").length;
+    const inProgressTasks = tasks.filter(t => t.status === "قيد التنفيذ").length;
+    const urgentTasks = tasks.filter(t => t.priority === "عالية").length;
+
+    statsContainer.innerHTML = `
+      <div class="stat-card">
+        <div class="stat-value">${totalTasks}</div>
+        <div class="stat-label">إجمالي المهام</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${completedTasks}</div>
+        <div class="stat-label">مهام مكتملة</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${inProgressTasks}</div>
+        <div class="stat-label">قيد التنفيذ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${urgentTasks}</div>
+        <div class="stat-label">مهام عاجلة</div>
+      </div>
+    `;
+  }
+  qrButton.addEventListener('click', () => {
+    window.location.href = 'qr-dashboard.html';
+  });
 });

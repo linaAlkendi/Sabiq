@@ -1,0 +1,505 @@
+/* ملف facility-details.css المعدل ليتناسق مع صفحة الفني */
+
+:root {
+  /* الألوان المستخدمة في صفحة الفني */
+  --primary-btn:rgba(64, 102, 189, 0.8);
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --text-color: #333333;
+  --section-title: #2c3e50;
+  --muted-text: #7f8c8d;
+}
+
+/* التنسيقات العامة */
+.facility-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 30px;
+  color: var(--text-color);
+}
+
+/* عنوان الصفحة */
+.facility-header h1 {
+  font-size: 30px;
+  color: var(--section-title);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* بطاقة معلومات المرفق */
+.facility-card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px var(--card-shadow);
+  border-right: 6px solid var(--primary-btn);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facility-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* معلومات المرفق */
+.facility-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.meta-item {
+  background: rgba(64, 102, 189, 0.05);
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.meta-label {
+  font-size: 14px;
+  color: var(--muted-text);
+  margin-bottom: 5px;
+}
+
+.meta-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* شريط التقدم */
+.usage-progress {
+  margin-top: 25px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: rgba(64, 102, 189, 0.8);
+  transition: width 0.8s ease;
+}
+body.dark .progress-fill {
+  background-color: rgba(64, 102, 189, 0.8);
+}   
+/* أقسام الصفحة */
+.section {
+  margin: 40px 0;
+}
+
+.section-title {
+  font-size: 24px;
+  color: var(--section-title);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(64, 102, 189, 0.2);
+}
+
+/* بطاقات التنبؤ */
+.prediction-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.prediction-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--card-shadow);
+  border-left: 4px solid var(--primary-btn);
+}
+
+.prediction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.prediction-header h4 {
+  margin: 0;
+  color: var(--primary-btn);
+  font-size: 18px;
+}
+
+.prediction-probability {
+  color: #e56658;
+  font-weight: 700;
+}
+
+/* الأعطال الشائعة */
+.common-issues {
+  list-style: none;
+  padding: 0;
+}
+
+.common-issues li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* نصائح الصيانة */
+.maintenance-advice {
+  background: rgba(64, 102, 189, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-btn);
+}
+
+.advice-steps {
+  padding-left: 20px;
+}
+
+.advice-steps li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* سجل الصيانة */
+.history-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--card-shadow);
+}
+
+.maintenance-history {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.maintenance-history th {
+  background-color: var(--primary-btn);
+  color: white;
+  padding: 15px;
+  text-align: right;
+}
+
+.maintenance-history td {
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.maintenance-history tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* أزرار الإجراءات */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn i {
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: var(--primary-btn);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3457a1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--primary-btn);
+  border: 1px solid var(--primary-btn);
+}
+body.dark .btn-primary {
+  background-color: rgba(64, 102, 189, 0.1);
+}
+body.dark .btn-secondary {
+  background-color: var(--primary-btn);
+  color: var(--primary-btn);
+  border: 1px solid black
+}
+.btn-secondary:hover {
+  background-color: rgba(64, 102, 189, 0.1);
+}
+body.dark .btn-secondary:hover {
+  background-color: rgba(32, 47, 81, 0.2);
+} 
+
+.btn-danger {
+  background-color: #e56658;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #d25c4f;
+}
+
+/* الرسوم البيانية */
+.chart-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.chart-wrapper {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--card-shadow);
+}
+
+.qr-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-btn);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 100;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.qr-btn:hover {
+  transform: scale(1.1);
+}
+
+.qr-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: rgb(83, 116, 176)
+}
+/* التنسيقات العامة */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  color: white;
+  transform: translateX(150%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification.success {
+  background-color: #4e8950;
+}
+
+.notification.error {
+  background-color: #975e5a;
+}
+
+/* نافذة مودال */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+#submit-parts-request{
+
+background-color: #526e8a;
+}
+.form-group label {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+/* QR Scanner Styles */
+.qr-placeholder {
+  text-align: center;
+  padding: 30px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.qr-placeholder i {
+  font-size: 80px;
+  color: #4a89dc;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.qr-placeholder p {
+  color: #666;
+  font-size: 18px;
+}
+
+.qr-result {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.qr-result h4 {
+  color: #4a89dc;
+  margin: 10px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* أزرار الإجراءات */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background-color: #5a7aa3;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #546988;
+}
+
+.btn-secondary {
+  background-color: #8fa677;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #8db065;
+}
+
+.btn-danger {
+  background-color: #bb6770;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #784c47;
+}
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .facility-container {
+    padding: 20px 15px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* أيقونات Font Awesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');

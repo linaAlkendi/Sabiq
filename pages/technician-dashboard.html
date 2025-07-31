@@ -9,28 +9,29 @@
   <link rel="stylesheet" href="../css/theme.css">
   <link rel="stylesheet" href="../css/technician-dashboard.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <header class="top-bar">
     <label class="theme-toggle-switch">
-    <input type="checkbox" id="theme-toggle-switch">
-    <span class="slider">
-      <!-- شمس SVG -->
-      <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z"/>
-      </svg>
-      <!-- هلال SVG -->
-      <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z"/>
-      </svg>
-    </span>
-  </label>
+      <input type="checkbox" id="theme-toggle-switch" />
+      <span class="slider">
+        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45-1.79l-1.79 1.8 1.42 1.42 1.79-1.8-1.42-1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zm8-8h3v-1h-3v1zm-19 0h3v-1H1v1zm2.05 7.05l1.8-1.79-1.42-1.42-1.79 1.8 1.41 1.41zm15.9 0l1.41-1.41-1.79-1.8-1.42 1.42 1.8 1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z"
+          />
+        </svg>
+        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
+        </svg>
+      </span>
+    </label>
 
     <button class="menu-toggle" id="menuToggle">☰</button>
 
     <aside class="side-menu" id="sideMenu">
       <br /><br /><br />
-     <nav class="menu-nav">
+      <nav class="menu-nav">
         <ul id="menu" class="main-menu"></ul>
 
       </nav>
@@ -39,24 +40,31 @@
       </div>
     </aside>
 
-    <a href="technician-dashboard.html">
+    <a href="dashboard.html">
       <img src="../assets/sabiqLogoLight.png" alt="SABIQ Logo" class="logo" />
     </a>
-    <h1>مهام الفني</h1>
+    <h1>لوحة الفني</h1>
   </header>
 
   <main class="technician-main">
     <section class="welcome">
-      <h2>مرحبًا، محمد العتيبي</h2>
-      <p>أدناه قائمة المهام الموكلة إليك </p>
+      <h2>مرحبًا، <span id="username-display">محمد العتيبي</span></h2>
+      <p>أدناه نظرة عامة على مهامك</p>
     </section>
 
-      <main class="technician-main">
+    <section class="stats-cards" id="statsContainer">
+      <!-- سيتم ملؤها بواسطة JavaScript -->
+    </section>
+
     <section class="tasks-section" id="taskContainer">
       <!-- المهام تظهر هنا عبر JavaScript -->
     </section>
-  </main>
 
+    <button class="qr-btn" id="qrButton" title="مسح QR Code">
+      <svg viewBox="0 0 24 24">
+        <path d="M3,11H5V13H3V11M11,5H13V9H11V5M9,11H13V15H11V13H9V11M15,11H17V13H19V11H21V13H19V15H21V19H19V21H17V19H13V21H11V17H15V15H17V13H15V11M19,19V15H17V19H19M15,3H21V9H15V3M17,5V7H19V5H17M3,3H9V9H3V3M5,5V7H7V5H5M3,15H5V17H3V15M7,15H9V17H7V15Z"/>
+      </svg>
+    </button>
   </main>
 
   <footer>
@@ -69,4 +77,3 @@
   <script src="../js/technician-dashboard.js"></script>
 </body>
 </html>
-
